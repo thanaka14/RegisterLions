@@ -1,0 +1,62 @@
+﻿@model RegisterLions.Models.TUser
+
+@{
+    ViewBag.Title = "ลบข้อมูลผู้ใช้งาน";
+}
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.user_code)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user_code)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.eff_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.eff_date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.exp_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.exp_date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Member.full_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Member.full_name_eng)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    ลบข้อมูล
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "TUsers")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+    
+    </div>

@@ -1,0 +1,184 @@
+﻿@model IEnumerable<RegisterLions.Models.Member>
+
+@{
+    ViewBag.Title = "รายชื่อผู้ติดต่อ สโมสรไลออนส์";
+    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    if (ViewBag.MemberCount !=  0)
+    {
+        ViewBag.Msg = "จำนวน " + ViewBag.MemberCount.ToString("#,##0") + " คน";
+    }else
+    {
+        ViewBag.Msg = "";
+    }
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title@ViewBag.clubName @identity.User.district_name_thai (@identity.User.district_id) @ViewBag.Msg</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Membership", "MyDistrict", FormMethod.Post, new { name = "searchForm" }))
+        {
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group col-md-offset-6">
+                        @Html.DropDownList("club_id", null, "ทุกสโมสร",htmlAttributes: new { @class = "form-control " })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                                <i class="text-muted glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="myTable">
+                <thead>
+                    <tr>
+                       
+
+
+
+
+                      
+
+                        <th class="text-center">
+                            @ViewBag.Title
+                        </th>
+
+                      @*<th></th>*@
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            
+                            <td>
+                                <dl class="dl-horizontal">
+                                    <dd>
+                                        @{
+                                            string imgSrc;
+                                            if (item.image != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(item.image);
+                                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                                            }
+                                            else
+                                            {
+                                                <img src='~/Pictures/login.jpg' style="max-width:100px; max-height:100px;" />
+                                            }
+
+                                        }
+
+                                    </dd>
+                                    <dt>
+                                        ชื่อ - นามสกุล
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(modelItem => item.full_name)                                        
+                                        (@Html.DisplayFor(modelItem => item.member_id)) <span class="label label-success">@Html.DisplayFor(modelItem => item.charterName)</span>
+                                        @{
+                                            if (item.member_sts == 2)
+                                            {
+                                                <span class="label label-danger">พ้นสภาพ</span>
+                                            }
+                                        }
+                                    </dd>
+                                    <dt>
+                                        สโมสรไลออนส์
+                                    </dt>
+
+                                    <dd>
+
+                                        @Html.DisplayFor(modelItem => item.Club.club_name_thai) (@Html.DisplayFor(modelItem => item.Club.club_id)) 
+                                    </dd>
+                                   
+
+                                    <dt>
+                                        วันที่เป็นสมาชิก
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(modelItem => item.join_date)
+                                    </dd>
+                                    
+
+                                    <dt>
+                                        ที่อยู่
+                                    </dt>
+
+                                    <dd>
+                                        @{ if (item.member_address_thai != null)
+                                            {
+                                                @Html.DisplayFor(modelItem => item.member_address_thai);
+                                            }
+                                            else
+                                            {@Html.DisplayFor(modelItem => item.member_address_eng);
+                                                }
+                                            }
+
+                                    </dd>
+                                    
+                                    <dt>ปีเกิด</dt>
+                                    <dd>@Html.DisplayFor(modelItem => item.birth_year)</dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.email)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(modelItem => item.email)
+                                    </dd>
+
+                                    <dt>
+                                        โทรศัพท์
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(modelItem => item.cell_phone)
+                                    </dd>
+
+                                   
+
+
+                                    
+
+                                   
+
+
+
+
+
+
+
+
+
+                                </dl>
+
+                            </td>
+                            @*<td align="center">
+                                <a class="btn btn-success" href="@Url.Action("MembershipDetails", "MyLionsClubs", new { id = item.member_seq})">
+                                    <i class="glyphicon glyphicon-zoom-in"> </i>
+                                </a>
+
+
+
+                            </td>*@
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel-footer">&nbsp;</div>
+</div>

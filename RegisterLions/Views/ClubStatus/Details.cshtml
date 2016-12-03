@@ -1,0 +1,26 @@
+﻿@model RegisterLions.Models.ClubStatus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ClubStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.club_status_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.club_status_desc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.club_sts }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

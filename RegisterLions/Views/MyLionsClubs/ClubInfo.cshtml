@@ -1,0 +1,75 @@
+﻿@model RegisterLions.Models.Club
+
+@{
+    ViewBag.Title = "ข้อมูลสโมสร";
+}
+
+
+<div class="panel panel-primary">
+    
+    <div class="panel-heading">@ViewBag.Title </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.club_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.club_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_name_eng)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.club_id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.charter_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.charter_date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.District.district_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.District.district_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.meeting_place)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.meeting_place)
+            </dd>
+
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ClubStatus.club_status_desc)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClubStatus.club_status_desc)
+            </dd>
+
+
+
+        </dl>
+    </div>
+    <div class="panel-footer">&nbsp;</div>
+    </div>

@@ -1,0 +1,85 @@
+﻿@model RegisterLions.Models.ZoneClub
+
+@{
+    ViewBag.Title = "แก้ไขสโมสรในแต่ละเขต";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.zone_club_id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fiscal_year, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fiscal_year, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fiscal_year, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.zone_officer_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("zone_officer_id", null, "เลือกประธานเขต", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.zone_officer_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.club_seq, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.club_seq, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.club_seq, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.club_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("club_id", null,"เลือกสโมสร", htmlAttributes: new { @class = "form-control col-md-8" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="submitButton" onclick="javascript: return openWindow('../../Clubs/listClub');">
+                                <i class="text-muted glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.club_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+               
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button id="submitButton" name="submitButton" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-thumbs-up"></i> จัดเก็บ
+                        </button>
+                        <a class="btn btn-warning" href="@Url.Action("Index", "ZoneClubs")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+}
+
+
+<script language="javascript">
+
+                            function openWindow(theURL) {
+                                var w = 750;
+                                var h = 600;
+                                var l = (window.screen.width / 2) - ((w / 2) + 10);
+                                var t = (window.screen.height / 2) - ((h / 2) + 50);
+                                window.open(theURL, "_blank", "status=yes,toolbar=no,menubar=no,location=no,width=" + w + ",height=" + h + ",left=" + l + ",top=" + t);
+
+                        }
+
+</script>

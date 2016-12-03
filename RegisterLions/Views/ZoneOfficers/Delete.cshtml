@@ -1,0 +1,62 @@
+﻿@model RegisterLions.Models.ZoneOfficer
+
+@{
+    ViewBag.Title = "ลบข้อมูลชื่อประธานเขต";
+}
+
+    <div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.fiscal_year_disp)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.fiscal_year_disp)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.zone_no)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.zone_no)
+                </dd>
+
+                
+
+                <dt>
+                    ประธานเขต
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Member.full_name)
+                </dd>
+
+                <dt>
+                    ประธานภูมิภาค
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RegionOfficer.Member.full_name)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        ลบข้อมูล
+                    </button>
+                    <a class="btn btn-warning" href="@Url.Action("Index", "ZoneOfficers")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                </div>
+            }
+            <div class="panel-footer">&nbsp;</div>
+        </div>
+        </div>
+

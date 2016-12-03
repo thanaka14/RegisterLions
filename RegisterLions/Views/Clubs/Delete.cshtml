@@ -1,0 +1,113 @@
+﻿
+@model RegisterLions.Models.Club
+
+@{
+    ViewBag.Title = "ลบข้อมูลสโมสร";
+}
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.club_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.club_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_name_eng)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.charter_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.charter_date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.meeting_place)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.meeting_place)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.addr_line1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.addr_line1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.addr_line2)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.addr_line2)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.post_code)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.post_code)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.addr_line3)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.addr_line3)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.District.district_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.District.district_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ClubStatus.club_status_desc)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClubStatus.club_status_desc)
+            </dd>
+
+           
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    ลบข้อมูล
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "Clubs")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+    
+    </div>

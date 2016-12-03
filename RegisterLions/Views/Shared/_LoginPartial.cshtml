@@ -1,0 +1,28 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+
+{
+    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    using (Html.BeginForm("Logout", "Manage", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        
+            @*<li>
+                @Html.ActionLink(identity.User.full_name, "Profile", "Manage", routeValues: null, htmlAttributes: new { title = "จัดการบัญชีของฉัน" })
+        
+            </li>*@
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">ออกจากระบบ</a>
+
+            </li>        
+    }
+}
+else
+{    
+    
+        <li>@Html.ActionLink("เข้าสู่ระบบ", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    
+}
+

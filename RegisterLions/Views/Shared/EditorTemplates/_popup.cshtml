@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@Page.Title</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/jqueryui")
+        @Scripts.Render("~/bundles/modernizr")        
+        @Scripts.Render("~/bundles/jquery")
+    </head>
+    <body>
+        @RenderBody()
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jqueryui")
+        <script type="text/JavaScript">
+
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 10,
+                "pagingType": "full_numbers",
+                "language": {
+                    "info": "หน้าที่ _PAGE_/_PAGES_ (_TOTAL_ รายการ)"
+                }
+
+            }
+                );
+        });
+
+        </script>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

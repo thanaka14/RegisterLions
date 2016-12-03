@@ -1,0 +1,88 @@
+﻿@model IEnumerable<RegisterLions.Models.TUser>
+
+@{
+    ViewBag.Title = "ข้อมูลผู้ใช้งาน";    
+}
+
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+            <a class="btn btn-primary" href="@Url.Action("Create", "TUsers")"><i class="glyphicon glyphicon-file"></i> เพิ่ม</a>
+        </div>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { name = "searchForm" }))
+        {
+
+            <div class="col-xs-10 col-lg-6 col-md-6">
+                <div class="input-group">
+                    <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                            <i class="text-muted glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        }
+        <table class="display table table-bordered" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.user_code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.eff_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.exp_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Member.full_name_eng)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.role_name_disp)
+                    </th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                </tr>
+                </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user_code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.eff_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.exp_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Member.full_name_eng)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.role_name_disp)
+                        </td>
+                        <td align="center">
+
+                            <a class="btn btn-success" href="@Url.Action("Edit", "TUsers", new { id = item.user_code })">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            </td>
+                        <td align="center">
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "TUsers", new { id = item.user_code })">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    <div class="panel-footer">&nbsp;</div>
+    </div>

@@ -1,0 +1,1664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RegisterLionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationLog">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_date" Type="datetime" />
+          <Property Name="ip_addr" Type="varchar" MaxLength="100" />
+          <Property Name="view_name" Type="varchar" MaxLength="50" />
+          <Property Name="member_seq" Type="int" />
+          <Property Name="club_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="club_id" />
+          </Key>
+          <Property Name="club_id" Type="int" Nullable="false" />
+          <Property Name="club_name_thai" Type="varchar" MaxLength="100" />
+          <Property Name="club_name_eng" Type="varchar" MaxLength="100" />
+          <Property Name="charter_date" Type="date" />
+          <Property Name="meeting_place" Type="varchar" MaxLength="400" />
+          <Property Name="district_id" Type="int" />
+          <Property Name="club_sts" Type="int" />
+          <Property Name="image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ClubOfficer">
+          <Key>
+            <PropertyRef Name="club_officer_id" />
+          </Key>
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="member_seq" Type="int" Nullable="false" />
+          <Property Name="officer_id" Type="int" Nullable="false" />
+          <Property Name="club_officer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="seq_no" Type="int" />
+        </EntityType>
+        <EntityType Name="ClubStatus">
+          <Key>
+            <PropertyRef Name="club_sts" />
+          </Key>
+          <Property Name="club_sts" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="club_status_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Committee">
+          <Key>
+            <PropertyRef Name="committee_id" />
+          </Key>
+          <Property Name="committee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="event_date" Type="date" />
+          <Property Name="place" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CommitteeDetail">
+          <Key>
+            <PropertyRef Name="committee_detail_id" />
+          </Key>
+          <Property Name="committee_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="committee_id" Type="int" />
+          <Property Name="officer_id" Type="int" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="member_seq" Type="int" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="seq_no" Type="int" />
+        </EntityType>
+        <EntityType Name="CommitteeOfficer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+          </Key>
+          <Property Name="officer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="officer_name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_name" Type="varchar" MaxLength="100" />
+          <Property Name="start_date" Type="date" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="place" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CourseDetail">
+          <Key>
+            <PropertyRef Name="course_detail_id" />
+          </Key>
+          <Property Name="course_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="result" Type="int" />
+          <Property Name="remark" Type="varchar" MaxLength="100" />
+          <Property Name="member_seq" Type="int" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="course_id" Type="int" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="district_id" />
+          </Key>
+          <Property Name="district_id" Type="int" Nullable="false" />
+          <Property Name="district_name_thai" Type="varchar" MaxLength="100" />
+          <Property Name="district_name_eng" Type="varchar" MaxLength="100" />
+          <Property Name="multiple_district_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="member_seq" />
+          </Key>
+          <Property Name="member_id" Type="int" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="member_address_eng" Type="varchar" MaxLength="500" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="cell_phone" Type="varchar" MaxLength="20" />
+          <Property Name="birth_year" Type="int" />
+          <Property Name="occupation" Type="varchar" MaxLength="100" />
+          <Property Name="join_date" Type="date" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="member_seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="membership_type" Type="int" />
+          <Property Name="first_name_eng" Type="varchar" MaxLength="50" />
+          <Property Name="last_name_eng" Type="varchar" MaxLength="50" />
+          <Property Name="member_address_thai" Type="varchar" MaxLength="500" />
+          <Property Name="image" Type="varbinary(max)" />
+          <Property Name="sponsor_name" Type="varchar" MaxLength="50" />
+          <Property Name="upd_date" Type="datetime" />
+          <Property Name="charter_flag" Type="char" MaxLength="1" />
+          <Property Name="member_sts" Type="int" />
+        </EntityType>
+        <EntityType Name="MemberMovement">
+          <Key>
+            <PropertyRef Name="hist_id" />
+          </Key>
+          <Property Name="hist_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hist_date" Type="date" />
+          <Property Name="member_seq" Type="int" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="move_sts" Type="int" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="membership_type" />
+          </Key>
+          <Property Name="membership_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="membership_desc_thai" Type="varchar" MaxLength="100" />
+          <Property Name="membership_desc_eng" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="move_sts" />
+          </Key>
+          <Property Name="move_sts" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="move_desc" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MultipleDistrict">
+          <Key>
+            <PropertyRef Name="multiple_district_id" />
+          </Key>
+          <Property Name="multiple_district_id" Type="int" Nullable="false" />
+          <Property Name="multiple_district_name_thai" Type="varchar" MaxLength="100" />
+          <Property Name="multiple_district_name_eng" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Officer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+          </Key>
+          <Property Name="officer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" />
+          <Property Name="officer_type" Type="char" MaxLength="1" />
+          <Property Name="title_eng" Type="varchar" MaxLength="200" />
+          <Property Name="officer_grp" Type="int" />
+        </EntityType>
+        <EntityType Name="OfficerGroup">
+          <Key>
+            <PropertyRef Name="officer_grp" />
+          </Key>
+          <Property Name="officer_grp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="officer_grp_desc" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RegionOfficer">
+          <Key>
+            <PropertyRef Name="region_officer_id" />
+          </Key>
+          <Property Name="region_officer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="region_no" Type="int" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="member_seq" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TUser">
+          <Key>
+            <PropertyRef Name="user_code" />
+          </Key>
+          <Property Name="user_code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_pwd" Type="varchar" MaxLength="100" />
+          <Property Name="eff_date" Type="date" />
+          <Property Name="exp_date" Type="date" />
+          <Property Name="member_seq" Type="int" />
+          <Property Name="upd_date" Type="datetime" />
+          <Property Name="role_name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ZoneClub">
+          <Key>
+            <PropertyRef Name="zone_club_id" />
+          </Key>
+          <Property Name="zone_club_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="club_id" Type="int" />
+          <Property Name="zone_officer_id" Type="int" />
+          <Property Name="club_seq" Type="int" />
+          <Property Name="member_seq" Type="int" />
+        </EntityType>
+        <EntityType Name="ZoneOfficer">
+          <Key>
+            <PropertyRef Name="zone_officer_id" />
+          </Key>
+          <Property Name="zone_officer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zone_no" Type="int" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="region_officer_id" Type="int" />
+          <Property Name="member_seq" Type="int" />
+        </EntityType>
+        <Association Name="R_10">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="ClubOfficer" Type="Self.ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_101">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="CourseDetail" Type="Self.CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_102">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="CourseDetail" Type="Self.CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_103">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="CommitteeDetail" Type="Self.CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_104">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="CommitteeDetail" Type="Self.CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_105">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseDetail" Type="Self.CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_107">
+          <End Role="RegionOfficer" Type="Self.RegionOfficer" Multiplicity="0..1" />
+          <End Role="ZoneOfficer" Type="Self.ZoneOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionOfficer">
+              <PropertyRef Name="region_officer_id" />
+            </Principal>
+            <Dependent Role="ZoneOfficer">
+              <PropertyRef Name="region_officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_109">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ZoneClub" Type="Self.ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_110">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ZoneOfficer" Type="Self.ZoneOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ZoneOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_111">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="RegionOfficer" Type="Self.RegionOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="RegionOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_113">
+          <End Role="OfficerGroup" Type="Self.OfficerGroup" Multiplicity="0..1" />
+          <End Role="Officer" Type="Self.Officer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficerGroup">
+              <PropertyRef Name="officer_grp" />
+            </Principal>
+            <Dependent Role="Officer">
+              <PropertyRef Name="officer_grp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_16">
+          <End Role="MultipleDistrict" Type="Self.MultipleDistrict" Multiplicity="0..1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultipleDistrict">
+              <PropertyRef Name="multiple_district_id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="multiple_district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Role="Officer" Type="Self.Officer" Multiplicity="1" />
+          <End Role="ClubOfficer" Type="Self.ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Officer">
+              <PropertyRef Name="officer_id" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_38">
+          <End Role="MembershipType" Type="Self.MembershipType" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="membership_type" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="membership_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_39">
+          <End Role="ClubStatus" Type="Self.ClubStatus" Multiplicity="0..1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubStatus">
+              <PropertyRef Name="club_sts" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="club_sts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_53">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="TUser" Type="Self.TUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="TUser">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_671">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="MemberMovement" Type="Self.MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_701">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="MemberMovement" Type="Self.MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_711">
+          <End Role="Movement" Type="Self.Movement" Multiplicity="0..1" />
+          <End Role="MemberMovement" Type="Self.MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movement">
+              <PropertyRef Name="move_sts" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="move_sts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_87">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ClubOfficer" Type="Self.ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_94">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="ZoneClub" Type="Self.ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_95">
+          <End Role="ZoneOfficer" Type="Self.ZoneOfficer" Multiplicity="0..1" />
+          <End Role="ZoneClub" Type="Self.ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZoneOfficer">
+              <PropertyRef Name="zone_officer_id" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="zone_officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_97">
+          <End Role="Committee" Type="Self.Committee" Multiplicity="0..1" />
+          <End Role="CommitteeDetail" Type="Self.CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee">
+              <PropertyRef Name="committee_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="committee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_98">
+          <End Role="CommitteeOfficer" Type="Self.CommitteeOfficer" Multiplicity="0..1" />
+          <End Role="CommitteeDetail" Type="Self.CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommitteeOfficer">
+              <PropertyRef Name="officer_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RegisterLionsModelStoreContainer">
+          <EntitySet Name="ApplicationLog" EntityType="Self.ApplicationLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubOfficer" EntityType="Self.ClubOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubStatus" EntityType="Self.ClubStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Committee" EntityType="Self.Committee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommitteeDetail" EntityType="Self.CommitteeDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommitteeOfficer" EntityType="Self.CommitteeOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseDetail" EntityType="Self.CourseDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberMovement" EntityType="Self.MemberMovement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipType" EntityType="Self.MembershipType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movement" EntityType="Self.Movement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MultipleDistrict" EntityType="Self.MultipleDistrict" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Officer" EntityType="Self.Officer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficerGroup" EntityType="Self.OfficerGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegionOfficer" EntityType="Self.RegionOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZoneClub" EntityType="Self.ZoneClub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZoneOfficer" EntityType="Self.ZoneOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TUser" EntityType="Self.TUser" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TUser].[user_code] AS [user_code], 
+    [TUser].[user_pwd] AS [user_pwd], 
+    [TUser].[eff_date] AS [eff_date], 
+    [TUser].[exp_date] AS [exp_date], 
+    [TUser].[member_seq] AS [member_seq], 
+    [TUser].[upd_date] AS [upd_date], 
+    [TUser].[role_name] AS [role_name]
+    FROM [dbo].[TUser] AS [TUser]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_101" Association="Self.R_101">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_102" Association="Self.R_102">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_103" Association="Self.R_103">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_104" Association="Self.R_104">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_105" Association="Self.R_105">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_107" Association="Self.R_107">
+            <End Role="RegionOfficer" EntitySet="RegionOfficer" />
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_109" Association="Self.R_109">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <AssociationSet Name="R_110" Association="Self.R_110">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_111" Association="Self.R_111">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="RegionOfficer" EntitySet="RegionOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_113" Association="Self.R_113">
+            <End Role="OfficerGroup" EntitySet="OfficerGroup" />
+            <End Role="Officer" EntitySet="Officer" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="Self.R_16">
+            <End Role="MultipleDistrict" EntitySet="MultipleDistrict" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="Self.R_17">
+            <End Role="District" EntitySet="District" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="Self.R_18">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="Self.R_23">
+            <End Role="Officer" EntitySet="Officer" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_38" Association="Self.R_38">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="R_39" Association="Self.R_39">
+            <End Role="ClubStatus" EntitySet="ClubStatus" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="R_53" Association="Self.R_53">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="TUser" EntitySet="TUser" />
+          </AssociationSet>
+          <AssociationSet Name="R_671" Association="Self.R_671">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <AssociationSet Name="R_701" Association="Self.R_701">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <AssociationSet Name="R_711" Association="Self.R_711">
+            <End Role="Movement" EntitySet="Movement" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <AssociationSet Name="R_87" Association="Self.R_87">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_94" Association="Self.R_94">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <AssociationSet Name="R_95" Association="Self.R_95">
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <AssociationSet Name="R_97" Association="Self.R_97">
+            <End Role="Committee" EntitySet="Committee" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_98" Association="Self.R_98">
+            <End Role="CommitteeOfficer" EntitySet="CommitteeOfficer" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RegisterLionsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClubStatus">
+          <Key>
+            <PropertyRef Name="club_sts" />
+          </Key>
+          <Property Name="club_sts" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="club_status_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_39" FromRole="ClubStatus" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="district_id" />
+          </Key>
+          <Property Name="district_id" Type="Int32" Nullable="false" />
+          <Property Name="district_name_thai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="district_name_eng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="multiple_district_id" Type="Int32" />
+          <NavigationProperty Name="MultipleDistrict" Relationship="Self.R_16" FromRole="District" ToRole="MultipleDistrict" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_17" FromRole="District" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="MemberMovement">
+          <Key>
+            <PropertyRef Name="hist_id" />
+          </Key>
+          <Property Name="hist_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hist_date" Type="DateTime" Precision="0" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="club_id" Type="Int32" />
+          <Property Name="move_sts" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movement" Relationship="Self.R_711" FromRole="MemberMovement" ToRole="Movement" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_701" FromRole="MemberMovement" ToRole="Club" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_671" FromRole="MemberMovement" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="membership_type" />
+          </Key>
+          <Property Name="membership_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="membership_desc_thai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="membership_desc_eng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_38" FromRole="MembershipType" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="move_sts" />
+          </Key>
+          <Property Name="move_sts" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="move_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MemberMovement" Relationship="Self.R_711" FromRole="Movement" ToRole="MemberMovement" />
+        </EntityType>
+        <EntityType Name="MultipleDistrict">
+          <Key>
+            <PropertyRef Name="multiple_district_id" />
+          </Key>
+          <Property Name="multiple_district_id" Type="Int32" Nullable="false" />
+          <Property Name="multiple_district_name_thai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="multiple_district_name_eng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="District" Relationship="Self.R_16" FromRole="MultipleDistrict" ToRole="District" />
+        </EntityType>
+        <EntityType Name="Officer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+          </Key>
+          <Property Name="officer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="officer_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="title_eng" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClubOfficer" Relationship="RegisterLionsModel.R_23" FromRole="Officer" ToRole="ClubOfficer" />
+          <Property Name="officer_grp" Type="Int32" />
+          <NavigationProperty Name="OfficerGroup" Relationship="RegisterLionsModel.R_113" FromRole="Officer" ToRole="OfficerGroup" />
+        </EntityType>
+        <EntityType Name="TUser">
+          <Key>
+            <PropertyRef Name="user_code" />
+          </Key>
+          <Property Name="user_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="eff_date" Type="DateTime" Precision="0" />
+          <Property Name="exp_date" Type="DateTime" Precision="0" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="upd_date" Type="DateTime" Precision="3" />
+          <Property Name="role_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_53" FromRole="TUser" ToRole="Member" />
+        </EntityType>
+        <Association Name="R_16">
+          <End Role="MultipleDistrict" Type="Self.MultipleDistrict" Multiplicity="0..1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultipleDistrict">
+              <PropertyRef Name="multiple_district_id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="multiple_district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_711">
+          <End Role="Movement" Type="Self.Movement" Multiplicity="0..1" />
+          <End Role="MemberMovement" Type="Self.MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movement">
+              <PropertyRef Name="move_sts" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="move_sts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RegisterLionsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClubStatus" EntityType="Self.ClubStatus" />
+          <EntitySet Name="District" EntityType="Self.District" />
+          <EntitySet Name="MemberMovement" EntityType="Self.MemberMovement" />
+          <EntitySet Name="MembershipType" EntityType="Self.MembershipType" />
+          <EntitySet Name="Movement" EntityType="Self.Movement" />
+          <EntitySet Name="MultipleDistrict" EntityType="Self.MultipleDistrict" />
+          <EntitySet Name="Officer" EntityType="Self.Officer" />
+          <EntitySet Name="TUser" EntityType="Self.TUser" />
+          <AssociationSet Name="R_16" Association="Self.R_16">
+            <End Role="MultipleDistrict" EntitySet="MultipleDistrict" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="R_711" Association="Self.R_711">
+            <End Role="Movement" EntitySet="Movement" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <EntitySet Name="Committee" EntityType="RegisterLionsModel.Committee" />
+          <EntitySet Name="CommitteeDetail" EntityType="RegisterLionsModel.CommitteeDetail" />
+          <EntitySet Name="CommitteeOfficer" EntityType="RegisterLionsModel.CommitteeOfficer" />
+          <EntitySet Name="Course" EntityType="RegisterLionsModel.Course" />
+          <EntitySet Name="CourseDetail" EntityType="RegisterLionsModel.CourseDetail" />
+          <EntitySet Name="ZoneClub" EntityType="RegisterLionsModel.ZoneClub" />
+          <EntitySet Name="ZoneOfficer" EntityType="RegisterLionsModel.ZoneOfficer" />
+          <AssociationSet Name="R_97" Association="RegisterLionsModel.R_97">
+            <End Role="Committee" EntitySet="Committee" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_98" Association="RegisterLionsModel.R_98">
+            <End Role="CommitteeOfficer" EntitySet="CommitteeOfficer" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_105" Association="RegisterLionsModel.R_105">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_95" Association="RegisterLionsModel.R_95">
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <EntitySet Name="ClubOfficer" EntityType="RegisterLionsModel.ClubOfficer" />
+          <EntitySet Name="RegionOfficer" EntityType="RegisterLionsModel.RegionOfficer" />
+          <AssociationSet Name="R_23" Association="RegisterLionsModel.R_23">
+            <End Role="Officer" EntitySet="Officer" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <EntitySet Name="Club" EntityType="RegisterLionsModel.Club" />
+          <AssociationSet Name="R_102" Association="RegisterLionsModel.R_102">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_104" Association="RegisterLionsModel.R_104">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="RegisterLionsModel.R_17">
+            <End Role="District" EntitySet="District" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="R_39" Association="RegisterLionsModel.R_39">
+            <End Role="ClubStatus" EntitySet="ClubStatus" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="R_701" Association="RegisterLionsModel.R_701">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <AssociationSet Name="R_94" Association="RegisterLionsModel.R_94">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <EntitySet Name="Member" EntityType="RegisterLionsModel.Member" />
+          <AssociationSet Name="R_18" Association="RegisterLionsModel.R_18">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="R_10" Association="RegisterLionsModel.R_10">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_103" Association="RegisterLionsModel.R_103">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CommitteeDetail" EntitySet="CommitteeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_101" Association="RegisterLionsModel.R_101">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CourseDetail" EntitySet="CourseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="R_38" Association="RegisterLionsModel.R_38">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="R_53" Association="RegisterLionsModel.R_53">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="TUser" EntitySet="TUser" />
+          </AssociationSet>
+          <AssociationSet Name="R_671" Association="RegisterLionsModel.R_671">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberMovement" EntitySet="MemberMovement" />
+          </AssociationSet>
+          <EntitySet Name="ApplicationLog" EntityType="RegisterLionsModel.ApplicationLog" />
+          <AssociationSet Name="R_109" Association="RegisterLionsModel.R_109">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ZoneClub" EntitySet="ZoneClub" />
+          </AssociationSet>
+          <AssociationSet Name="R_110" Association="RegisterLionsModel.R_110">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_111" Association="RegisterLionsModel.R_111">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="RegionOfficer" EntitySet="RegionOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_107" Association="RegisterLionsModel.R_107">
+            <End Role="RegionOfficer" EntitySet="RegionOfficer" />
+            <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
+          </AssociationSet>
+          <AssociationSet Name="R_87" Association="RegisterLionsModel.R_87">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubOfficer" EntitySet="ClubOfficer" />
+          </AssociationSet>
+          <EntitySet Name="OfficerGroup" EntityType="RegisterLionsModel.OfficerGroup" />
+          <AssociationSet Name="R_113" Association="RegisterLionsModel.R_113">
+            <End Role="OfficerGroup" EntitySet="OfficerGroup" />
+            <End Role="Officer" EntitySet="Officer" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Committee">
+          <Key>
+            <PropertyRef Name="committee_id" />
+          </Key>
+          <Property Name="committee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="event_date" Type="DateTime" Precision="0" />
+          <Property Name="place" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CommitteeDetail" Relationship="RegisterLionsModel.R_97" FromRole="Committee" ToRole="CommitteeDetail" />
+        </EntityType>
+        <EntityType Name="CommitteeDetail">
+          <Key>
+            <PropertyRef Name="committee_detail_id" />
+          </Key>
+          <Property Name="committee_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="committee_id" Type="Int32" />
+          <Property Name="officer_id" Type="Int32" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="club_id" Type="Int32" />
+          <NavigationProperty Name="Committee" Relationship="RegisterLionsModel.R_97" FromRole="CommitteeDetail" ToRole="Committee" />
+          <NavigationProperty Name="CommitteeOfficer" Relationship="RegisterLionsModel.R_98" FromRole="CommitteeDetail" ToRole="CommitteeOfficer" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_104" FromRole="CommitteeDetail" ToRole="Club" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_103" FromRole="CommitteeDetail" ToRole="Member" />
+          <Property Name="seq_no" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CommitteeOfficer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+          </Key>
+          <Property Name="officer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="officer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CommitteeDetail" Relationship="RegisterLionsModel.R_98" FromRole="CommitteeOfficer" ToRole="CommitteeDetail" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="place" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseDetail" Relationship="RegisterLionsModel.R_105" FromRole="Course" ToRole="CourseDetail" />
+        </EntityType>
+        <EntityType Name="CourseDetail">
+          <Key>
+            <PropertyRef Name="course_detail_id" />
+          </Key>
+          <Property Name="course_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="result" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="club_id" Type="Int32" />
+          <Property Name="course_id" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="RegisterLionsModel.R_105" FromRole="CourseDetail" ToRole="Course" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_102" FromRole="CourseDetail" ToRole="Club" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_101" FromRole="CourseDetail" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="ZoneClub">
+          <Key>
+            <PropertyRef Name="zone_club_id" />
+          </Key>
+          <Property Name="zone_club_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="club_id" Type="Int32" />
+          <Property Name="zone_officer_id" Type="Int32" />
+          <Property Name="club_seq" Type="Int32" />
+          <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_95" FromRole="ZoneClub" ToRole="ZoneOfficer" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_94" FromRole="ZoneClub" ToRole="Club" />
+          <Property Name="member_seq" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_109" FromRole="ZoneClub" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="ZoneOfficer">
+          <Key>
+            <PropertyRef Name="zone_officer_id" />
+          </Key>
+          <Property Name="zone_officer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zone_no" Type="Int32" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <NavigationProperty Name="ZoneClub" Relationship="RegisterLionsModel.R_95" FromRole="ZoneOfficer" ToRole="ZoneClub" />
+          <Property Name="region_officer_id" Type="Int32" />
+          <Property Name="member_seq" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_110" FromRole="ZoneOfficer" ToRole="Member" />
+          <NavigationProperty Name="RegionOfficer" Relationship="RegisterLionsModel.R_107" FromRole="ZoneOfficer" ToRole="RegionOfficer" />
+        </EntityType>
+        <Association Name="R_97">
+          <End Type="RegisterLionsModel.Committee" Role="Committee" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CommitteeDetail" Role="CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Committee">
+              <PropertyRef Name="committee_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="committee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_98">
+          <End Type="RegisterLionsModel.CommitteeOfficer" Role="CommitteeOfficer" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CommitteeDetail" Role="CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommitteeOfficer">
+              <PropertyRef Name="officer_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_105">
+          <End Type="RegisterLionsModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CourseDetail" Role="CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_95">
+          <End Type="RegisterLionsModel.ZoneOfficer" Role="ZoneOfficer" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ZoneClub" Role="ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZoneOfficer">
+              <PropertyRef Name="zone_officer_id" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="zone_officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubOfficer">
+          <Key>
+            <PropertyRef Name="club_officer_id" />
+          </Key>
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="member_seq" Type="Int32" Nullable="false" />
+          <Property Name="officer_id" Type="Int32" Nullable="false" />
+          <Property Name="club_officer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="club_id" Type="Int32" />
+          <NavigationProperty Name="Officer" Relationship="RegisterLionsModel.R_23" FromRole="ClubOfficer" ToRole="Officer" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_10" FromRole="ClubOfficer" ToRole="Member" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_87" FromRole="ClubOfficer" ToRole="Club" />
+          <Property Name="seq_no" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RegionOfficer">
+          <Key>
+            <PropertyRef Name="region_officer_id" />
+          </Key>
+          <Property Name="region_officer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="region_no" Type="Int32" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="member_seq" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_111" FromRole="RegionOfficer" ToRole="Member" />
+          <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_107" FromRole="RegionOfficer" ToRole="ZoneOfficer" />
+        </EntityType>
+        <Association Name="R_23">
+          <End Type="RegisterLionsModel.Officer" Role="Officer" Multiplicity="1" />
+          <End Type="RegisterLionsModel.ClubOfficer" Role="ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Officer">
+              <PropertyRef Name="officer_id" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="club_id" />
+          </Key>
+          <Property Name="club_id" Type="Int32" Nullable="false" />
+          <Property Name="club_name_thai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="club_name_eng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="charter_date" Type="DateTime" Precision="0" />
+          <Property Name="meeting_place" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="district_id" Type="Int32" />
+          <Property Name="club_sts" Type="Int32" />
+          <NavigationProperty Name="CourseDetail" Relationship="RegisterLionsModel.R_102" FromRole="Club" ToRole="CourseDetail" />
+          <NavigationProperty Name="CommitteeDetail" Relationship="RegisterLionsModel.R_104" FromRole="Club" ToRole="CommitteeDetail" />
+          <NavigationProperty Name="District" Relationship="RegisterLionsModel.R_17" FromRole="Club" ToRole="District" />
+          <NavigationProperty Name="ClubStatus" Relationship="RegisterLionsModel.R_39" FromRole="Club" ToRole="ClubStatus" />
+          <NavigationProperty Name="MemberMovement" Relationship="RegisterLionsModel.R_701" FromRole="Club" ToRole="MemberMovement" />
+          <NavigationProperty Name="ZoneClub" Relationship="RegisterLionsModel.R_94" FromRole="Club" ToRole="ZoneClub" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_18" FromRole="Club" ToRole="Member" />
+          <NavigationProperty Name="ClubOfficer" Relationship="RegisterLionsModel.R_87" FromRole="Club" ToRole="ClubOfficer" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="R_102">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CourseDetail" Role="CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_104">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CommitteeDetail" Role="CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Type="RegisterLionsModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_39">
+          <End Type="RegisterLionsModel.ClubStatus" Role="ClubStatus" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubStatus">
+              <PropertyRef Name="club_sts" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="club_sts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_701">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.MemberMovement" Role="MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_94">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ZoneClub" Role="ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="member_seq" />
+          </Key>
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="member_address_eng" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cell_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="birth_year" Type="Int32" />
+          <Property Name="occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="join_date" Type="DateTime" Precision="0" />
+          <Property Name="club_id" Type="Int32" />
+          <Property Name="member_seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="membership_type" Type="Int32" />
+          <Property Name="first_name_eng" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name_eng" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="member_address_thai" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="sponsor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="upd_date" Type="DateTime" Precision="3" />
+          <Property Name="charter_flag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="member_sts" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_18" FromRole="Member" ToRole="Club" />
+          <NavigationProperty Name="ClubOfficer" Relationship="RegisterLionsModel.R_10" FromRole="Member" ToRole="ClubOfficer" />
+          <NavigationProperty Name="CommitteeDetail" Relationship="RegisterLionsModel.R_103" FromRole="Member" ToRole="CommitteeDetail" />
+          <NavigationProperty Name="CourseDetail" Relationship="RegisterLionsModel.R_101" FromRole="Member" ToRole="CourseDetail" />
+          <NavigationProperty Name="MembershipType" Relationship="RegisterLionsModel.R_38" FromRole="Member" ToRole="MembershipType" />
+          <NavigationProperty Name="TUser" Relationship="RegisterLionsModel.R_53" FromRole="Member" ToRole="TUser" />
+          <NavigationProperty Name="MemberMovement" Relationship="RegisterLionsModel.R_671" FromRole="Member" ToRole="MemberMovement" />
+          <NavigationProperty Name="ZoneClub" Relationship="RegisterLionsModel.R_109" FromRole="Member" ToRole="ZoneClub" />
+          <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_110" FromRole="Member" ToRole="ZoneOfficer" />
+          <NavigationProperty Name="RegionOfficer" Relationship="RegisterLionsModel.R_111" FromRole="Member" ToRole="RegionOfficer" />
+        </EntityType>
+        <Association Name="R_18">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_10">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="RegisterLionsModel.ClubOfficer" Role="ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_103">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CommitteeDetail" Role="CommitteeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="CommitteeDetail">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_101">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.CourseDetail" Role="CourseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="CourseDetail">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_38">
+          <End Type="RegisterLionsModel.MembershipType" Role="MembershipType" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="membership_type" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="membership_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_53">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.TUser" Role="TUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="TUser">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_671">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.MemberMovement" Role="MemberMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="MemberMovement">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApplicationLog">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="log_date" Type="DateTime" Precision="3" />
+          <Property Name="ip_addr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="view_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="club_id" Type="Int32" />
+        </EntityType>
+        <Association Name="R_109">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ZoneClub" Role="ZoneClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ZoneClub">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_110">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ZoneOfficer" Role="ZoneOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="ZoneOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_111">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.RegionOfficer" Role="RegionOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="RegionOfficer">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_107">
+          <End Type="RegisterLionsModel.RegionOfficer" Role="RegionOfficer" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ZoneOfficer" Role="ZoneOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionOfficer">
+              <PropertyRef Name="region_officer_id" />
+            </Principal>
+            <Dependent Role="ZoneOfficer">
+              <PropertyRef Name="region_officer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_87">
+          <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.ClubOfficer" Role="ClubOfficer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="club_id" />
+            </Principal>
+            <Dependent Role="ClubOfficer">
+              <PropertyRef Name="club_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OfficerGroup">
+          <Key>
+            <PropertyRef Name="officer_grp" />
+          </Key>
+          <Property Name="officer_grp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="officer_grp_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Officer" Relationship="RegisterLionsModel.R_113" FromRole="OfficerGroup" ToRole="Officer" />
+        </EntityType>
+        <Association Name="R_113">
+          <End Type="RegisterLionsModel.OfficerGroup" Role="OfficerGroup" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.Officer" Role="Officer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficerGroup">
+              <PropertyRef Name="officer_grp" />
+            </Principal>
+            <Dependent Role="Officer">
+              <PropertyRef Name="officer_grp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RegisterLionsModelStoreContainer" CdmEntityContainer="RegisterLionsEntities">
+          <EntitySetMapping Name="ClubStatus">
+            <EntityTypeMapping TypeName="RegisterLionsModel.ClubStatus">
+              <MappingFragment StoreEntitySet="ClubStatus">
+                <ScalarProperty Name="club_sts" ColumnName="club_sts" />
+                <ScalarProperty Name="club_status_desc" ColumnName="club_status_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="District">
+            <EntityTypeMapping TypeName="RegisterLionsModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
+                <ScalarProperty Name="district_name_thai" ColumnName="district_name_thai" />
+                <ScalarProperty Name="district_name_eng" ColumnName="district_name_eng" />
+                <ScalarProperty Name="multiple_district_id" ColumnName="multiple_district_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberMovement">
+            <EntityTypeMapping TypeName="RegisterLionsModel.MemberMovement">
+              <MappingFragment StoreEntitySet="MemberMovement">
+                <ScalarProperty Name="hist_id" ColumnName="hist_id" />
+                <ScalarProperty Name="hist_date" ColumnName="hist_date" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="move_sts" ColumnName="move_sts" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipType">
+            <EntityTypeMapping TypeName="RegisterLionsModel.MembershipType">
+              <MappingFragment StoreEntitySet="MembershipType">
+                <ScalarProperty Name="membership_type" ColumnName="membership_type" />
+                <ScalarProperty Name="membership_desc_thai" ColumnName="membership_desc_thai" />
+                <ScalarProperty Name="membership_desc_eng" ColumnName="membership_desc_eng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movement">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Movement">
+              <MappingFragment StoreEntitySet="Movement">
+                <ScalarProperty Name="move_sts" ColumnName="move_sts" />
+                <ScalarProperty Name="move_desc" ColumnName="move_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultipleDistrict">
+            <EntityTypeMapping TypeName="RegisterLionsModel.MultipleDistrict">
+              <MappingFragment StoreEntitySet="MultipleDistrict">
+                <ScalarProperty Name="multiple_district_id" ColumnName="multiple_district_id" />
+                <ScalarProperty Name="multiple_district_name_thai" ColumnName="multiple_district_name_thai" />
+                <ScalarProperty Name="multiple_district_name_eng" ColumnName="multiple_district_name_eng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Officer">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Officer">
+              <MappingFragment StoreEntitySet="Officer">
+                <ScalarProperty Name="officer_grp" ColumnName="officer_grp" />
+                <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="officer_type" ColumnName="officer_type" />
+                <ScalarProperty Name="title_eng" ColumnName="title_eng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TUser">
+            <EntityTypeMapping TypeName="RegisterLionsModel.TUser">
+              <MappingFragment StoreEntitySet="TUser">
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="user_pwd" ColumnName="user_pwd" />
+                <ScalarProperty Name="eff_date" ColumnName="eff_date" />
+                <ScalarProperty Name="exp_date" ColumnName="exp_date" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="upd_date" ColumnName="upd_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Committee">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Committee">
+              <MappingFragment StoreEntitySet="Committee">
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="event_date" ColumnName="event_date" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="committee_id" ColumnName="committee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommitteeDetail">
+            <EntityTypeMapping TypeName="RegisterLionsModel.CommitteeDetail">
+              <MappingFragment StoreEntitySet="CommitteeDetail">
+                <ScalarProperty Name="seq_no" ColumnName="seq_no" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+                <ScalarProperty Name="committee_id" ColumnName="committee_id" />
+                <ScalarProperty Name="committee_detail_id" ColumnName="committee_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommitteeOfficer">
+            <EntityTypeMapping TypeName="RegisterLionsModel.CommitteeOfficer">
+              <MappingFragment StoreEntitySet="CommitteeOfficer">
+                <ScalarProperty Name="officer_name" ColumnName="officer_name" />
+                <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseDetail">
+            <EntityTypeMapping TypeName="RegisterLionsModel.CourseDetail">
+              <MappingFragment StoreEntitySet="CourseDetail">
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="course_detail_id" ColumnName="course_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZoneClub">
+            <EntityTypeMapping TypeName="RegisterLionsModel.ZoneClub">
+              <MappingFragment StoreEntitySet="ZoneClub">
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="club_seq" ColumnName="club_seq" />
+                <ScalarProperty Name="zone_officer_id" ColumnName="zone_officer_id" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="zone_club_id" ColumnName="zone_club_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZoneOfficer">
+            <EntityTypeMapping TypeName="RegisterLionsModel.ZoneOfficer">
+              <MappingFragment StoreEntitySet="ZoneOfficer">
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="region_officer_id" ColumnName="region_officer_id" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="zone_no" ColumnName="zone_no" />
+                <ScalarProperty Name="zone_officer_id" ColumnName="zone_officer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubOfficer">
+            <EntityTypeMapping TypeName="RegisterLionsModel.ClubOfficer">
+              <MappingFragment StoreEntitySet="ClubOfficer">
+                <ScalarProperty Name="seq_no" ColumnName="seq_no" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="club_officer_id" ColumnName="club_officer_id" />
+                <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionOfficer">
+            <EntityTypeMapping TypeName="RegisterLionsModel.RegionOfficer">
+              <MappingFragment StoreEntitySet="RegionOfficer">
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="region_no" ColumnName="region_no" />
+                <ScalarProperty Name="region_officer_id" ColumnName="region_officer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="club_sts" ColumnName="club_sts" />
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
+                <ScalarProperty Name="meeting_place" ColumnName="meeting_place" />
+                <ScalarProperty Name="charter_date" ColumnName="charter_date" />
+                <ScalarProperty Name="club_name_eng" ColumnName="club_name_eng" />
+                <ScalarProperty Name="club_name_thai" ColumnName="club_name_thai" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="RegisterLionsModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="member_sts" ColumnName="member_sts" />
+                <ScalarProperty Name="charter_flag" ColumnName="charter_flag" />
+                <ScalarProperty Name="upd_date" ColumnName="upd_date" />
+                <ScalarProperty Name="sponsor_name" ColumnName="sponsor_name" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="member_address_thai" ColumnName="member_address_thai" />
+                <ScalarProperty Name="last_name_eng" ColumnName="last_name_eng" />
+                <ScalarProperty Name="first_name_eng" ColumnName="first_name_eng" />
+                <ScalarProperty Name="membership_type" ColumnName="membership_type" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="occupation" ColumnName="occupation" />
+                <ScalarProperty Name="birth_year" ColumnName="birth_year" />
+                <ScalarProperty Name="cell_phone" ColumnName="cell_phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="member_address_eng" ColumnName="member_address_eng" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationLog">
+            <EntityTypeMapping TypeName="RegisterLionsModel.ApplicationLog">
+              <MappingFragment StoreEntitySet="ApplicationLog">
+                <ScalarProperty Name="club_id" ColumnName="club_id" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="view_name" ColumnName="view_name" />
+                <ScalarProperty Name="ip_addr" ColumnName="ip_addr" />
+                <ScalarProperty Name="log_date" ColumnName="log_date" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficerGroup">
+            <EntityTypeMapping TypeName="RegisterLionsModel.OfficerGroup">
+              <MappingFragment StoreEntitySet="OfficerGroup">
+                <ScalarProperty Name="officer_grp_desc" ColumnName="officer_grp_desc" />
+                <ScalarProperty Name="officer_grp" ColumnName="officer_grp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

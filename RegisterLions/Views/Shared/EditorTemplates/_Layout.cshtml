@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+    <link href="/Content/Project.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+
+    <link href="/Content/jqueryui" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/jQuery.migrate.js"></script>
+
+    <script src="~/Scripts/jQueryMobileMenu.js"></script>
+
+    <script src="~/Scripts/hoverIntent.js"></script>
+
+    <script src="~/Scripts/Superfish.js"></script>
+    <script src="~/Scripts/FitVids1.1.js"></script>
+    <script type='text/javascript'>
+//<![CDATA[
+
+
+
+jQuery(function () {
+    jQuery('ul.menu-secondary').superfish({
+        animation: {
+            opacity: 'show'
+        },
+        autoArrows: true,
+        dropShadows: false,
+        speed: 200,
+        delay: 800
+    });
+});
+
+jQuery(document).ready(function() {
+jQuery('.menu-secondary-container').mobileMenu({
+    defaultText: 'เมนู',
+    className: 'menu-secondary-responsive',
+    containerClass: 'menu-secondary-responsive-container',
+    subMenuDash: '&ndash;'
+});
+jQuery(".post").fitVids();
+});
+
+
+
+//]]>
+    </script>
+
+
+
+
+</head>
+<body>
+    <div id='body-wrapper'>
+        <div id='outer-wrapper'>
+            <div id='wrap2'>
+                @Html.Partial("_HeaderLayout")
+                @Html.Partial("_NavLayout")
+                <div id='content-wrapper'>
+                    <div id='main-wrapper'>
+                        @*@Html.Partial("_JsSlider")*@
+                        <div class='main section' id='main'>
+                            @RenderBody()
+                        </div>
+                    </div>
+                    @Html.Partial("_Rightsidebar")
+                </div>
+                <!-- end content-wrapper -->
+                @Html.Partial("_FooterLayout")
+
+            </div>
+        </div>
+    </div>
+    <!-- end outer-wrapper -->
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

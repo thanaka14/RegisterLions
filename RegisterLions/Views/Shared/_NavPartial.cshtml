@@ -1,0 +1,74 @@
+﻿<div class='span-24'>
+    <div class='menu-secondary-container'>
+        <ul class='menus menu-secondary'>
+            <li>@Html.ActionLink("หน้าแรก", "Index", "Home")</li>
+            @if (Request.IsAuthenticated)
+            {
+                if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+            <li>
+                <a href='#'>ตารางพื้นฐาน</a>
+                <ul class='children'>
+                    <li>@Html.ActionLink("ภาครวม", "Index", "MultipleDistricts")</li>
+                    <li>@Html.ActionLink("ภาค", "Index", "Districts")</li>
+                    <li>@Html.ActionLink("สโมสร", "Index", "Clubs")</li>                    
+                    <li>@Html.ActionLink("สถานะสโมสร", "Index", "ClubStatus")</li>
+                    <li>@Html.ActionLink("ประเภทสมาชิก", "Index", "MembershipTypes")</li>
+                    <li>@Html.ActionLink("ตำแหน่งกรรมการสโมสรและภาค", "Index", "Officers")</li>                                       
+                           
+                </ul>
+            </li>
+            <li>
+                <a class='ai' href='#'>ทะเบียนสมาชิกไลออนส์</a>
+                <ul class='children'>
+                    <li>@Html.ActionLink("สมาชิกไลออนส์", "Index", "Members")</li>
+                    <li>@Html.ActionLink("รายชื่อกรรมการสโมสรและภาค", "Index", "ClubOfficers")</li> 
+                    <li>@Html.ActionLink("ประธานภูมิภาค", "Index", "RegionOfficers")</li>
+                    <li>@Html.ActionLink("ประธานเขต", "Index", "ZoneOfficers")</li>
+                    <li>@Html.ActionLink("สโมสรในแต่ละเขต", "Index", "ZoneClubs")</li>
+                    <li>@Html.ActionLink("กำหนดสิทธิ์ผู้ใช้งาน", "Index", "TUsers")</li>     
+                </ul>
+                
+            </li>
+                }
+                if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("User"))
+                {
+                    <li>
+                        @Html.ActionLink("ข้อมูลของฉัน", "Profile", "Manage")
+                        <ul>
+                            <li>@Html.ActionLink("ข้อมูลส่วนตัว", "Profile", "Manage")</li>
+                            <li>@Html.ActionLink("เปลี่ยนรหัสผ่าน", "ChangePassword", "Manage")</li>
+                            <li>@Html.ActionLink("ประวัติการดำรงตำแหน่ง", "OfficerHistory", "MyHistory")</li>
+                        </ul>
+                    </li>
+            <li>
+                @Html.ActionLink("ข้อมูลสโมสร", "Membership", "MyLionsClubs")
+                <ul>
+                    <li>@Html.ActionLink("รายชื่อสมาชิก", "Membership", "MyLionsClubs")</li>
+                    <li>@Html.ActionLink("ข้อมูลสโมสร", "ClubInfo", "MyLionsClubs")</li>
+                    <li>@Html.ActionLink("รายชื่อกรรมการบริหาร", "Officer", "MyLionsClubs")</li>
+                </ul>
+            </li>
+            <li>
+            @Html.ActionLink("ข้อมูลภาค", "Membership", "MyDistrict")
+                <ul>
+                    <li>@Html.ActionLink("รายชื่อผู้ติดต่อ", "Membership", "MyDistrict")</li>
+                    <li>@Html.ActionLink("รายชื่อสโมสร", "ClubList", "MyDistrict")</li>                    
+                    <li>@Html.ActionLink("สมาชิกใหม่", "NewMember", "MyDistrict")</li>
+                    <li>@Html.ActionLink("สมาชิกที่พ้นสภาพ", "DroppedMember", "MyDistrict")</li>
+                    <li>@Html.ActionLink("รายงานความเคลื่อนไหวของสมาชิก", "MemberReport", "MyDistrict")</li>                    
+                    <li>@Html.ActionLink("ประวัติการดำรงตำแหน่งรายบุคคล", "DistrictOfficerHistory", "MyHistory")</li>
+                    <li>@Html.ActionLink("รายชื่อกรรมการภาค", "DistrictOfficer", "MyDistrict")</li>
+                    <li>@Html.ActionLink("รายชื่อนายก เลขาและเหรัญญิก", "RegionZone", "MyDistrict")</li>
+                    
+                </ul>
+            </li>
+            
+                }
+            }
+            <li>@Html.ActionLink("ติดต่อเรา", "Contact", "Home")</li>
+            @Html.Partial("_LoginPartial")
+        </ul>
+    </div>
+</div>
+<div style='clear:both;'></div>

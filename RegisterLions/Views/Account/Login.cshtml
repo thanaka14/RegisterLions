@@ -1,0 +1,77 @@
+﻿@using RegisterLions.Models
+@model Login
+@{
+    ViewBag.Title = "เข้าสู่ระบบ";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<br />
+<div class="row">   
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <div class="panel-body">
+               
+
+                   
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="input-group">
+                                        <div class="col-md-6"></div>
+                                        <span class="input-group-addon" id="lblUserCode"><span class="glyphicon glyphicon-user"></span></span>
+
+                                        
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "รหัสผู้ใช้" })
+                                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                                    
+                                 </div>
+                                <div class="input-group">
+                                    <div class="col-md-6"></div>
+                                    <span class="input-group-addon" id="lblUserCode"><span class="glyphicon glyphicon-lock"></span></span>
+
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "รหัสผ่าน" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                    
+
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+
+                                        <button id="submitButton" name="submitButton" class="btn btn-primary">
+                                            <i class="glyphicon glyphicon-log-in"></i> Log in
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                        }
+                        </section>
+                    
+
+               
+
+            </div>
+            <div class="panel-footer">&nbsp;</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+       
+    </div>
+</div>
+

@@ -1,0 +1,83 @@
+﻿@model RegisterLions.Models.TUser
+
+@{
+    ViewBag.Title = "ข้อมูลส่วนตัว";
+}
+
+<br />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title </div>
+    <div class="panel-body">
+        <p class="text-success">@ViewBag.StatusMessage</p>
+    
+        
+            <div class="col-md-offset-5 col-md-8">
+                @{
+                    string imgSrc;
+                    if (Model.Member.image != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Member.image);
+                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <img src='~/Pictures/login.jpg' style="max-width:100px; max-height:100px;" />
+                    }
+
+                }
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>รหัสผู้ใช้:</dt>
+                    <dd>@Html.DisplayFor(model => model.user_code)</dd>
+                    <dt>ชื่อ-นามสกุล:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.full_name_thai)</dd>                    
+                    <dt>ชื่อ-นามสกุล (อัวกฤษ):</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.full_name_eng)</dd>
+                    
+                    <dt>สโมสรไลออนส์:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.Club.club_name_thai) @Html.DisplayFor(model => model.Member.Club.District.district_name_thai)</dd>
+                    <dt>รหัสสมาชิก:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.member_id)</dd>
+                    <dt>ประเภทสมาชิก:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.MembershipType.membership_desc_thai)</dd>
+                    <dt>วันที่เป็นสมาชิก:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.join_date)</dd>
+                    <dt>ที่อยู่:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.member_address_thai)</dd>
+                    <dt>ที่อยู่ (อังกฤษ):</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.member_address_eng)</dd>
+
+                    <dt>e-mail:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.email)</dd>
+                    <dt>โทรศัพท์เคลื่อนที่:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.cell_phone)</dd>
+                    <dt>ปีเกิด :</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.birth_year)</dd>
+                    <dt>อาชีพ:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.occupation)</dd>
+                    <dt>ชื่อผู้ Sponsor:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.sponsor_name)</dd>
+
+
+
+
+                </dl>
+            </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-8">
+                        <a class="btn btn-success" href="@Url.Action("EditProfile", "Manage", new { id =  Model.Member.member_seq })">
+                            <i class="glyphicon glyphicon-edit"> แก้ไขข้อมูลส่วนตัว</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

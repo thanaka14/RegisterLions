@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RegisterLions.Models.Officer>
+
+@{
+    ViewBag.Title = "ListOfficer";
+    Layout = "~/Views/Shared/EditorTemplates/_popup.cshtml";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+
+        </div>
+        @using (Html.BeginForm("ListOfficer", "Officers", FormMethod.Post, new { name = "searchForm" }))
+            {
+
+            <div class="col-xs-10 col-lg-6 col-md-6">
+                <div class="input-group">
+                    <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                            <i class="text-muted glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        }
+        <table class="table table-bordered table-striped table-hover" id="myTable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.title)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.title_eng)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.title)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.title_eng)
+                        </td>
+                        <td>
+                            <a href="javascript:selectOfficer('@item.officer_id')">เลือกตำแหน่ง</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script language="javascript">
+
+    function selectOfficer(officer_id) {
+        window.opener.document.getElementById('officer_id').value = officer_id;
+        window.close();
+    }
+</script>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<RegisterLions.Models.Member>
+
+@{
+    ViewBag.Title = "รายชื่อสมาชิก สโมสรไลออนส์";
+    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title@identity.User.club_name_thai (@identity.User.club_id) @identity.User.district_name_thai  จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>
+    <div class="panel-body">
+       
+            @using (Html.BeginForm("Membership", "MyLionsClubs", FormMethod.Post, new { name = "searchForm" }))
+            {
+              
+                <div class="row">                 
+                    <div class="col-md-6">                       
+                        <div class="form-group col-md-offset-6">
+                            @*@Html.DropDownList("memberSts", null, htmlAttributes: new { @class = "form-control ", onChange = "document.searchForm.submit();" })*@
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                                    <i class="text-muted glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        ชื่อ - นามสกุล
+                                    </th>
+
+
+
+
+                                    <th class="text-center">
+                                        วันที่เป็นสมาชิก
+                                    </th>
+                                    
+
+
+                                    <th  class="text-center">รายละเอียด</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                           @Html.DisplayFor(modelItem => item.full_name)                                            
+
+                                            (@Html.DisplayFor(modelItem => item.member_id)) 
+
+                                            @{
+
+                                                if (item.charter_flag == "Y")
+                                                {
+                                                    <span class="label label-success">สมาชิกก่อตั้ง</span>
+
+                                                }
+                                               
+                                            }
+                                            @{
+                                                if (item.member_sts == 2)
+                                                {
+                                                    <span class="label label-danger">พ้นสภาพ</span>
+                                                }
+                                            }
+                                        </td>
+
+
+
+
+
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.join_date)
+                                        </td>
+                                        
+
+                                        <td align="center">
+                                            <a class="btn btn-success" href="@Url.Action("MembershipDetails", "MyLionsClubs", new { id = item.member_seq})">
+                                                <i class="glyphicon glyphicon-zoom-in"> </i>
+                                            </a>
+
+
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+    <div class="panel-footer">&nbsp;</div>
+</div>

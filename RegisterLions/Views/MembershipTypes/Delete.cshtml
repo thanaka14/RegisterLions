@@ -1,0 +1,47 @@
+﻿@model RegisterLions.Models.MembershipType
+
+@{
+    ViewBag.Title = "ลบข้อมูลประเภทสมาชิก";
+}
+
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.membership_desc_thai)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.membership_desc_thai)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.membership_desc_eng)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.membership_desc_eng)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        ลบข้อมูล
+                    </button>
+                    <a class="btn btn-warning" href="@Url.Action("Index", "MembershipTypes")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                </div>
+            }
+            <div class="panel-footer">&nbsp;</div>
+        </div>
+    </div>

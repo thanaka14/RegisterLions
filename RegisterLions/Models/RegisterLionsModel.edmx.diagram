@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c2e16673caf4d108dfb3258eb9aca85" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="RegisterLionsModel.ClubStatus" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.District" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.MemberMovement" Width="1.5" PointX="15.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.MembershipType" Width="1.5" PointX="8.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Movement" Width="1.5" PointX="13.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.MultipleDistrict" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Officer" Width="1.5" PointX="10.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterLionsModel.TUser" Width="1.5" PointX="12.75" PointY="28" IsExpanded="true" />
+        <AssociationConnector Association="RegisterLionsModel.R_16" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterLionsModel.R_711" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Committee" Width="1.5" PointX="13.875" PointY="22.25" />
+        <EntityTypeShape EntityType="RegisterLionsModel.CommitteeDetail" Width="1.5" PointX="16.125" PointY="17.875" />
+        <EntityTypeShape EntityType="RegisterLionsModel.CommitteeOfficer" Width="1.5" PointX="13.875" PointY="25" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Course" Width="1.5" PointX="10.875" PointY="20.25" />
+        <EntityTypeShape EntityType="RegisterLionsModel.CourseDetail" Width="1.5" PointX="13.125" PointY="17.875" />
+        <EntityTypeShape EntityType="RegisterLionsModel.ZoneClub" Width="1.5" PointX="8.625" PointY="13.625" />
+        <EntityTypeShape EntityType="RegisterLionsModel.ZoneOfficer" Width="1.5" PointX="5.625" PointY="9.5" />
+        <AssociationConnector Association="RegisterLionsModel.R_97" />
+        <AssociationConnector Association="RegisterLionsModel.R_98" />
+        <AssociationConnector Association="RegisterLionsModel.R_105" />
+        <AssociationConnector Association="RegisterLionsModel.R_95" />
+        <EntityTypeShape EntityType="RegisterLionsModel.ClubOfficer" Width="1.5" PointX="12.75" PointY="12.125" />
+        <EntityTypeShape EntityType="RegisterLionsModel.RegionOfficer" Width="1.5" PointX="15" PointY="5.5" />
+        <AssociationConnector Association="RegisterLionsModel.R_23" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Club" Width="1.5" PointX="5.25" PointY="12.5" />
+        <AssociationConnector Association="RegisterLionsModel.R_102" />
+        <AssociationConnector Association="RegisterLionsModel.R_104" />
+        <AssociationConnector Association="RegisterLionsModel.R_17" />
+        <AssociationConnector Association="RegisterLionsModel.R_39" />
+        <AssociationConnector Association="RegisterLionsModel.R_701" />
+        <AssociationConnector Association="RegisterLionsModel.R_94" />
+        <EntityTypeShape EntityType="RegisterLionsModel.Member" Width="1.5" PointX="10.5" PointY="12" />
+        <AssociationConnector Association="RegisterLionsModel.R_18" />
+        <AssociationConnector Association="RegisterLionsModel.R_10" />
+        <AssociationConnector Association="RegisterLionsModel.R_103" />
+        <AssociationConnector Association="RegisterLionsModel.R_101" />
+        <AssociationConnector Association="RegisterLionsModel.R_38" />
+        <AssociationConnector Association="RegisterLionsModel.R_53" />
+        <AssociationConnector Association="RegisterLionsModel.R_671" />
+        <EntityTypeShape EntityType="RegisterLionsModel.ApplicationLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="RegisterLionsModel.R_109" />
+        <AssociationConnector Association="RegisterLionsModel.R_110" />
+        <AssociationConnector Association="RegisterLionsModel.R_111" />
+        <AssociationConnector Association="RegisterLionsModel.R_107" />
+        <AssociationConnector Association="RegisterLionsModel.R_87" />
+        <EntityTypeShape EntityType="RegisterLionsModel.OfficerGroup" Width="1.5" PointX="8.25" PointY="8.625" />
+        <AssociationConnector Association="RegisterLionsModel.R_113" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,153 @@
+﻿@model RegisterLions.Models.Member
+
+@{
+    ViewBag.Title = "ลบข้อมูลสมาชิก";
+}
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.member_id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.member_id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.first_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.first_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.last_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.last_name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.first_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.first_name_eng)
+            </dd>
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.last_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.last_name_eng)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.member_address_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.member_address_eng)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cell_phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cell_phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.birth_year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.birth_year)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.occupation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.occupation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.join_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.join_date)
+            </dd>
+
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.member_address_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.member_address_thai)
+            </dd>
+
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.sponsor_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sponsor_name)
+            </dd>
+
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Club.club_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Club.club_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MembershipType.membership_desc_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MembershipType.membership_desc_thai)
+            </dd>
+
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash">ลบข้อมูล</i>
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "Members")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+
+    </div>
+    </div>

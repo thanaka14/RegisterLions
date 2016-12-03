@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link href="~/Content/Project.css" rel="stylesheet" />
+    
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+
+    <link href="~/Content/jqueryui" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jssor-slider/21.1.5/jssor.slider.mini.js' type='text/javascript'></script>
+    <!-- use jssor.slider.debug.js instead for debug -->
+
+    <script src="~/Scripts/jssor.slider.js"></script>
+    <script src="~/Scripts/json.js"></script>
+    <script src="~/Scripts/jQuery.migrate.js"></script>
+
+    <script src="~/Scripts/jQueryMobileMenu.js"></script>
+
+    <script src="~/Scripts/hoverIntent.js"></script>
+
+    <script src="~/Scripts/Superfish.js"></script>
+    <script src="~/Scripts/FitVids1.1.js"></script>
+    <script type='text/javascript'>
+//<![CDATA[
+
+
+
+jQuery(function () {
+    jQuery('ul.menu-secondary').superfish({
+        animation: {
+            opacity: 'show'
+        },
+        autoArrows: true,
+        dropShadows: false,
+        speed: 200,
+        delay: 800
+    });
+});
+
+jQuery(document).ready(function() {
+jQuery('.menu-secondary-container').mobileMenu({
+    defaultText: 'เมนู',
+    className: 'menu-secondary-responsive',
+    containerClass: 'menu-secondary-responsive-container',
+    subMenuDash: '&ndash;'
+});
+jQuery(".post").fitVids();
+});
+
+
+
+//]]>
+    </script>
+
+
+    
+
+</head>
+<body id="body1">
+    <div id='body-wrapper'>
+        <div id='outer-wrapper'>
+            <div id='content-wrapper'>
+                
+                    @Html.Partial("_HeaderPartial")
+                    @Html.Partial("_NavPartial")
+                    <div id='content-wrapper'>
+                        <div id='main-wrapper'>
+                            @Html.Partial("_JsSliderPartial")
+                            <div class='main section' id='main'>
+                                @RenderBody()
+                            </div>
+                        </div>
+                        @Html.Partial("_RightPartial")
+                    </div>
+                    <!-- end content-wrapper -->
+                    @Html.Partial("_FooterPartial")
+
+                
+            </div>
+            </div>
+    </div>
+    <!-- end outer-wrapper -->
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

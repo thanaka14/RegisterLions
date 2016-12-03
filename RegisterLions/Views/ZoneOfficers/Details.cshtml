@@ -1,0 +1,58 @@
+﻿@model RegisterLions.Models.ZoneOfficer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ZoneOfficer</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.zone_no)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.zone_no)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fiscal_year)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fiscal_year)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Member.first_name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Member.first_name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RegionOfficer.region_officer_id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RegionOfficer.region_officer_id)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.zone_officer_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

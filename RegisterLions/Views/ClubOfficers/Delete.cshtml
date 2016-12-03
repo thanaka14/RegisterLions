@@ -1,0 +1,65 @@
+﻿@model RegisterLions.Models.ClubOfficer
+
+@{
+    ViewBag.Title = "ลบกรรมการสโมสร/ภาค";
+}
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.fiscal_year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fiscal_year)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Member.first_name)
+            </dt>
+
+            <dd>
+                @{ if (Model.Member.first_name == null)
+
+                    {@Html.DisplayFor(model => model.Member.full_name_eng)}
+                    else {@Html.DisplayFor(model => model.Member.full_name_thai)}
+                } 
+                
+            </dd>
+
+            
+            <dt>
+                สโมสร
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Member.Club.club_name_thai)
+            </dd>
+            <dt>
+                ตำแหน่ง
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Officer.title)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    ลบข้อมูล
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "ClubOfficers")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+    </div>

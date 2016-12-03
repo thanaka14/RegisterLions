@@ -1,0 +1,75 @@
+﻿@model IEnumerable<RegisterLions.Models.Member>
+
+@{
+    ViewBag.Title = "ค้นหาชื่อ-ใส่ชื่อที่ต้องการแล้วกดปุ่มค้นหา เลือกชื่อที่ต้องการโดยกดปุ่ม 'เลือกชื่อ'";
+    Layout = "~/Views/Shared/EditorTemplates/_popup.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+
+        </div>
+        @using (Html.BeginForm("ListMember", "Members", FormMethod.Post, new { name = "searchForm" }))
+            {
+
+            <div class="col-xs-10 col-lg-6 col-md-6">
+                <div class="input-group">
+                    <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                            <i class="text-muted glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        }
+        <table class="table table-bordered table-striped table-hover" id="myTable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.full_name)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Club.club_name_thai)
+                    </th>
+
+                    <th></th>
+                </tr>
+                </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.full_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Club.club_name_thai)
+                        </td>
+
+                        <td>
+                            <a href="javascript:changeParent('@item.member_seq','@item.full_name','@item.club_id')">เลือกชื่อ</a>
+
+                        </td>
+                    </tr>
+                }
+                </tbody>
+</table>
+    </div>
+</div>
+
+
+<script language="javascript">
+
+        function changeParent(member_seq, full_name_eng,club_id) {
+            window.opener.document.getElementById('member_seq').value = member_seq;
+            //window.opener.document.getElementById('Member_full_name_eng').value = full_name_eng;
+            window.opener.document.getElementById('club_id').value = club_id;
+            window.close();
+        }
+</script>

@@ -1,0 +1,182 @@
+﻿@model RegisterLions.Models.Member
+
+@{
+    ViewBag.Title = "ความเคลื่อนไหวสมาชิก";
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.member_seq)
+    @Html.HiddenFor(model => model.image)
+    @Html.HiddenFor(model => model.member_sts)
+    @Html.HiddenFor(model => model.membership_type)
+    @Html.HiddenFor(model => model.charter_flag)
+    
+    @Html.HiddenFor(model => model.gender)
+    @Html.HiddenFor(model => model.member_address_eng)
+    @Html.HiddenFor(model => model.member_address_thai)
+    @Html.HiddenFor(model => model.email)
+    @Html.HiddenFor(model => model.cell_phone)
+    @Html.HiddenFor(model => model.birth_year)
+    @Html.HiddenFor(model => model.occupation)
+    @Html.HiddenFor(model => model.join_date)
+    @Html.HiddenFor(model => model.sponsor_name)
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.member_id, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="moveDate">สถานะสมาชิก</label>
+                            <div class="col-md-8">
+                               @{
+
+                                   if (Model.member_sts == 1)
+                                   {
+                                    <h4><span class="label label-success">ปกติ</span></h4>
+
+                                   }
+                                   else
+                                   { <h4><span class="label label-danger">พ้นสภาพ (Dropped)</span></h4>
+
+                                   }
+                            }
+                            </div>
+                        </div>
+                    </div>
+                   
+
+ 
+                       
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.first_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.first_name_eng, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.first_name_eng, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.last_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.last_name_eng, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="movement">ความเคลื่อนไหว</label>
+
+                            <div class="col-md-8">
+                                @Html.DropDownList("movement", null, "เลือกความเคลื่อนไหว", htmlAttributes: new { @class = "form-control", required = "required" })
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.club_id, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("club_id", null, "เลือกสโมสร", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.club_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="moveDate">วันที่ดำเนินการ</label>
+
+                            <div class="col-md-8">
+                                <input class="form-control datefield" required="required" id="movedate" name="movedate" type="text" value="" />
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4" for="comment">หมายเหตุ</label>
+
+                        <div class="col-md-8">
+
+                            <input class="form-control" data-val="true" id="comment" name="comment" type="text" value="" />
+
+
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-offset-5 col-md-8">
+                                    <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        ดำเนินการ
+                                    </button>
+                                    <a class="btn btn-warning" href="@Url.Action("Index", "Members")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+        </div>
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+}
+
+

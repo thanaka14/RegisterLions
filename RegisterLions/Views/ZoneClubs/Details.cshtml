@@ -1,0 +1,58 @@
+﻿@model RegisterLions.Models.ZoneClub
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ZoneClub</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fiscal_year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fiscal_year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.club_seq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.club_seq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZoneOfficer.zone_officer_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZoneOfficer.zone_officer_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Club.club_name_thai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.club_name_thai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.first_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.zone_club_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

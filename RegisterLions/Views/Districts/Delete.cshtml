@@ -1,0 +1,58 @@
+﻿@model RegisterLions.Models.District
+
+@{
+    ViewBag.Title = "ลบข้อมูลภาค";
+}
+
+
+
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MultipleDistrict.multiple_district_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MultipleDistrict.multiple_district_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.district_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.district_name_thai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.district_name_eng)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.district_name_eng)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash">ลบข้อมูล</i>
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "Districts")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+
+        
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+
+</div>
+

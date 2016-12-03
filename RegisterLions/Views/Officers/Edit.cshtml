@@ -1,0 +1,67 @@
+﻿@model RegisterLions.Models.Officer
+
+@{
+    ViewBag.Title = "แก้ไขตำแหน่งกรรมการสโมสรและกรรมการภาค";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-body">
+
+            <div class="form-horizontal">
+                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.officer_id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.title_eng, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.title_eng, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.title_eng, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.officer_type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        
+                        <label class="radio-inline">@Html.RadioButtonFor(model => model.officer_type, "C")กรรมการสโมสร</label><label class="radio-inline">@Html.RadioButtonFor(model => model.officer_type, "D")กรรมการภาค</label>
+                        @Html.ValidationMessageFor(model => model.officer_type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.officer_grp, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("officer_grp", null, "เลือกชื่อกลุ่ม", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.officer_grp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button id="submitButton" name="submitButton" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-thumbs-up"></i> จัดเก็บ
+                        </button>
+                        <a class="btn btn-warning" href="@Url.Action("Index", "Officers")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="panel-footer">&nbsp;</div>
+        </div>
+            }

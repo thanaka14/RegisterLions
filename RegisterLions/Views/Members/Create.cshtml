@@ -1,0 +1,277 @@
+﻿@model RegisterLions.Models.Member
+
+@{
+    ViewBag.Title = "เพิ่มข้อมูลสมาชิกไลออนส์";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.member_id, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.member_id, "", new { @class = "text-danger" })
+                                @{if (ViewBag.errorMessage != null)
+                                    { <span style="color:red">@ViewBag.errorMessage</span>}
+                                    }
+                            </div>
+                        </div>
+                        </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.membership_type, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("membership_type", null, "เลือกประเภทสมาชิก", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.membership_type, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.charter_flag, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <label class="radio-inline">@Html.RadioButtonFor(model => model.charter_flag, "Y")ใช่</label><label class="radio-inline">@Html.RadioButtonFor(model => model.charter_flag, "N", new { Checked = "checked" })ไม่ใช่</label>
+
+                                @Html.ValidationMessageFor(model => model.charter_flag, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.member_sts, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <label class="radio-inline">@Html.RadioButtonFor(model => model.member_sts, "1", new { Checked = "checked" })ปกติ</label><label class="radio-inline">@Html.RadioButtonFor(model => model.member_sts, "2")พ้นสภาพ (Dropped)</label>
+                                @Html.ValidationMessageFor(model => model.member_sts, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="movement">ความเคลื่อนไหว</label>
+
+                            <div class="col-md-8">
+                                @Html.DropDownList("movement", null, "เลือกความเคลื่อนไหว", htmlAttributes: new { @class = "form-control",required = "required" })
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4" for="moveDate">วันที่ดำเนินการ</label>
+
+                        <div class="col-md-8">
+                            <input class="form-control datefield" data-val="true" data-val-date="The field Model must be a date." id="movedate" name="movedate" type="text" value="" required="required"/>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.first_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.first_name_eng, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+
+                                @Html.ValidationMessageFor(model => model.first_name_eng, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.last_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.last_name_eng, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.last_name_eng, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.club_id, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("club_id", null, "เลือกสโมสร", htmlAttributes: new { @class = "form-control col-md-6" })
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" name="submitButton" onclick="javascript: return openWindow('../Clubs/listClub');">
+                                        <i class="text-muted glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+                                @Html.ValidationMessageFor(model => model.club_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <label class="radio-inline">@Html.RadioButtonFor(model => model.gender, "M")ชาย</label><label class="radio-inline">@Html.RadioButtonFor(model => model.gender, "F")หญิง</label>
+
+                                @Html.ValidationMessageFor(model => model.gender, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.member_address_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.member_address_eng, 4, 37, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.member_address_eng, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.member_address_thai, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.member_address_thai,4,37, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.member_address_thai, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cell_phone, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.cell_phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.cell_phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.birth_year, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.birth_year, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.birth_year, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.occupation, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.occupation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.occupation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.join_date, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.join_date, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.join_date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sponsor_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.sponsor_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sponsor_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">                                
+                                @Html.TextBoxFor(model => model.image, new { type = "file", accept = "image/*" , @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-offset-5 col-md-8">
+                                    <button id="submitButton" name="submitButton" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-thumbs-up"></i> จัดเก็บ
+                                    </button>
+                                    <a class="btn btn-warning" href="@Url.Action("Index", "Members")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+        </div>
+        <div class="panel-footer">&nbsp;</div>
+        </div>
+            }
+<script language="javascript">
+
+                            function openWindow(theURL) {
+                                var w = 750;
+                                var h = 600;
+                                var l = (window.screen.width / 2) - ((w / 2) + 10);
+                                var t = (window.screen.height / 2) - ((h / 2) + 50);
+                                window.open(theURL, "_blank", "status=yes,toolbar=no,menubar=no,location=no,width=" + w + ",height=" + h + ",left=" + l + ",top=" + t);
+
+                        }
+
+</script>

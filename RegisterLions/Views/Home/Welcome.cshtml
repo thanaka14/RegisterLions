@@ -1,0 +1,55 @@
+﻿@model RegisterLions.Models.Member
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Welcome Page";
+}
+
+@if (Request.IsAuthenticated)
+
+{
+    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>ยินดีต้อนรับ</h2>
+                    <p>
+                        <dl class="dl-horizontal">
+                             @Html.ActionLink("ไลออน "+identity.User.full_name, "Profile", "Manage", routeValues: null, htmlAttributes: new { title = "จัดการบัญชีของฉัน" })
+                            สโมสรไลออนส์@identity.User.club_name_thai (@identity.User.club_id) @identity.User.district_name_thai (@identity.User.district_id)
+                        </dl>
+                    </p>
+                    <p>
+                        @{
+                            string imgSrc;
+                            if (Model.image != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.image);
+                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                            }
+                            else
+                            {
+                                <img src='~/Pictures/login.jpg' style="max-width:100px; max-height:100px;" />
+                            }
+
+                        }
+                    </p>
+                    <p>ระบบทะเบียนสมาชิกไลออนส์ เป็นระบบที่พัฒนาขึ้นเพื่อจัดเก็บข้อมูลสมาชิกไลออนส์ ข้อมูลสโมสร ตำแหน่งกรรมการบริหารสโมสร และกรรมการภาคฯ และหน้าที่ของสมาชิก ของสโมสรไลออนส์สากลภาค 310-เอ2"</p>
+                    
+                    
+                   
+                </div>
+                <div class="col-md-6">
+                    <h2>เริ่มต้นใช้งาน</h2>
+                    <p>คลิกที่เมนู "สโมสร" หรือ "ภาค" เพื่อเลือกดูข้อมูลที่ต้องการ</p>
+                    <p>เลือกเมนู "บัญชีของฉัน" เพื่อแก้ไขข้อมูลส่วนตัว และเปลี่ยนรหัสผ่าน</p>
+                    
+                </div>
+                </div>
+        </div>
+        <div class="panel-footer">&nbsp;</div>
+    </div>
+                            }

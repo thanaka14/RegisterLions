@@ -1,0 +1,50 @@
+﻿@model RegisterLions.Models.TUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_pwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_pwd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eff_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eff_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.first_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.first_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.user_code }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

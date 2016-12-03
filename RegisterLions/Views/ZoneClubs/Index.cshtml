@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RegisterLions.Models.ZoneClub>
+
+@{
+    ViewBag.Title = "บันทึกสโมสรในแต่ละเขต";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+            <a class="btn btn-primary" href="@Url.Action("Create", "ZoneClubs")"><i class="glyphicon glyphicon-file"></i> เพิ่ม</a>
+        </div>
+        @using (Html.BeginForm("Index", "ZoneClubs", FormMethod.Post, new { name = "searchForm" }))
+        {
+
+            <div class="col-xs-10 col-lg-6 col-md-6">
+                <div class="input-group">
+                    <input type="text" id="searchString" name="searchString" class="form-control pull-right" placeholder="ค้นหา...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                            <i class="text-muted glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        }
+        <table class="table table-bordered table-striped table-hover" id="myTable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fiscal_year_disp)
+                    </th>
+                    <th>
+                        เขตที่
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.club_seq)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Club.club_name_thai)
+                    </th>
+
+                    <th class="text-center">แก้ไข</th>
+                    <th class="text-center">ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fiscal_year_disp)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ZoneOfficer.zone_no)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.club_seq)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Club.club_name_thai)
+                        </td>
+
+                        <td align="center">
+                            <a class="btn btn-success" href="@Url.Action("Edit", "ZoneClubs", new { id = item.zone_club_id })">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                        </td>
+                        <td align="center">
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "ZoneClubs", new { id = item.zone_club_id })">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">&nbsp;</div>
+</div>

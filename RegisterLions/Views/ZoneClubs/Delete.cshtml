@@ -1,0 +1,64 @@
+﻿@model RegisterLions.Models.ZoneClub
+
+@{
+    ViewBag.Title = "ลบข้อมูลสโมสรในแต่ละเขต";
+}
+
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <h3>ท่านต้องการลบข้อมูลหรือไม่?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.fiscal_year_disp)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fiscal_year_disp)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ZoneOfficer.zone_no)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ZoneOfficer.zone_no)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.club_seq)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.club_seq)
+            </dd>
+
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Club.club_name_thai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Club.club_name_thai)
+            </dd>
+
+            
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button id="deleteButton" name="submitForm" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    ลบข้อมูล
+                </button>
+                <a class="btn btn-warning" href="@Url.Action("Index", "ZoneClubs")"><i class="glyphicon glyphicon-thumbs-down"></i> ยกเลิก</a>
+            </div>
+        }
+    </div>
+</div>
+

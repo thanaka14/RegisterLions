@@ -1,0 +1,55 @@
+﻿@using RegisterLions.Models
+@model MemberReport
+@{
+    ViewBag.Title = "รายงานความเคลื่อนไหวของสมาชิก ";
+    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title @ViewBag.fiscal_year @identity.User.district_name_thai (@identity.User.district_id) จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped" id="myTable">
+            <thead>
+                <tr>
+
+
+                    <th class="text-center">
+                        สโมสร
+                    </th>
+                    <th class="text-center">
+                        สมาชิกใหม่
+                    </th>
+                    <th class="text-center">
+                        โอนย้าย
+                    </th>
+
+                    <th class="text-center">
+                        กลับเข้ามาใหม่
+                    </th>
+                    <th>พ้นสภาพ</th>
+
+
+                    <th>รวมทั้งสิ้น</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.MemberReport)
+            {
+                   <tr>
+                        <td>
+                            @t.club_name (@t.club_id)
+                        </td>
+                       <td align="center">@t.newMember</td>
+                       <td align="center">@t.transferMember</td>
+                       <td align="center">@t.reinstallMember</td>
+                       <td align="center">@t.dropMember</td>
+                       <td align="center">@t.totalMember</td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">&nbsp;</div>
+</div>

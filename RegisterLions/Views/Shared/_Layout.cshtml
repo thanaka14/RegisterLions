@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+
+    <link href="~/Content/Project.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.jqueryui.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <script src="~/Scripts/jssor.slider-21.1.5.mini.js"></script>
+
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+
+    
+    
+
+
+
+    <script src="~/Scripts/jQuery.migrate.js"></script>
+
+    <script src="~/Scripts/jQueryMobileMenu.js"></script>
+
+    <script src="~/Scripts/hoverIntent.js"></script>
+
+    <script src="~/Scripts/Superfish.js"></script>
+    <script src="~/Scripts/FitVids1.1.js"></script>
+    <script type='text/javascript'>
+//<![CDATA[
+
+
+
+jQuery(function () {
+    jQuery('ul.menu-secondary').superfish({
+        animation: {
+            opacity: 'show'
+        },
+        autoArrows: true,
+        dropShadows: false,
+        speed: 200,
+        delay: 800
+    });
+});
+
+jQuery(document).ready(function() {
+jQuery('.menu-secondary-container').mobileMenu({
+    defaultText: 'เมนู',
+    className: 'menu-secondary-responsive',
+    containerClass: 'menu-secondary-responsive-container',
+    subMenuDash: '&ndash;'
+});
+jQuery(".post").fitVids();
+});
+
+
+
+//]]>
+    </script>
+
+
+
+</head>
+<body>
+    <div id='body-wrapper'>
+        <div id='outer-wrapper'>
+            
+                @Html.Partial("_HeaderPartial")
+                @Html.Partial("_NavPartial")
+            <div class='post-outer'>
+                @RenderBody()
+</div>
+                <!-- end content-wrapper -->
+                @Html.Partial("_FooterPartial")
+
+
+            </div>
+    </div>
+    <!-- end outer-wrapper -->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
+
+    @*@Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")*@
+    <script type="text/JavaScript">
+
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 10,
+                "pagingType": "full_numbers",
+                "language": {
+                    "info": "หน้าที่ _PAGE_/_PAGES_ (_TOTAL_ รายการ)"
+                }
+
+            }
+                );
+        });
+
+    </script>
+    <script src="~/Scripts/jqueryui_datepicker_thai.js"></script>
+    @*<script type="text/javascript">
+        //$(document).ready(function () {
+        //    var d = new Date();
+        //    var toDay = d.getDate() + '/' + (d.getMonth() + 1) + '/' + (d.getFullYear());
+
+        //    $(".datefield").datepicker({
+        //        changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy', defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+        //        dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+        //        monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+        //        monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+        //        buttonImageOnly: true,
+        //        buttonImage: '/images/calendar.gif',
+        //        buttonText: "Select date"
+        //       // showOn: "button"
+        //    }).css("display", "inline-block")
+        //          .next("button").button({
+        //              icons: { primary: "ui-icon-calendar" },
+        //              label: "Select a date",
+        //              text: false
+        //          });
+
+
+
+        //});
+
+        $(".datefield").datepicker({
+            dateFormat: 'dd/mm/yy',
+            showOn: 'button',
+                  buttonImage: 'http://jqueryui.com/demos/datepicker/images/calendar.gif',  
+            buttonImageOnly: false,
+            changeMonth: true,
+            changeYear: true
+        });
+
+    </script>*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

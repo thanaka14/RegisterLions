@@ -1,0 +1,170 @@
+﻿@model RegisterLions.Models.Member
+
+@{
+    ViewBag.Title = "รายละเอียดข้อมูลสมาชิกสโมสรไลออนส์";
+}
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title@Html.DisplayFor(model => model.Club.club_name_thai) (@Html.DisplayFor(model => model.Club.club_id)) @Html.DisplayFor(model => model.Club.District.district_name_thai) (@Html.DisplayFor(model => model.Club.District.district_id))</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dd>
+                @{
+                    string imgSrc;
+                    if (Model.image != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.image);
+                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <img src='~/Pictures/login.jpg' style="max-width:100px; max-height:100px;" />
+                    }
+
+                }
+
+            </dd>
+            <dt>
+                ชื่อ - นามสกุล
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.first_name_eng) @Html.DisplayFor(model => model.last_name_eng) (@Html.DisplayFor(model => model.member_id))
+                @{
+
+                    if (Model.charter_flag == "Y")
+                    {
+                        <span class="label label-success">สมาชิกก่อตั้ง</span>
+
+                    }
+
+                }
+               
+            </dd>
+           
+            
+            <dd>
+                @Html.DisplayFor(model => model.first_name) @Html.DisplayFor(model => model.last_name)
+            </dd>
+            
+            <dt>
+                ประเภทสมาชิก
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MembershipType.membership_desc_thai)
+            </dd>
+            <dt>
+                สถานะสมาชิก
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.statusName)
+            </dd>
+            <dt>
+                วันที่เป็นสมาชิก
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.join_date)
+            </dd>
+
+           
+
+            <dt>
+                เพศ
+            </dt>
+
+            <dd>
+               
+                @Html.DisplayFor(model => model.genderName)
+            </dd>
+
+            <dt>
+                ที่อยู่
+            </dt>
+
+            <dd>
+                @{ if (Model.member_address_thai != null)
+                    {
+                        @Html.DisplayFor(model => model.member_address_thai);
+                    }
+                    else
+                    {@Html.DisplayFor(model => model.member_address_eng);
+                    }
+                }
+                
+            </dd>
+
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+            <dt>
+                โทรศัพท์
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cell_phone)
+            </dd>
+
+            <dt>
+                ปีเกิด
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.birth_year)
+            </dd>
+
+            <dt>
+                อาชีพ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.occupation)
+            </dd>
+
+           
+           
+
+           
+
+            <dt>
+                ชื่อ Sponsor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sponsor_name)
+            </dd>
+
+           
+
+           
+
+           
+
+           
+
+            
+
+        </dl>
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-8">
+                        <a class="btn btn-warning" href="@Url.Action("Membership", "MyLionsClubs")"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        </div>
+    <div class="panel-footer">&nbsp;</div>
+    </div>
+   

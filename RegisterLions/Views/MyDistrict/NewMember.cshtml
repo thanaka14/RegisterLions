@@ -1,0 +1,149 @@
+﻿@model IEnumerable<RegisterLions.Models.MemberMovement>
+
+@{
+    ViewBag.Title = "สมาชิกใหม่";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@ViewBag.Title จำนวน @ViewBag.MemberCount.ToString("#,##0") คน </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("NewMember", "MyDistrict", FormMethod.Post, new { name = "searchForm" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group col-md-offset-6">
+                        @Html.DropDownList("fiscal_year", null, htmlAttributes: new { @class = "form-control " })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        @Html.DropDownList("club_id", null, "ทุกสโมสร", htmlAttributes: new { @class = "form-control pull-right " })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
+                                <i class="text-muted glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+               
+                </div>
+                }
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    @ViewBag.Title
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <dl class="dl-horizontal">
+
+                                            <dt>
+                                                ชื่อ - นามสกุล
+                                            </dt>
+                                            <dd>
+                                                @Html.DisplayFor(modelItem => item.Member.full_name)
+                                                (@Html.DisplayFor(modelItem => item.Member.member_id)) <span class="label label-success">@Html.DisplayFor(modelItem => item.Member.charterName)</span>
+
+                                            </dd>
+                                            <dt>
+                                                สโมสรไลออนส์
+                                            </dt>
+
+                                            <dd>
+
+                                                @Html.DisplayFor(modelItem => item.Club.club_name_thai) (@Html.DisplayFor(modelItem => item.Club.club_id))
+                                            </dd>
+
+                                            <dt>สถานะ</dt>
+                                            <dd>
+                                                <span class="label label-primary">@Html.DisplayFor(modelItem => item.Movement.move_desc)</span>
+                                            </dd>
+                                            <dt>
+                                                วันที่เป็นสมาชิก
+                                            </dt>
+                                            <dd>
+                                                @Html.DisplayFor(modelItem => item.Member.join_date)
+                                            </dd>
+
+
+                                            <dt>
+                                                ที่อยู่
+                                            </dt>
+
+                                            <dd>
+                                                @{ if (item.Member.member_address_thai != null)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Member.member_address_thai);
+                                                    }
+                                                    else
+                                                    {@Html.DisplayFor(modelItem => item.Member.member_address_eng);
+                                                    }
+                                                }
+
+                                            </dd>
+
+                                            <dt>ปีเกิด</dt>
+                                            <dd>@Html.DisplayFor(modelItem => item.Member.birth_year)</dd>
+                                            <dt>
+                                                @Html.DisplayNameFor(model => model.Member.email)
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(modelItem => item.Member.email)
+                                            </dd>
+
+                                            <dt>
+                                                โทรศัพท์
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(modelItem => item.Member.cell_phone)
+                                            </dd>
+
+                                            <dt>
+                                                วันที่เพิ่ม
+                                            </dt>
+
+                                            <dd>
+                                                <span class="label label-info">@Html.DisplayFor(modelItem => item.hist_date)</span>
+                                            </dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </dl>
+
+                                    </td>
+
+                                </tr>
+                                                    }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    <div class="panel-footer">&nbsp;</div>
+</div>
+
+
