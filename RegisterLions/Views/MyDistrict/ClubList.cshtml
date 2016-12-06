@@ -1,13 +1,13 @@
-﻿@model IEnumerable<RegisterLions.Models.Club>
+﻿
 
 @{
     ViewBag.Title = "รายชื่อสโมสรไลออนส์ ";
-    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    //var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
 }
 
 
 <div class="panel panel-primary">
-    <div class="panel-heading">@ViewBag.Title @identity.User.district_name_thai (@identity.User.district_id)</div>
+    <div class="panel-heading">@ViewBag.Title </div>
     <div class="panel-body">
         <div class="col-md-6">
             
@@ -25,7 +25,7 @@
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         }
-        <table class="table table-bordered table-striped table-hover" id="myTable" cellspacing="0" width="100%">
+        <table class="table table-bordered table-striped table-hover" id="myTable1" cellspacing="0">
             <thead>
                 <tr>
                     <th align="center">
@@ -44,25 +44,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in ViewBag.zoneClub)
             {
                     <tr>
                         
                         <td>
                             <dl class="dl-horizontal">
                                 <dt>สโมสรไลออนส์</dt>
-                                <dd>@Html.DisplayFor(modelItem => item.club_name_thai) (@Html.DisplayFor(modelItem => item.club_id))</dd>
-                                <dd>@Html.DisplayFor(modelItem => item.club_name_eng) </dd>
+                                <dd>@item.Club.club_name_thai (@item.club_id))</dd>
+                                <dd>@item.Club.club_name_eng </dd>
                                 <dt>วันที่ก่อตั้ง</dt>
-                                <dd>@Html.DisplayFor(modelItem => item.charter_date)</dd>
+                                <dd>@item.Club.charter_date</dd>
                                 <dt>สถานที่ประชุม</dt>
-                                <dd>@Html.DisplayFor(modelItem => item.meeting_place)</dd>
+                                <dd>@item.Club.meeting_place</dd>
                                 <dt>
-                                    @Html.DisplayFor(modelItem => item.ClubStatus.club_status_desc)
+                                    สถานะสโมสร
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(modelItem => item.ClubStatus.club_status_desc)
+                                    @item.Club.ClubStatus.club_status_desc
                                 </dd>
                             </dl>
                                 

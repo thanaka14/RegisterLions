@@ -272,6 +272,7 @@
     <Compile Include="Models\Officer.cs">
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Officer2Col.cs" />
     <Compile Include="Models\OfficerGroup.cs">
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>

@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "รายชื่อนายก เลขาและเหรัญญิก";
-    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+   // var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
 }
 
 
 
 <div class="panel panel-primary">
-    <div class="panel-heading">@ViewBag.Title @identity.User.district_name_thai (@identity.User.district_id) </div>
+    <div class="panel-heading">@ViewBag.Title </div>
     <div class="panel-body">
         <div class="col-md-8">
 
@@ -42,11 +42,11 @@
                                 {
                                     var base64 = Convert.ToBase64String(item.Member.image);
                                     imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                    <img src='@imgSrc' style="max-width:50px; max-height:50px;" />
+                                    <img src='@imgSrc' style="max-width:70px; max-height:70px;" />
                                 }
                                 else
                                 {
-                                    <img src='~/Pictures/login.jpg' style="max-width:50px; max-height:50px;" />
+                                    <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
                                 }
 
                             }
@@ -74,11 +74,11 @@
                                                     {
                                                         var base64 = Convert.ToBase64String(zone.Member.image);
                                                         imgSrc1 = String.Format("data:image/gif;base64,{0}", base64);
-                                                        <img src='@imgSrc1' style="max-width:50px; max-height:50px;" />
+                                                        <img src='@imgSrc1' style="max-width:70px; max-height:70px;" />
                                                     }
                                                     else
                                                     {
-                                                        <img src='~/Pictures/login.jpg' style="max-width:50px; max-height:50px;" />
+                                                        <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
                                                     }
 
                                                 }
@@ -98,6 +98,7 @@
                                                                     @club.Club.club_name_thai
                                                                 </td>
                                                             </tr>
+                                                            
                                                             <tr style="border-top: none">
                                                                 <td style="border-top: none">
                                                                     <table class="table table-bordered">
@@ -113,11 +114,11 @@
                                                                                             {
                                                                                                 var base64 = Convert.ToBase64String(clubofficer.Member.image);
                                                                                                 imgSrc2 = String.Format("data:image/gif;base64,{0}", base64);
-                                                                                                <img src='@imgSrc2' style="max-width:50px; max-height:50px;" />
+                                                                                                <img src='@imgSrc2' style="max-width:70px; max-height:70px;" />
                                                                                             }
                                                                                             else
                                                                                             {
-                                                                                                <img src='~/Pictures/login.jpg' style="max-width:50px; max-height:50px;" />
+                                                                                                <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
                                                                                             }
 
                                                                                         }

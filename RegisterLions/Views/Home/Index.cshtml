@@ -1,11 +1,50 @@
 ﻿@{
     ViewBag.Title = "หน้าแรก";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
-}
 
+}
 <div class='widget-content'>
-    <h2>เริ่มต้นใช้งาน</h2>
-    <p>คลิกที่เมนูแล้วเลือก "เข้าสู่ระบบ" จากนั้นใส่รหัสผู้ใช้และรหัสผ่าน แล้วคลิกที่ปุ่ม "Log in</p>
+    
+    <h3>ผู้บริหารสโมสรไลออนส์สากล ภาค 310-เอ2</h3>
+    
+        <table class="table table-bordered">
+        
+            
+            @foreach (var t in ViewBag.officer)
+            {
+
+                    <tr>
+                        <td align="center" width="50%">
+                            <img src='@t.imgsrc1' style="max-width:100px; max-height:100px;" />
+                            <br />@t.title1
+                            <br />@t.name1
+                            
+                        </td>
+                        
+                        <td align="center" width="50%">
+                            <img src='@t.imgsrc2' style="max-width:100px; max-height:100px;" />
+                            <br />@t.title2
+                            <br />@t.name2
+
+                        </td>
+                        
+
+
+                        
+                        </tr>
+                        }
+
+
+
+
+
+</table>
+
+</div>
+    
+<div class='widget-content'>
+    
+    
     <link href="http://mybloggerlab.com/Scripts/recent.css" type="text/css" rel="stylesheet" />
 
     
@@ -18,7 +57,11 @@
                                  var showpostdate = false;
                                  var showpostsummary = true;
                                  var numchars = 100;</script>
+    <h3>ข่าวสารสโมสรไลออนส์สากล</h3>
     <script type="text/javascript" src="http://lcinewsa2.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+    <h3>Centennial News</h3>
     <script type="text/javascript" src="http://lci-centennial.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+    <h3>การประชุมใหญ่ไลอนส์สากภาครวม 310 ประเทศไทยครั้งที่ 51</h3>
     <script type="text/javascript" src="http://md310convention51.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+    
 </div>

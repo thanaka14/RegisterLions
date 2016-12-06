@@ -233,12 +233,12 @@ embed, img, object, video {max-width: 100%;}
             height: 52px;
         }
     }
- #body1{
+ /*#body1{
             -webkit-filter: grayscale(100%); 
     -moz-filter: grayscale(100%); 
     -ms-filter: grayscale(100%); 
     -o-filter: grayscale(100%); 
     filter: grayscale(100%); 
     filter: gray; 
-        }
+        }*/
 -->
