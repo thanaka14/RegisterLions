@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "รายชื่อสโมสรไลออนส์ ";
     //var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    int zone_officer_id = 0;
+    int region_officer_id = 0;
 }
 
 
@@ -15,68 +17,102 @@
         @using (Html.BeginForm("ClubList", "MyDistrict", FormMethod.Post, new { name = "searchForm" }))
         {
 
-            <div class="col-md-offset-9">
-                <div class="input-group">
-                    
-                    @Html.DropDownList("club_id", null, "ทุกสโมสร", htmlAttributes: new { @class = "form-control pull-right ", onChange = "document.searchForm.submit();" })
-                    <span class="input-group-btn">
-                        
-                    </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-        }
-        <table class="table table-bordered table-striped table-hover" id="myTable1" cellspacing="0">
-            <thead>
-                <tr>
-                    <th align="center">
-                        ข้อมูลสโมสรไลออนส์
-                    </th>
-                    
-                   
 
-
-                   
-                   
-
-
-
-                   
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in ViewBag.zoneClub)
-            {
-                    <tr>
-                        
-                        <td>
-                            <dl class="dl-horizontal">
-                                <dt>สโมสรไลออนส์</dt>
-                                <dd>@item.Club.club_name_thai (@item.club_id))</dd>
-                                <dd>@item.Club.club_name_eng </dd>
-                                <dt>วันที่ก่อตั้ง</dt>
-                                <dd>@item.Club.charter_date</dd>
-                                <dt>สถานที่ประชุม</dt>
-                                <dd>@item.Club.meeting_place</dd>
-                                <dt>
-                                    สถานะสโมสร
-                                </dt>
-
-                                <dd>
-                                    @item.Club.ClubStatus.club_status_desc
-                                </dd>
-                            </dl>
-                                
-</td>
-
-                        
-
-
-
-                        
-                    </tr>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("searchFisicalYear", null, htmlAttributes: new { @class = "form-control " , onChange = "document.searchForm.submit();" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("club_id", null, "ทุกสโมสร", htmlAttributes: new { @class = "form-control ", onChange = "document.searchForm.submit();" })
+                    </div>
+                </div>
+                </div>
                 }
-            </tbody>
-        </table>
-    </div>
+                <table class="table table-bordered  table-hover" id="myTable1" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th align="center">
+                                ข้อมูลสโมสรไลออนส์
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.zoneClub)
+                {
+                    if (region_officer_id != item.ZoneOfficer.RegionOfficer.region_officer_id)
+                    {
+                        region_officer_id = item.ZoneOfficer.RegionOfficer.region_officer_id;
+                        string imgSrc1;
+                        if (item.ZoneOfficer.RegionOfficer.Member.image != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ZoneOfficer.RegionOfficer.Member.image);
+                            imgSrc1 = String.Format("data:image/gif;base64,{0}", base64);
+
+                        }
+                        else
+                        {
+                            imgSrc1 = "~/Pictures/login.jpg";
+                        }
+                        <tr class="success">
+                            <td>ประธานเภูมิภาคที่ @item.ZoneOfficer.RegionOfficer.region_no @item.ZoneOfficer.RegionOfficer.Member.full_name <img src='@imgSrc1' style="max-width:70px; max-height:70px;" /> </td>
+                        </tr>
+
+                            }
+
+                            if (zone_officer_id != item.zone_officer_id)
+                            {
+                                zone_officer_id = item.zone_officer_id;
+                                string imgSrc2;
+                                if (item.ZoneOfficer.Member.image != null)
+                                {
+                                    var base64 = Convert.ToBase64String(item.ZoneOfficer.Member.image);
+                                    imgSrc2 = String.Format("data:image/gif;base64,{0}", base64);
+
+                                }
+                                else
+                                {
+                                    imgSrc2 = "~/Pictures/login.jpg";
+                                }
+                                <tr class="warning">
+                                    <td>ประธานเขตที่ @item.ZoneOfficer.zone_no @item.ZoneOfficer.Member.full_name <img src='@imgSrc2' style="max-width:70px; max-height:70px;" /></td>
+                                </tr>
+
+
+                            }
+                            <tr>
+
+                                <td>
+                                    <dl class="dl-horizontal">
+                                        <dt>สโมสรไลออนส์</dt>
+                                        <dd>@item.Club.club_name_thai (@item.club_id))</dd>
+                                        <dd>@item.Club.club_name_eng </dd>
+                                        <dt>วันที่ก่อตั้ง</dt>
+                                        <dd>@item.Club.charter_date</dd>
+                                        <dt>สถานที่ประชุม</dt>
+                                        <dd>@item.Club.meeting_place</dd>
+                                        <dt>
+                                            สถานะสโมสร
+                                        </dt>
+
+                                        <dd>
+                                            @item.Club.ClubStatus.club_status_desc
+                                        </dd>
+                                    </dl>
+
+                                </td>
+
+
+
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
     <div class="panel-footer">&nbsp;</div>
 </div>

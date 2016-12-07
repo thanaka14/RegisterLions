@@ -1,8 +1,10 @@
-﻿@model IEnumerable<RegisterLions.Models.RegionOfficer>
+﻿
 
 @{
     ViewBag.Title = "รายชื่อนายก เลขาและเหรัญญิก";
-   // var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    // var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    int zone_officer_id = 0;
+    int region_officer_id = 0;    
 }
 
 
@@ -10,155 +12,106 @@
 <div class="panel panel-primary">
     <div class="panel-heading">@ViewBag.Title </div>
     <div class="panel-body">
-        <div class="col-md-8">
+        <div class="col-md-9">
 
         </div>
         @using (Html.BeginForm("RegionZone", "MyDistrict", FormMethod.Post, new { name = "searchForm" }))
-            {
+        {
 
-            <div class="col-md-4">
-                <div class="input-group">
 
-                    @Html.DropDownList("searchFisicalYear", null, htmlAttributes: new { @class = "form-control pull-right", onChange = "document.searchForm.submit();" })
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
-                            <i class="text-muted glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("searchFisicalYear", null, htmlAttributes: new { @class = "form-control ", onChange = "document.searchForm.submit();" })
+                    </div>
+                </div>
+                
+            </div>
         }
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                @foreach (var item in Model)
+        <table class="table table-bordered table-hover" id="myTable1" cellspacing="0">
+            
+            <tbody>
+                @foreach (var item in ViewBag.zoneClub)
                 {
-                    <tr style="border-top: none">
-                        <td style="border-top: none">
+                    if (region_officer_id != item.ZoneOfficer.RegionOfficer.region_officer_id)
+                    {
+                        region_officer_id = item.ZoneOfficer.RegionOfficer.region_officer_id;
+                        string imgSrc1;
+                        if (item.ZoneOfficer.RegionOfficer.Member.image != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ZoneOfficer.RegionOfficer.Member.image);
+                            imgSrc1 = String.Format("data:image/gif;base64,{0}", base64);
 
-                            ภูมิภาคที่ @Html.DisplayFor(modelItem => item.region_no) @Html.DisplayFor(modelItem => item.Member.full_name)
-                            @{
-                                string imgSrc = null;
-                                if (item.Member.image != null)
-                                {
-                                    var base64 = Convert.ToBase64String(item.Member.image);
-                                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                    <img src='@imgSrc' style="max-width:70px; max-height:70px;" />
-                                }
-                                else
-                                {
-                                    <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
-                                }
+                        }
+                        else
+                        {
+                            imgSrc1 = "../Pictures/login.jpg";
+                        }
+                        <tr class="success">
+                            <td>ประธานเภูมิภาคที่ @item.ZoneOfficer.RegionOfficer.region_no @item.ZoneOfficer.RegionOfficer.Member.full_name <img src='@imgSrc1' style="max-width:70px; max-height:70px;" /> </td>
+                        </tr>
+
+                    }
+
+                    if (zone_officer_id != item.zone_officer_id)
+                    {
+                        zone_officer_id = item.zone_officer_id;
+                        string imgSrc2;
+                        if (item.ZoneOfficer.Member.image != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ZoneOfficer.Member.image);
+                            imgSrc2 = String.Format("data:image/gif;base64,{0}", base64);
+
+                        }
+                        else
+                        {
+                            imgSrc2 = "../Pictures/login.jpg";
+                        }
+                        <tr class="warning">
+                            <td>ประธานเขตที่ @item.ZoneOfficer.zone_no @item.ZoneOfficer.Member.full_name <img src='@imgSrc2' style="max-width:70px; max-height:70px;" /></td>
+                        </tr>
+
+
+                    }
+                    <tr class="danger">
+                        <td>@item.club_seq สโมสรไลออนส์ @item.Club.club_name_thai</td>
+                    </tr>
+                    foreach (var clubofficer in ViewBag.clubOfficer)
+                    {
+                        if (clubofficer.club_id == item.club_id)
+                        {
+                            string imgSrc3;
+                            if (clubofficer.Member.image != null)
+                            {
+                                var base64 = Convert.ToBase64String(clubofficer.Member.image);
+                                imgSrc3 = String.Format("data:image/gif;base64,{0}", base64);
 
                             }
+                            else
+                            {
+                                imgSrc3 = "../Pictures/login.jpg";
+                            }
+                    <tr >
+
+                        <td>
+                            
+                                <dd><img src='@imgSrc3' style="max-width:70px; max-height:70px;" />@clubofficer.Member.full_name
+                                @clubofficer.Officer.title</dd>                                
+                           
+
                         </td>
 
 
+
+
+
+
                     </tr>
-                    <tr style="border-top: none">
-                        <td style="border-top: none">
-                            <table class="table">
-                                @foreach (var zone in ViewBag.zoneOfficer)
-
-                                {
-
-                                    if (zone.region_officer_id == item.region_officer_id)
-                                    {
-                                        <tr style="border-top: none">
-
-                                            <td style="border-top: none">
-                                                เขตที่ @zone.zone_no
-                                                @zone.Member.full_name
-                                                @{
-                                                    string imgSrc1;
-                                                    if (zone.Member.image != null)
-                                                    {
-                                                        var base64 = Convert.ToBase64String(zone.Member.image);
-                                                        imgSrc1 = String.Format("data:image/gif;base64,{0}", base64);
-                                                        <img src='@imgSrc1' style="max-width:70px; max-height:70px;" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
-                                                    }
-
-                                                }
-                                            </td>
-                                        </tr>
-                                        <tr style="border-top: none">
-                                            <td style="border-top: none">
-                                                <table class="table">
-                                                    @foreach (var club in ViewBag.zoneClub)
-                                                    {
-                                                        if (club.zone_officer_id == zone.zone_officer_id)
-                                                        {
-                                                            <tr style="border-top: none">
-
-                                                                <td style="border-top: none">
-                                                                    @club.club_seq สโมสรไลออนส์
-                                                                    @club.Club.club_name_thai
-                                                                </td>
-                                                            </tr>
-                                                            
-                                                            <tr style="border-top: none">
-                                                                <td style="border-top: none">
-                                                                    <table class="table table-bordered">
-                                                                        @foreach (var clubofficer in ViewBag.clubOfficer)
-                                                                        {
-                                                                            if (clubofficer.club_id == club.club_id)
-                                                                            {
-                                                                                <tr style="border-top: none">
-                                                                                    <td style="border-top: none">
-                                                                                        @{
-                                                                                            string imgSrc2;
-                                                                                            if (clubofficer.Member.image != null)
-                                                                                            {
-                                                                                                var base64 = Convert.ToBase64String(clubofficer.Member.image);
-                                                                                                imgSrc2 = String.Format("data:image/gif;base64,{0}", base64);
-                                                                                                <img src='@imgSrc2' style="max-width:70px; max-height:70px;" />
-                                                                                            }
-                                                                                            else
-                                                                                            {
-                                                                                                <img src='~/Pictures/login.jpg' style="max-width:70px; max-height:70px;" />
-                                                                                            }
-
-                                                                                        }
-                                                                                        @clubofficer.Member.full_name
-                                                                                        @clubofficer.Officer.title
-
-
-                                                                                    </td>
-
-                                                                                </tr>
-                                                                                                }
-                                                                                            }
-
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-
-
-
-
-                                                                                                }
-
-                                                                                            }
-                                                </table>
-                                            </td>
-                                        </tr>
-                                                                                                }
-
-                                                                                            }
-
-                            </table>
-                        </td>
-                    </tr>
-                                                                                            }
-
-
-
-            </table>
-        </div>
-
-        
+                            }
+                        }
+                    }
+            </tbody>
+        </table>
     </div>
+    <div class="panel-footer">&nbsp;</div>
 </div>

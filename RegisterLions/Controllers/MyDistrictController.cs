@@ -100,12 +100,7 @@ namespace RegisterLions.Controllers
             //WriteLog writeLog = new WriteLog();
             ////--writeLog.TransactionLog(identity.User.member_seq, "ClubList", identity.User.club_id);
             //writeLog.TransactionLog(0, "ClubList", 0);
-            #endregion
-            var regionOfficer = (from r in db.RegionOfficers
-                                 select r);
-            var zoneOfficer = (from z in db.ZoneOfficers
-                               join r in db.RegionOfficers on z.region_officer_id equals r.region_officer_id
-                               select z);
+            #endregion           
             var zoneClub = (from c1 in db.ZoneClubs
                             join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
                             select c1
@@ -130,15 +125,12 @@ namespace RegisterLions.Controllers
                 zoneClub = zoneClub.Where(x => x.club_id == club_id);
             }
 
-            ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);
-            regionOfficer = regionOfficer.Where(x => x.fiscal_year == searchFisicalYear);
-            zoneOfficer = zoneOfficer.Where(x => x.fiscal_year == searchFisicalYear);
+            ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);            
             zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
 
-            regionOfficer = regionOfficer.OrderBy(x => x.region_no);
-            zoneOfficer = zoneOfficer.OrderBy(x => x.zone_no);
+            
             zoneClub = zoneClub.OrderBy(x => x.ZoneOfficer.zone_no).ThenBy(x => x.club_seq);
-            ViewBag.zoneOfficer = zoneOfficer.ToList();
+           
             ViewBag.zoneClub = zoneClub.ToList();
             ViewBag.club_id = new SelectList(db.Clubs.Where(x => x.club_sts != 3).OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
             WriteLog writeLog = new WriteLog();
@@ -375,6 +367,18 @@ namespace RegisterLions.Controllers
             
             ViewBag.MemberReport = memberReport.OrderBy(x => x.club_name);
 
+            var zoneClub = (from c1 in db.ZoneClubs
+                            join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
+                            select c1
+                            );
+            var searchFisicalYear = (DateTime.Now.Year) + 543;
+            zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
+
+
+            zoneClub = zoneClub.OrderBy(x => x.ZoneOfficer.zone_no).ThenBy(x => x.club_seq);
+
+            ViewBag.zoneClub = zoneClub.ToList();
+
             // Write log to table TransactionLog
             WriteLog writeLog = new WriteLog();
             writeLog.TransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
@@ -385,24 +389,24 @@ namespace RegisterLions.Controllers
         public ActionResult RegionZone(int? searchFisicalYear)
         {
             //var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
-            var regionOfficer = (from r in db.RegionOfficers
-                                 //join m in db.Members on r.member_seq equals m.member_seq
-                                 //join c in db.Clubs on m.club_id equals c.club_id
-                                 //where c.district_id == identity.User.district_id
-                                 select r);
-            var zoneOfficer = (from z in db.ZoneOfficers
-                               join r in db.RegionOfficers on z.region_officer_id equals r.region_officer_id
-                               //join m in db.Members on z.member_seq equals m.member_seq
-                               //join c in db.Clubs on m.club_id equals c.club_id
-                               //where c.district_id == identity.User.district_id
-                               select z);
+            //var regionOfficer = (from r in db.RegionOfficers
+            //                     //join m in db.Members on r.member_seq equals m.member_seq
+            //                     //join c in db.Clubs on m.club_id equals c.club_id
+            //                     //where c.district_id == identity.User.district_id
+            //                     select r);
+            //var zoneOfficer = (from z in db.ZoneOfficers
+            //                   join r in db.RegionOfficers on z.region_officer_id equals r.region_officer_id
+            //                   //join m in db.Members on z.member_seq equals m.member_seq
+            //                   //join c in db.Clubs on m.club_id equals c.club_id
+            //                   //where c.district_id == identity.User.district_id
+            //                   select z);
             var zoneClub = (from c1 in db.ZoneClubs
                             join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
                             //join c3 in db.Clubs on c1.club_id equals c3.club_id
                             //where c3.district_id == identity.User.district_id
                             select c1
                             );
-           
+
             var c_fiscal_year = (from c1 in db.ZoneClubs                              
                                 select new
                                 {                                    
@@ -425,20 +429,20 @@ namespace RegisterLions.Controllers
                                select c);
 
             ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);
-                regionOfficer = regionOfficer.Where(x => x.fiscal_year == searchFisicalYear);
-                zoneOfficer = zoneOfficer.Where(x => x.fiscal_year == searchFisicalYear);
-                zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
-            
-            regionOfficer = regionOfficer.OrderBy(x => x.fiscal_year).ThenBy(x => x.region_no);
-            zoneOfficer= zoneOfficer.OrderBy(x => x.fiscal_year).ThenBy(x => x.zone_no);
+            //    regionOfficer = regionOfficer.Where(x => x.fiscal_year == searchFisicalYear);
+            //    zoneOfficer = zoneOfficer.Where(x => x.fiscal_year == searchFisicalYear);
+            zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
+
+            //regionOfficer = regionOfficer.OrderBy(x => x.fiscal_year).ThenBy(x => x.region_no);
+            //zoneOfficer= zoneOfficer.OrderBy(x => x.fiscal_year).ThenBy(x => x.zone_no);
             zoneClub = zoneClub.OrderBy(x => x.fiscal_year).ThenBy(x => x.ZoneOfficer.zone_no).ThenBy(x => x.club_seq);
-            ViewBag.zoneOfficer = zoneOfficer.ToList();
+            //ViewBag.zoneOfficer = zoneOfficer.ToList();
             ViewBag.zoneClub = zoneClub.ToList();
             ViewBag.clubOfficer = clubOfficer.OrderBy(x=>x.officer_id).ToList();
             WriteLog writeLog = new WriteLog();
             //writeLog.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
             writeLog.TransactionLog(0, "RegionZone", 0);
-            return View(regionOfficer.ToList());
+            return View();
         }
         public ActionResult DistrictOfficer(int? fiscal_year, string searchString,int? officer_grp)
         {

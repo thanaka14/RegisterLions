@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "รายชื่อกรรมการภาค";
+    int officer_grp = 0;
 }
 
 <div class="panel panel-primary">
@@ -52,6 +53,14 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+                    if (officer_grp != item.Officer.officer_grp)
+                    {
+                        officer_grp = (int) item.Officer.officer_grp;                       
+                        <tr class="success">
+                            <td colspan="3"> @item.Officer.OfficerGroup.officer_grp_desc</td>
+                        </tr>
+
+                    }
                     <tr>
                         
                         <td>

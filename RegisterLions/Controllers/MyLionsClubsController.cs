@@ -117,7 +117,7 @@ namespace RegisterLions.Controllers
             return View(club);
         }
         //GET: Officer
-        public ActionResult Officer(int? searchFisicalYear)
+        public ActionResult Officer(int? searchFisicalYear,int? club_id)
         {
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             var tClub_id = identity.User.club_id;
@@ -130,18 +130,35 @@ namespace RegisterLions.Controllers
             }
             
             var clubOfficer = (from a in db.ClubOfficers
-                               where a.club_id == tClub_id
+                               //where a.club_id == tClub_id
                                join b in db.Members on a.member_seq equals b.member_seq                                                              
                                join d in db.Officers on a.officer_id equals d.officer_id
                                where d.officer_type.Equals("C") //&& a.fiscal_year == fiscal_year
                                orderby a.officer_id
                                select a);
+            var tClub = (from c in db.Clubs                         
+                         join zc in db.ZoneClubs on c.club_id equals zc.club_id                         
+                         select new
+                         {
+                             club_id = c.club_id,
+                             club_name_thai = c.club_name_thai,
+                             fiscal_year= zc.fiscal_year
+                         }
+                           ).Distinct();
 
             if (searchFisicalYear == null)
-            { searchFisicalYear= (DateTime.Now.Year) + 543; }
-                
-                this.ViewBag.searchFisicalYear = new SelectList(lstFiscalYear, "Value", "Text", searchFisicalYear);
-                clubOfficer = clubOfficer.Where(x => x.fiscal_year == searchFisicalYear);
+            { searchFisicalYear = (DateTime.Now.Year) + 543; }
+            if (club_id == null)
+            {
+                club_id = tClub_id;
+               
+            }
+
+            clubOfficer = clubOfficer.Where(x => x.club_id == club_id);
+            ViewBag.searchFisicalYear = new SelectList(lstFiscalYear, "Value", "Text", searchFisicalYear);
+            SelectList listClub = new SelectList(tClub.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
+            ViewBag.club_id = new SelectList(tClub.Where(X => X.fiscal_year == searchFisicalYear).OrderBy(x => x.club_name_thai), "club_id", "club_name_thai", club_id);
+            clubOfficer = clubOfficer.Where(x=>x.fiscal_year== searchFisicalYear);
            
             // Write log to table TransactionLog
             WriteLog writeLog = new WriteLog();

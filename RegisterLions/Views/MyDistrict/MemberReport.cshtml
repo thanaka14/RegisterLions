@@ -1,14 +1,14 @@
-﻿@using RegisterLions.Models
-@model MemberReport
-@{
+﻿@{
     ViewBag.Title = "รายงานความเคลื่อนไหวของสมาชิก ";
     var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    int zone_officer_id = 0;
+    int region_officer_id = 0;
 }
 
 <div class="panel panel-primary">
     <div class="panel-heading">@ViewBag.Title @ViewBag.fiscal_year @identity.User.district_name_thai (@identity.User.district_id) จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>
     <div class="panel-body">
-        <table class="table table-bordered table-striped" id="myTable">
+        <table class="table table-bordered" id="myTable1">
             <thead>
                 <tr>
 
@@ -35,19 +35,44 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var t in ViewBag.MemberReport)
-            {
+
+                @foreach (var t in ViewBag.zoneClub)
+                {
+                    if (region_officer_id != t.ZoneOfficer.RegionOfficer.region_officer_id)
+                    {
+                        region_officer_id = t.ZoneOfficer.RegionOfficer.region_officer_id;                       
+                        <tr class="success">
+                            <td colspan="6">ภูมิภาคที่ @t.ZoneOfficer.RegionOfficer.region_no</td>
+                        </tr>
+
+                    }
+                    if (zone_officer_id != t.zone_officer_id)
+                    {
+                        zone_officer_id = t.zone_officer_id;
+
+                        <tr class="warning">
+                            <td colspan="6">เขตที่ @t.ZoneOfficer.zone_no</td>
+                        </tr>
+
+
+                    }
+                    foreach (var tt in ViewBag.MemberReport)
+                    {
+                        if (t.club_id == tt.club_id)
+                        {
                    <tr>
                         <td>
-                            @t.club_name (@t.club_id)
+                            @tt.club_name (@t.club_id)
                         </td>
-                       <td align="center">@t.newMember</td>
-                       <td align="center">@t.transferMember</td>
-                       <td align="center">@t.reinstallMember</td>
-                       <td align="center">@t.dropMember</td>
-                       <td align="center">@t.totalMember</td>
+                       <td align="center">@tt.newMember</td>
+                       <td align="center">@tt.transferMember</td>
+                       <td align="center">@tt.reinstallMember</td>
+                       <td align="center">@tt.dropMember</td>
+                       <td align="center">@tt.totalMember</td>
                     </tr>
-                                }
+                        }
+                    }
+                }
             </tbody>
         </table>
     </div>

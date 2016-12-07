@@ -210,7 +210,6 @@
     <Compile Include="Controllers\MyDistrictController.cs" />
     <Compile Include="Controllers\MyHistoryController.cs" />
     <Compile Include="Controllers\MyLionsClubsController.cs" />
-    <Compile Include="Controllers\MyLionsController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
     <Compile Include="Controllers\RegionOfficersController.cs" />
     <Compile Include="Controllers\TUsersController.cs" />
