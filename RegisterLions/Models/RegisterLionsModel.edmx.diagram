@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="RegisterLionsModel.Movement" Width="1.5" PointX="13.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterLionsModel.MultipleDistrict" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterLionsModel.Officer" Width="1.5" PointX="10.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterLionsModel.TUser" Width="1.5" PointX="12.75" PointY="28" IsExpanded="true" />
         <AssociationConnector Association="RegisterLionsModel.R_16" ManuallyRouted="false" />
         <AssociationConnector Association="RegisterLionsModel.R_711" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RegisterLionsModel.Committee" Width="1.5" PointX="13.875" PointY="22.25" />
@@ -42,7 +41,6 @@
         <AssociationConnector Association="RegisterLionsModel.R_103" />
         <AssociationConnector Association="RegisterLionsModel.R_101" />
         <AssociationConnector Association="RegisterLionsModel.R_38" />
-        <AssociationConnector Association="RegisterLionsModel.R_53" />
         <AssociationConnector Association="RegisterLionsModel.R_671" />
         <EntityTypeShape EntityType="RegisterLionsModel.ApplicationLog" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="RegisterLionsModel.R_109" />
@@ -52,6 +50,8 @@
         <AssociationConnector Association="RegisterLionsModel.R_87" />
         <EntityTypeShape EntityType="RegisterLionsModel.OfficerGroup" Width="1.5" PointX="8.25" PointY="8.625" />
         <AssociationConnector Association="RegisterLionsModel.R_113" />
+        <EntityTypeShape EntityType="RegisterLionsModel.TUser" Width="1.5" PointX="12.75" PointY="4.25" />
+        <AssociationConnector Association="RegisterLionsModel.R_53" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

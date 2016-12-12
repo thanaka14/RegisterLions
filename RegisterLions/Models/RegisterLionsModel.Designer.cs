@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'd:\Lions\RegisterLions\RegisterLions\Models\RegisterLionsModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\source code\RegisterLions\RegisterLions\Models\RegisterLionsModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

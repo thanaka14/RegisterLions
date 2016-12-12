@@ -46,7 +46,7 @@ namespace RegisterLions.Models
         [Display(Name = "สถานที่ประชุม")]
         public string meeting_place { get; set; }
 
-        
+
 
         [Display(Name = "รหัสภาค")]
         [Required(ErrorMessage = "เลือกภาค")]
@@ -56,7 +56,7 @@ namespace RegisterLions.Models
         [Required(ErrorMessage = "เลือกสถานะ")]
         public Nullable<int> club_sts { get; set; }
         public byte[] image { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseDetail> CourseDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

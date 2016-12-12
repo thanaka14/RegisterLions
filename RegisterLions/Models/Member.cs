@@ -21,11 +21,11 @@ namespace RegisterLions.Models
             this.ClubOfficer = new HashSet<ClubOfficer>();
             this.CommitteeDetail = new HashSet<CommitteeDetail>();
             this.CourseDetail = new HashSet<CourseDetail>();
-            this.TUser = new HashSet<TUser>();
             this.MemberMovement = new HashSet<MemberMovement>();
             this.ZoneClub = new HashSet<ZoneClub>();
             this.ZoneOfficer = new HashSet<ZoneOfficer>();
             this.RegionOfficer = new HashSet<RegionOfficer>();
+            this.TUser = new HashSet<TUser>();
         }
 
         [Display(Name = "รหัสสมาชิก")]
@@ -178,8 +178,6 @@ namespace RegisterLions.Models
         public virtual ICollection<CourseDetail> CourseDetail { get; set; }
         public virtual MembershipType MembershipType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TUser> TUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberMovement> MemberMovement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ZoneClub> ZoneClub { get; set; }
@@ -187,5 +185,7 @@ namespace RegisterLions.Models
         public virtual ICollection<ZoneOfficer> ZoneOfficer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegionOfficer> RegionOfficer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TUser> TUser { get; set; }
     }
 }

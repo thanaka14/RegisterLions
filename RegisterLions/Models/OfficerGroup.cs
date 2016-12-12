@@ -28,6 +28,7 @@ namespace RegisterLions.Models
         [Display(Name = "กลุ่ม")]
         public string officer_grp_desc { get; set; }
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Officer> Officer { get; set; }
     }

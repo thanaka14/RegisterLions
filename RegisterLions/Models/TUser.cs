@@ -38,6 +38,8 @@ namespace RegisterLions.Models
         [Display(Name = "ชื่อ-นามสกุล")]
         [Required(ErrorMessage = "เลือกชื่อ-นามสกุลผู้ใช้")]
         public Nullable<int> member_seq { get; set; }
+
+
         public Nullable<System.DateTime> upd_date { get; set; }
 
         [Display(Name = "บทบาท")]

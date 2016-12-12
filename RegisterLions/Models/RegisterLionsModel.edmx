@@ -192,8 +192,6 @@
           <Property Name="fiscal_year" Type="int" />
           <Property Name="member_seq" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TUser">
           <Key>
             <PropertyRef Name="user_code" />
@@ -558,19 +556,9 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
           <EntitySet Name="Officer" EntityType="Self.Officer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OfficerGroup" EntityType="Self.OfficerGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionOfficer" EntityType="Self.RegionOfficer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TUser" EntityType="Self.TUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZoneClub" EntityType="Self.ZoneClub" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZoneOfficer" EntityType="Self.ZoneOfficer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TUser" EntityType="Self.TUser" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TUser].[user_code] AS [user_code], 
-    [TUser].[user_pwd] AS [user_pwd], 
-    [TUser].[eff_date] AS [eff_date], 
-    [TUser].[exp_date] AS [exp_date], 
-    [TUser].[member_seq] AS [member_seq], 
-    [TUser].[upd_date] AS [upd_date], 
-    [TUser].[role_name] AS [role_name]
-    FROM [dbo].[TUser] AS [TUser]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="R_10" Association="Self.R_10">
             <End Role="Member" EntitySet="Member" />
             <End Role="ClubOfficer" EntitySet="ClubOfficer" />
@@ -751,19 +739,6 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
           <Property Name="officer_grp" Type="Int32" />
           <NavigationProperty Name="OfficerGroup" Relationship="RegisterLionsModel.R_113" FromRole="Officer" ToRole="OfficerGroup" />
         </EntityType>
-        <EntityType Name="TUser">
-          <Key>
-            <PropertyRef Name="user_code" />
-          </Key>
-          <Property Name="user_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="user_pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="eff_date" Type="DateTime" Precision="0" />
-          <Property Name="exp_date" Type="DateTime" Precision="0" />
-          <Property Name="member_seq" Type="Int32" />
-          <Property Name="upd_date" Type="DateTime" Precision="3" />
-          <Property Name="role_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_53" FromRole="TUser" ToRole="Member" />
-        </EntityType>
         <Association Name="R_16">
           <End Role="MultipleDistrict" Type="Self.MultipleDistrict" Multiplicity="0..1" />
           <End Role="District" Type="Self.District" Multiplicity="*" />
@@ -796,7 +771,6 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
           <EntitySet Name="Movement" EntityType="Self.Movement" />
           <EntitySet Name="MultipleDistrict" EntityType="Self.MultipleDistrict" />
           <EntitySet Name="Officer" EntityType="Self.Officer" />
-          <EntitySet Name="TUser" EntityType="Self.TUser" />
           <AssociationSet Name="R_16" Association="Self.R_16">
             <End Role="MultipleDistrict" EntitySet="MultipleDistrict" />
             <End Role="District" EntitySet="District" />
@@ -880,10 +854,6 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
             <End Role="MembershipType" EntitySet="MembershipType" />
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
-          <AssociationSet Name="R_53" Association="RegisterLionsModel.R_53">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="TUser" EntitySet="TUser" />
-          </AssociationSet>
           <AssociationSet Name="R_671" Association="RegisterLionsModel.R_671">
             <End Role="Member" EntitySet="Member" />
             <End Role="MemberMovement" EntitySet="MemberMovement" />
@@ -913,6 +883,11 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
           <AssociationSet Name="R_113" Association="RegisterLionsModel.R_113">
             <End Role="OfficerGroup" EntitySet="OfficerGroup" />
             <End Role="Officer" EntitySet="Officer" />
+          </AssociationSet>
+          <EntitySet Name="TUser" EntityType="RegisterLionsModel.TUser" />
+          <AssociationSet Name="R_53" Association="RegisterLionsModel.R_53">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="TUser" EntitySet="TUser" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Committee">
@@ -1210,11 +1185,11 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
           <NavigationProperty Name="CommitteeDetail" Relationship="RegisterLionsModel.R_103" FromRole="Member" ToRole="CommitteeDetail" />
           <NavigationProperty Name="CourseDetail" Relationship="RegisterLionsModel.R_101" FromRole="Member" ToRole="CourseDetail" />
           <NavigationProperty Name="MembershipType" Relationship="RegisterLionsModel.R_38" FromRole="Member" ToRole="MembershipType" />
-          <NavigationProperty Name="TUser" Relationship="RegisterLionsModel.R_53" FromRole="Member" ToRole="TUser" />
           <NavigationProperty Name="MemberMovement" Relationship="RegisterLionsModel.R_671" FromRole="Member" ToRole="MemberMovement" />
           <NavigationProperty Name="ZoneClub" Relationship="RegisterLionsModel.R_109" FromRole="Member" ToRole="ZoneClub" />
           <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_110" FromRole="Member" ToRole="ZoneOfficer" />
           <NavigationProperty Name="RegionOfficer" Relationship="RegisterLionsModel.R_111" FromRole="Member" ToRole="RegionOfficer" />
+          <NavigationProperty Name="TUser" Relationship="RegisterLionsModel.R_53" FromRole="Member" ToRole="TUser" />
         </EntityType>
         <Association Name="R_18">
           <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
@@ -1273,18 +1248,6 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
             </Principal>
             <Dependent Role="Member">
               <PropertyRef Name="membership_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_53">
-          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="RegisterLionsModel.TUser" Role="TUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="member_seq" />
-            </Principal>
-            <Dependent Role="TUser">
-              <PropertyRef Name="member_seq" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1391,6 +1354,31 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TUser">
+          <Key>
+            <PropertyRef Name="user_code" />
+          </Key>
+          <Property Name="user_code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="eff_date" Type="DateTime" Precision="0" />
+          <Property Name="exp_date" Type="DateTime" Precision="0" />
+          <Property Name="member_seq" Type="Int32" />
+          <Property Name="upd_date" Type="DateTime" Precision="3" />
+          <Property Name="role_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_53" FromRole="TUser" ToRole="Member" />
+        </EntityType>
+        <Association Name="R_53">
+          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="RegisterLionsModel.TUser" Role="TUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="member_seq" />
+            </Principal>
+            <Dependent Role="TUser">
+              <PropertyRef Name="member_seq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1461,19 +1449,6 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="officer_type" ColumnName="officer_type" />
                 <ScalarProperty Name="title_eng" ColumnName="title_eng" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TUser">
-            <EntityTypeMapping TypeName="RegisterLionsModel.TUser">
-              <MappingFragment StoreEntitySet="TUser">
-                <ScalarProperty Name="role_name" ColumnName="role_name" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="user_pwd" ColumnName="user_pwd" />
-                <ScalarProperty Name="eff_date" ColumnName="eff_date" />
-                <ScalarProperty Name="exp_date" ColumnName="exp_date" />
-                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
-                <ScalarProperty Name="upd_date" ColumnName="upd_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1635,6 +1610,19 @@ warning 6002: The table/view 'RegisterLions2.dbo.TUser' does not have a primary 
               <MappingFragment StoreEntitySet="OfficerGroup">
                 <ScalarProperty Name="officer_grp_desc" ColumnName="officer_grp_desc" />
                 <ScalarProperty Name="officer_grp" ColumnName="officer_grp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TUser">
+            <EntityTypeMapping TypeName="RegisterLionsModel.TUser">
+              <MappingFragment StoreEntitySet="TUser">
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="upd_date" ColumnName="upd_date" />
+                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
+                <ScalarProperty Name="exp_date" ColumnName="exp_date" />
+                <ScalarProperty Name="eff_date" ColumnName="eff_date" />
+                <ScalarProperty Name="user_pwd" ColumnName="user_pwd" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
