@@ -115,8 +115,8 @@
           <Property Name="last_name" Type="varchar" MaxLength="50" />
           <Property Name="gender" Type="char" MaxLength="1" />
           <Property Name="member_address_eng" Type="varchar" MaxLength="500" />
-          <Property Name="email" Type="varchar" MaxLength="30" />
-          <Property Name="cell_phone" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="cell_phone" Type="varchar" MaxLength="50" />
           <Property Name="birth_year" Type="int" />
           <Property Name="occupation" Type="varchar" MaxLength="100" />
           <Property Name="join_date" Type="date" />
@@ -131,6 +131,7 @@
           <Property Name="upd_date" Type="datetime" />
           <Property Name="charter_flag" Type="char" MaxLength="1" />
           <Property Name="member_sts" Type="int" />
+          <Property Name="line_id" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MemberMovement">
           <Key>
@@ -213,7 +214,6 @@
           <Property Name="club_id" Type="int" />
           <Property Name="zone_officer_id" Type="int" />
           <Property Name="club_seq" Type="int" />
-          <Property Name="member_seq" Type="int" />
         </EntityType>
         <EntityType Name="ZoneOfficer">
           <Key>
@@ -306,18 +306,6 @@
             </Principal>
             <Dependent Role="ZoneOfficer">
               <PropertyRef Name="region_officer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_109">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="ZoneClub" Type="Self.ZoneClub" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="member_seq" />
-            </Principal>
-            <Dependent Role="ZoneClub">
-              <PropertyRef Name="member_seq" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -587,10 +575,6 @@
             <End Role="RegionOfficer" EntitySet="RegionOfficer" />
             <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
           </AssociationSet>
-          <AssociationSet Name="R_109" Association="Self.R_109">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="ZoneClub" EntitySet="ZoneClub" />
-          </AssociationSet>
           <AssociationSet Name="R_110" Association="Self.R_110">
             <End Role="Member" EntitySet="Member" />
             <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
@@ -859,10 +843,6 @@
             <End Role="MemberMovement" EntitySet="MemberMovement" />
           </AssociationSet>
           <EntitySet Name="ApplicationLog" EntityType="RegisterLionsModel.ApplicationLog" />
-          <AssociationSet Name="R_109" Association="RegisterLionsModel.R_109">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="ZoneClub" EntitySet="ZoneClub" />
-          </AssociationSet>
           <AssociationSet Name="R_110" Association="RegisterLionsModel.R_110">
             <End Role="Member" EntitySet="Member" />
             <End Role="ZoneOfficer" EntitySet="ZoneOfficer" />
@@ -961,8 +941,6 @@
           <Property Name="club_seq" Type="Int32" />
           <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_95" FromRole="ZoneClub" ToRole="ZoneOfficer" />
           <NavigationProperty Name="Club" Relationship="RegisterLionsModel.R_94" FromRole="ZoneClub" ToRole="Club" />
-          <Property Name="member_seq" Type="Int32" />
-          <NavigationProperty Name="Member" Relationship="RegisterLionsModel.R_109" FromRole="ZoneClub" ToRole="Member" />
         </EntityType>
         <EntityType Name="ZoneOfficer">
           <Key>
@@ -1164,8 +1142,8 @@
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="member_address_eng" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="cell_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cell_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="birth_year" Type="Int32" />
           <Property Name="occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="join_date" Type="DateTime" Precision="0" />
@@ -1186,10 +1164,10 @@
           <NavigationProperty Name="CourseDetail" Relationship="RegisterLionsModel.R_101" FromRole="Member" ToRole="CourseDetail" />
           <NavigationProperty Name="MembershipType" Relationship="RegisterLionsModel.R_38" FromRole="Member" ToRole="MembershipType" />
           <NavigationProperty Name="MemberMovement" Relationship="RegisterLionsModel.R_671" FromRole="Member" ToRole="MemberMovement" />
-          <NavigationProperty Name="ZoneClub" Relationship="RegisterLionsModel.R_109" FromRole="Member" ToRole="ZoneClub" />
           <NavigationProperty Name="ZoneOfficer" Relationship="RegisterLionsModel.R_110" FromRole="Member" ToRole="ZoneOfficer" />
           <NavigationProperty Name="RegionOfficer" Relationship="RegisterLionsModel.R_111" FromRole="Member" ToRole="RegionOfficer" />
           <NavigationProperty Name="TUser" Relationship="RegisterLionsModel.R_53" FromRole="Member" ToRole="TUser" />
+          <Property Name="line_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="R_18">
           <End Type="RegisterLionsModel.Club" Role="Club" Multiplicity="0..1" />
@@ -1274,18 +1252,6 @@
           <Property Name="member_seq" Type="Int32" />
           <Property Name="club_id" Type="Int32" />
         </EntityType>
-        <Association Name="R_109">
-          <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="RegisterLionsModel.ZoneClub" Role="ZoneClub" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="member_seq" />
-            </Principal>
-            <Dependent Role="ZoneClub">
-              <PropertyRef Name="member_seq" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="R_110">
           <End Type="RegisterLionsModel.Member" Role="Member" Multiplicity="0..1" />
           <End Type="RegisterLionsModel.ZoneOfficer" Role="ZoneOfficer" Multiplicity="*" />
@@ -1510,7 +1476,6 @@
           <EntitySetMapping Name="ZoneClub">
             <EntityTypeMapping TypeName="RegisterLionsModel.ZoneClub">
               <MappingFragment StoreEntitySet="ZoneClub">
-                <ScalarProperty Name="member_seq" ColumnName="member_seq" />
                 <ScalarProperty Name="club_seq" ColumnName="club_seq" />
                 <ScalarProperty Name="zone_officer_id" ColumnName="zone_officer_id" />
                 <ScalarProperty Name="club_id" ColumnName="club_id" />
@@ -1569,6 +1534,7 @@
           <EntitySetMapping Name="Member">
             <EntityTypeMapping TypeName="RegisterLionsModel.Member">
               <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="line_id" ColumnName="line_id" />
                 <ScalarProperty Name="member_sts" ColumnName="member_sts" />
                 <ScalarProperty Name="charter_flag" ColumnName="charter_flag" />
                 <ScalarProperty Name="upd_date" ColumnName="upd_date" />
@@ -1640,7 +1606,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

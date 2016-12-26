@@ -1,19 +1,19 @@
 ﻿@model RegisterLions.Models.Club
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "เพิ่มสโมสรใหม่";
 }
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="panel-body">
             <div class="form-horizontal">
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row">
                     <div class="col-md-6">
@@ -24,71 +24,77 @@
                                 @Html.ValidationMessageFor(model => model.club_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.club_name_thai, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.club_name_thai, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.club_name_thai, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.club_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.club_name_eng, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.club_name_eng, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.club_name_thai, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.club_name_thai, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.club_name_thai, "", new { @class = "text-danger" })
                             </div>
-                            </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.charter_date, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.charter_date, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.charter_date, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.meeting_place, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.meeting_place, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.meeting_place, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.district_id, "ภาค", htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.DropDownList("district_id", null, "เลือกภาค", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.district_id, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                            
-                        </div>
-                   
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.club_sts, "สถานะสโมสร", htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.DropDownList("club_sts", null, "เลือกสถานะสโมสร", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.club_sts, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.club_name_eng, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.club_name_eng, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.club_name_eng, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.charter_date, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.charter_date, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.charter_date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.meeting_place, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.meeting_place, 4, 37, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.meeting_place, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.district_id, "ภาค", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("district_id", null, "เลือกภาค", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.district_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.club_sts, "สถานะสโมสร", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("club_sts", null, "เลือกสถานะสโมสร", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.club_sts, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.image, new { type = "file", accept = "image/*", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -100,12 +106,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
                     </div>
                 </div>
-               
+            </div>
                 <div class="panel-footer">&nbsp;</div>
             </div>
-            
+
             }
 
+            

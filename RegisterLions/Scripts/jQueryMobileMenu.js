@@ -14,7 +14,7 @@
  */
 (function($){
     $.fn.mobileMenu = function(options) {
-
+        //var dash2 = '&ndash;';
         var defaults = {
             defaultText: 'Navigate to...',
             className: 'select-menu',
@@ -55,8 +55,11 @@
 
                 // if menu has sub menu
                 if( $this.parents('ul').hasClass( settings.subMenuClass ) ) {
-                    dash = Array( len+1 ).join( settings.subMenuDash );
-                    optText = dash + optText;
+                    dash = Array(len + 1).join(settings.subMenuDash);
+                    //alert(optText);
+                    if (len == 1) { optText = optText; } else {
+                        optText = dash + optText;
+                    }
                 }
 
                 // Now build menu and append it

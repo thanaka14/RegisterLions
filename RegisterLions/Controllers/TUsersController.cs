@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace RegisterLions.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles="Admin")]
     public class TUsersController : Controller
     {
         private RegisterLionsEntities db = new RegisterLionsEntities();
@@ -28,8 +28,8 @@ namespace RegisterLions.Controllers
             }
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "ListTUser", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "ListTUser", identity.User.club_id);
             return View(tUser.OrderBy(x => x.user_code).ToList());
         }
 
@@ -62,12 +62,12 @@ namespace RegisterLions.Controllers
                    
                         tUser.upd_date = DateTime.Now;
                         tUser.user_pwd= FormsAuthentication.HashPasswordForStoringInConfigFile(tUser.user_pwd, "SHA1");
-                    db.TUsers.Add(tUser);
+                        db.TUsers.Add(tUser);
                         db.SaveChanges();
                         var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
-                        // Write log to table TransactionLog
-                        WriteLog writeLog = new WriteLog();
-                        writeLog.TransactionLog(identity.User.member_seq, "CreateTUser", identity.User.club_id);
+                    // Write log to table TransactionLog
+                    //ProjLib projlib = new ProjLib();
+                    ProjLib.TransactionLog(identity.User.member_seq, "CreateTUser", identity.User.club_id);
                         return RedirectToAction("Index");
                     
                 }else
@@ -116,13 +116,19 @@ namespace RegisterLions.Controllers
             if (ModelState.IsValid)
             {
                 tUser.upd_date = DateTime.Now;
+                var user_pwd_2 = Request.Form["user_pwd_edit"];
+                if (user_pwd_2 != null)
+                {
+                    tUser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(user_pwd_2, "SHA1");
+                }
+                
                 db.Entry(tUser).State = EntityState.Modified;
-                tUser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(tUser.user_pwd, "SHA1");
+                
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditTUser", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditTUser", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng), "member_seq", "full_name_eng", tUser.member_seq);
@@ -162,6 +168,41 @@ namespace RegisterLions.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GenerateUser()
+        {
+            var member = (from m in db.Members
+                          where m.member_sts==1 
+                          select m
+                         
+                        
+                      ).ToList();
+            foreach(var t in member)
+            {
+                if (t.member_seq != 326 && t.member_seq != 356 && t.member_seq != 357 && t.member_seq != 396
+                    && t.member_seq != 474 && t.member_seq != 708 && t.member_seq != 932 && t.member_seq != 1111
+                    && t.member_seq != 1168 && t.member_seq != 1194 && t.member_seq != 1263 && t.member_seq != 1265
+                    && t.member_seq != 1316)
+                { 
+                    var user = (from u in db.TUsers where u.member_seq == t.member_seq select u).ToList();
+                    if (user.Count() == 0)
+                    {
+                        //ProjLib projlib = new ProjLib();
+                        string user_code= ProjLib.ChkUserCode(t.first_name_eng, t.last_name_eng);                        
+                        TUser tuser = new TUser();
+                        tuser.user_code = user_code;                     
+                        tuser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(user_code + "@123", "SHA1");
+                        tuser.role_name = "User";
+                        tuser.member_seq = t.member_seq;
+                        tuser.upd_date = DateTime.Now;
+                        db.TUsers.Add(tuser);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return View();
+        }
+
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

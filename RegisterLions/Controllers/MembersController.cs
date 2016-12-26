@@ -76,14 +76,20 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "member_id,full_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member, HttpPostedFileBase image)
-        //public ActionResult Create([Bind(Include = "member_id,full_name,last_name,gender,member_address_eng,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai")] Member member)
+        public ActionResult Create([Bind(Include = "member_id,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts,line_id")] Member member, HttpPostedFileBase image)
+        //public ActionResult Create([Bind(Include = "member_id,first_name,last_name,gender,member_address_eng,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai")] Member member)
         {
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             if (ModelState.IsValid)
             {
-                Member result  = db.Members.Find(member.member_id);
-                if (result == null)
+                //Member result  = db.Members.Find(member.member_id);
+                var result = (from m in db.Members
+                              where m.member_id== member.member_id
+                              select m
+                              
+                                );
+
+                if (result.Count()==0)
                 {
 
                     if (image != null && image.ContentLength > 0)
@@ -122,19 +128,24 @@ namespace RegisterLions.Controllers
                     memberMovement.club_id = member.club_id;
                     memberMovement.move_sts = Int32.Parse(tMovement);
                     db.MemberMovements.Add(memberMovement);
+
+                    //ProjLib projlib = new ProjLib();
+                    var user_code = ProjLib.ChkUserCode(member.first_name_eng, member.last_name_eng);
                     TUser tuser = new TUser();
-                    tuser.user_code = member.first_name_eng.ToLower() + "." + member.last_name_eng.ToLower().Substring(0, 1);
-                    tuser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(member.first_name_eng.ToLower() + "." + member.last_name_eng.ToLower().Substring(0, 1) + "@123", "SHA1");
+                    //tuser.user_code = member.first_name_eng.ToLower() + "." + member.last_name_eng.ToLower().Substring(0, 1);
+                    tuser.user_code = user_code;
+                    //tuser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(member.first_name_eng.ToLower() + "." + member.last_name_eng.ToLower().Substring(0, 1) + "@123", "SHA1");
+                    tuser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(user_code + "@123", "SHA1");
                     tuser.role_name = "User";
                     tuser.member_seq = member.member_seq;
                     tuser.upd_date = DateTime.Now;
                     db.TUsers.Add(tuser);
                     db.SaveChanges();
 
-                    
+
                     // Write log to table TransactionLog
-                    WriteLog writeLog = new WriteLog();
-                    writeLog.TransactionLog(identity.User.member_seq, "CreateMember", identity.User.club_id);
+
+                    ProjLib.TransactionLog(identity.User.member_seq, "CreateMember", identity.User.club_id);
                     return RedirectToAction("Index");
                 }
                 else { ViewBag.errorMessage = "รหัสสมาชิกซ้ำ"; }
@@ -174,8 +185,8 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "member_id,full_name,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member, HttpPostedFileBase image, Member m)
-        //public ActionResult Edit([Bind(Include = "member_id,full_name,first_name,last_name,gender,member_address_eng,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai")] Member member)
+        public ActionResult Edit([Bind(Include = "member_id,first_name,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts,line_id")] Member member, HttpPostedFileBase image, Member m)
+        //public ActionResult Edit([Bind(Include = "member_id,first_name,first_name,last_name,gender,member_address_eng,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai")] Member member)
         {
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             if (ModelState.IsValid)
@@ -196,8 +207,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditMember", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditMember", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -230,8 +241,8 @@ namespace RegisterLions.Controllers
         // POST: Members/Movement/5
         [HttpPost, ActionName("Movement")]
         [ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(Bind(Include = "member_id,full_name,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member, Member m)
-        public ActionResult Movement([Bind(Include = "member_id,full_name,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member,Member m)
+        //public ActionResult DeleteConfirmed(Bind(Include = "member_id,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member, Member m)
+        public ActionResult Movement([Bind(Include = "member_id,first_name,last_name,gender,member_address_eng,post_code,email,cell_phone,birth_year,occupation,Join_Date,club_id,member_seq,membership_type,first_name_eng,last_name_eng,member_address_thai,sponsor_name,charter_flag,member_sts")] Member member,Member m)
         {
             //Member member = db.Members.Find(id);
             //db.Members.Remove(member);
@@ -263,8 +274,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "MovementMember", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "MovementMember", identity.User.club_id);
             }
             return RedirectToAction("Index");
         }
@@ -290,8 +301,8 @@ namespace RegisterLions.Controllers
 
             //var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-           // WriteLog writeLog = new WriteLog();
-           // writeLog.TransactionLog(identity.User.member_seq, "ListMember", identity.User.club_id);
+           // projlib projlib = new projlib();
+           // projlib.TransactionLog(identity.User.member_seq, "ListMember", identity.User.club_id);
             return View(members.ToList());
 
         }
@@ -324,8 +335,8 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteMember", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteMember", identity.User.club_id);
             return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)

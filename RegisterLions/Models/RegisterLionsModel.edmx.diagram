@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3c2e16673caf4d108dfb3258eb9aca85" Name="Diagram1" ZoomLevel="108">
+      <Diagram DiagramId="3c2e16673caf4d108dfb3258eb9aca85" Name="Diagram1" ZoomLevel="90">
         <EntityTypeShape EntityType="RegisterLionsModel.ClubStatus" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterLionsModel.District" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterLionsModel.MemberMovement" Width="1.5" PointX="15.75" PointY="13.875" IsExpanded="true" />
@@ -43,7 +43,6 @@
         <AssociationConnector Association="RegisterLionsModel.R_38" />
         <AssociationConnector Association="RegisterLionsModel.R_671" />
         <EntityTypeShape EntityType="RegisterLionsModel.ApplicationLog" Width="1.5" PointX="0.75" PointY="0.75" />
-        <AssociationConnector Association="RegisterLionsModel.R_109" />
         <AssociationConnector Association="RegisterLionsModel.R_110" />
         <AssociationConnector Association="RegisterLionsModel.R_111" />
         <AssociationConnector Association="RegisterLionsModel.R_107" />

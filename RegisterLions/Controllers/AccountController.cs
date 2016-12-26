@@ -76,6 +76,7 @@ namespace RegisterLions.Controllers
                               user_pwd=u.user_pwd,
                                eff_date=u.eff_date,
                                exp_date=u.exp_date,
+                               upd_date=u.upd_date,
                                first_name=m.first_name,
                                last_name=m.last_name,
                                first_name_eng=m.first_name_eng,
@@ -106,8 +107,8 @@ namespace RegisterLions.Controllers
 
 
                     // Write log to table TransactionLog
-                    WriteLog writeLog = new WriteLog();
-                    writeLog.TransactionLog(user.member_seq,"Login",user.club_id);
+                    //ProjLib projlib = new ProjLib();
+                    ProjLib.TransactionLog(user.member_seq,"Login",user.club_id);
 
                     JavaScriptSerializer js = new JavaScriptSerializer();
                     string data = js.Serialize(user);
@@ -119,10 +120,10 @@ namespace RegisterLions.Controllers
                     {
                         return Redirect(ReturnUrl);
                     }
-                    else
+                    else if (user.upd_date != null)
                     {
                         return RedirectToAction("Welcome", "Home");
-                    }
+                    }else { return RedirectToAction("ChangePassword", "Manage"); }
                     
                 }
                 

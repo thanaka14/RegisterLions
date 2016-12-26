@@ -51,8 +51,8 @@ namespace RegisterLions.Controllers
                 }
             }
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(0, "Index", 0);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(0, "Index", 0);
             ViewBag.officer = officer2col;
             return View();
             
@@ -62,8 +62,8 @@ namespace RegisterLions.Controllers
         {
             ViewBag.Message = "Your application description page.";
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(0, "About", 0);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(0, "About", 0);
             return View();
         }
 
@@ -71,8 +71,8 @@ namespace RegisterLions.Controllers
         {
             ViewBag.Message = "Your contact page.";
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(0, "Contact", 0);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(0, "Contact", 0);
 
             return View();
         }

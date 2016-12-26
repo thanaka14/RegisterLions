@@ -30,8 +30,8 @@ namespace RegisterLions.Controllers
             ViewBag.member_seq = Tuser.member_seq;
 
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "Profile", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "Profile", identity.User.club_id);
             return View(Tuser);
         }
 
@@ -66,8 +66,8 @@ namespace RegisterLions.Controllers
             u.upd_date = DateTime.Now;           
             db.SaveChanges();
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "ChangePassword", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "ChangePassword", identity.User.club_id);
             return RedirectToAction("Profile", new { Message = "ChangePasswordSuccess" });
            
 
@@ -121,8 +121,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditProfile", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditProfile", identity.User.club_id);
                 return RedirectToAction("Profile", new { Message = "ChangeInformationSuccess" });
             }
             //ViewBag.club_id = new SelectList(db.Clubs, "club_id", "club_name_thai", member.club_id);

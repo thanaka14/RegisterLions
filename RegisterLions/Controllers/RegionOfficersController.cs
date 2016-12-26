@@ -59,8 +59,8 @@ namespace RegisterLions.Controllers
                 db.RegionOfficers.Add(regionOfficer);
                 db.SaveChanges();
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateRegionOfficer", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateRegionOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -115,8 +115,8 @@ namespace RegisterLions.Controllers
                 db.Entry(regionOfficer).State = EntityState.Modified;
                 db.SaveChanges();
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditRegionOfficer", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditRegionOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             var member = (from m in db.Members
@@ -156,8 +156,8 @@ namespace RegisterLions.Controllers
             db.RegionOfficers.Remove(regionOfficer);
             db.SaveChanges();
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteRegionOfficer", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteRegionOfficer", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

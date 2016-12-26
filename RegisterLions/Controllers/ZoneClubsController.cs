@@ -64,7 +64,7 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "zone_club_id,fiscal_year,club_id,zone_officer_id,club_seq,member_seq")] ZoneClub zoneClub)
+        public ActionResult Create([Bind(Include = "zone_club_id,fiscal_year,club_id,zone_officer_id,club_seq")] ZoneClub zoneClub)
         {
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             if (ModelState.IsValid)
@@ -72,8 +72,8 @@ namespace RegisterLions.Controllers
                 db.ZoneClubs.Add(zoneClub);
                 db.SaveChanges();
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateZoneClub", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateZoneClub", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -142,7 +142,7 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "zone_club_id,fiscal_year,club_id,zone_officer_id,club_seq,member_seq")] ZoneClub zoneClub)
+        public ActionResult Edit([Bind(Include = "zone_club_id,fiscal_year,club_id,zone_officer_id,club_seq")] ZoneClub zoneClub)
         {
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             if (ModelState.IsValid)
@@ -150,8 +150,8 @@ namespace RegisterLions.Controllers
                 db.Entry(zoneClub).State = EntityState.Modified;
                 db.SaveChanges();
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditZoneClub", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditZoneClub", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             
@@ -205,8 +205,8 @@ namespace RegisterLions.Controllers
             db.ZoneClubs.Remove(zoneClub);
             db.SaveChanges();
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteZoneClub", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteZoneClub", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

@@ -31,34 +31,22 @@
                         @Html.ValidationMessageFor(model => model.seq_no, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.officer_id, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("officer_id", null, "เลือกตำแหน่ง", htmlAttributes: new { @class = "form-control  col-md-8" })
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" name="submitButton" onclick="javascript: return openWindow('../Officers/listOfficer');">
-                                <i class="text-muted glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                        @Html.ValidationMessageFor(model => model.officer_id, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.member_seq, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownList("member_seq", null, "เลือกชื่อ", htmlAttributes: new { @class = "form-control col-md-8" })
                         @Html.ValidationMessageFor(model => model.member_seq, "", new { @class = "text-danger" })
                         @*@Html.HiddenFor(model => model.member_seq)
-                            @Html.TextBoxFor(model => model.Member.full_name_eng, new { disabled = "disabled", @readonly = "readonly", @class = "form-control col-md-8" })*@
+                @Html.TextBoxFor(model => model.Member.full_name_eng, new { disabled = "disabled", @readonly = "readonly", @class = "form-control col-md-8" })*@
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" name="submitButton" onclick="javascript: return openWindow('../Members/listmember');">
                                 <i class="text-muted glyphicon glyphicon-search"></i>
                             </button>
                         </span>
                     </div>
-                   
-                </div>
 
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.club_id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -71,6 +59,21 @@
                         @Html.ValidationMessageFor(model => model.club_id, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.officer_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("officer_id", null, "เลือกตำแหน่ง", htmlAttributes: new { @class = "form-control  col-md-8" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="submitButton" onclick="javascript: return openWindow('../Officers/listOfficer');">
+                                <i class="text-muted glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.officer_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+               
+
+                
                 
 
                 <div class="form-group">

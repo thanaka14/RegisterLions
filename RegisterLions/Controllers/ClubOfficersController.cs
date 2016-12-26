@@ -40,7 +40,16 @@ namespace RegisterLions.Controllers
         // GET: ClubOfficers/Create
         public ActionResult Create()
         {
-            ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x=>x.last_name_eng), "member_seq", "full_name_eng");
+
+            var c_member = from m in db.Members
+                           select new
+                           {
+                               full_name = m.first_name + " " + m.last_name,
+                               m.member_seq,
+                               m.first_name,
+                               m.last_name
+                           };
+            ViewBag.member_seq = new SelectList(c_member.OrderBy(x => x.first_name).ThenBy(x=>x.last_name), "member_seq", "full_name");
             ViewBag.officer_id = new SelectList(db.Officers.OrderBy(x=>x.officer_id), "officer_id", "title");
             ViewBag.club_id = new SelectList(db.Clubs.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
             return View();
@@ -59,12 +68,20 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateClubOfficer", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateClubOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng), "member_seq", "full_name_eng", clubOfficer.member_seq);
+            var c_member = from m in db.Members
+                           select new
+                           {
+                               full_name=  m.first_name+" "+m.last_name,
+                               m.member_seq,
+                               m.first_name,
+                               m.last_name
+                           };
+            ViewBag.member_seq = new SelectList(c_member.OrderBy(x => x.first_name).ThenBy(x => x.last_name), "member_seq", "full_name", clubOfficer.member_seq);
+            
             ViewBag.officer_id = new SelectList(db.Officers.OrderBy(x => x.officer_id), "officer_id", "title", clubOfficer.officer_id);
             ViewBag.club_id = new SelectList(db.Clubs.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai", clubOfficer.club_id);            
             return View(clubOfficer);
@@ -82,7 +99,16 @@ namespace RegisterLions.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng), "member_seq", "full_name_eng", clubOfficer.member_seq);
+            var c_member = from m in db.Members
+                           select new
+                           {
+                               full_name = m.first_name + " " + m.last_name,
+                               m.member_seq,
+                               m.first_name,
+                               m.last_name
+                           };
+            ViewBag.member_seq = new SelectList(c_member.OrderBy(x => x.first_name).ThenBy(x => x.last_name), "member_seq", "full_name", clubOfficer.member_seq);
+            
             ViewBag.officer_id = new SelectList(db.Officers.OrderBy(x => x.officer_id), "officer_id", "title", clubOfficer.officer_id);
             ViewBag.club_id = new SelectList(db.Clubs.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai", clubOfficer.club_id);
             return View(clubOfficer);
@@ -101,11 +127,22 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditClubOfficer", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditClubOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
-            ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng), "member_seq", "full_name_eng", clubOfficer.member_seq);
+
+            var c_member = from m in db.Members
+                           select new
+                           {
+                               full_name = m.first_name + " " + m.last_name,
+                               m.member_seq,
+                               m.first_name,
+                               m.last_name
+                           };
+            ViewBag.member_seq = new SelectList(c_member.OrderBy(x => x.first_name).ThenBy(x => x.last_name), "member_seq", "full_name", clubOfficer.member_seq);
+
+            
             ViewBag.officer_id = new SelectList(db.Officers.OrderBy(x => x.officer_id), "officer_id", "title", clubOfficer.officer_id);
             ViewBag.club_id = new SelectList(db.Clubs.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai", clubOfficer.club_id);
             return View(clubOfficer);
@@ -136,8 +173,8 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteClubOfficer", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteClubOfficer", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

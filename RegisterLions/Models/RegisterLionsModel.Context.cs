@@ -24,7 +24,7 @@ namespace RegisterLions.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<ClubStatus> ClubStatus { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<MemberMovement> MemberMovements { get; set; }

@@ -49,8 +49,8 @@ namespace RegisterLions.Controllers
                 db.MembershipTypes.Add(membershipType);
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateMembershipType", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateMembershipType", identity.User.club_id);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -86,8 +86,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditMembershipType", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditMembershipType", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             return View(membershipType);
@@ -117,8 +117,8 @@ namespace RegisterLions.Controllers
             db.MembershipTypes.Remove(membershipType);
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteMembershipType", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteMembershipType", identity.User.club_id);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

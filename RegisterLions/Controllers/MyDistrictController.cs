@@ -54,10 +54,10 @@ namespace RegisterLions.Controllers
             else
             {
                 member = member.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng);
-                
+
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
 
             }
             ViewBag.MemberCount = member.Count();
@@ -97,9 +97,9 @@ namespace RegisterLions.Controllers
             //club = club.OrderBy(x => x.club_name_thai);
             //ViewBag.ClubCount =club.Count();
             //// Write log to table TransactionLog
-            //WriteLog writeLog = new WriteLog();
-            ////--writeLog.TransactionLog(identity.User.member_seq, "ClubList", identity.User.club_id);
-            //writeLog.TransactionLog(0, "ClubList", 0);
+            //projlib projlib = new projlib();
+            ////--projlib.TransactionLog(identity.User.member_seq, "ClubList", identity.User.club_id);
+            //projlib.TransactionLog(0, "ClubList", 0);
             #endregion           
             var zoneClub = (from c1 in db.ZoneClubs
                             join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
@@ -133,9 +133,9 @@ namespace RegisterLions.Controllers
            
             ViewBag.zoneClub = zoneClub.ToList();
             ViewBag.club_id = new SelectList(db.Clubs.Where(x => x.club_sts != 3).OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
-            WriteLog writeLog = new WriteLog();
-            //writeLog.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
-            writeLog.TransactionLog(0, "ClubList", 0);
+            //ProjLib projlib = new ProjLib();
+            //projlib.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
+            ProjLib.TransactionLog(0, "ClubList", 0);
             // return View(regionOfficer.ToList());
             return View();
         }
@@ -202,8 +202,8 @@ namespace RegisterLions.Controllers
                                  };
             ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
             return View(memberMovement);
         }
 
@@ -276,8 +276,8 @@ namespace RegisterLions.Controllers
 
             ViewBag.MemberCount = memberMovement.Count();
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
             return View(memberMovement);
         }
 
@@ -380,8 +380,8 @@ namespace RegisterLions.Controllers
             ViewBag.zoneClub = zoneClub.ToList();
 
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
             var member = (from m in db.Members where m.member_sts == 1 select m);
             ViewBag.MemberCount = member.Count();
             return View();
@@ -439,9 +439,9 @@ namespace RegisterLions.Controllers
             //ViewBag.zoneOfficer = zoneOfficer.ToList();
             ViewBag.zoneClub = zoneClub.ToList();
             ViewBag.clubOfficer = clubOfficer.OrderBy(x=>x.officer_id).ToList();
-            WriteLog writeLog = new WriteLog();
-            //writeLog.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
-            writeLog.TransactionLog(0, "RegionZone", 0);
+            //ProjLib projlib = new ProjLib();
+            //projlib.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
+            ProjLib.TransactionLog(0, "RegionZone", 0);
             return View();
         }
         public ActionResult DistrictOfficer(int? fiscal_year, string searchString,int? officer_grp)
@@ -494,9 +494,9 @@ namespace RegisterLions.Controllers
             ViewBag.zoneOfficer = zoneOfficer;
             ViewBag.regionOfficer = regionOfficer;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            //writeLog.TransactionLog(identity.User.member_seq, "DistrictOfficer", identity.User.club_id);
-            writeLog.TransactionLog(0, "DistrictOfficer", 0);
+            //ProjLib projlib = new ProjLib();
+            //projlib.TransactionLog(identity.User.member_seq, "DistrictOfficer", identity.User.club_id);
+            ProjLib.TransactionLog(0, "DistrictOfficer", 0);
             //ViewBag.member_seq = c_member2;
             return View(clubOfficer);
         }

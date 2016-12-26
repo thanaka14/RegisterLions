@@ -66,8 +66,8 @@ namespace RegisterLions.Controllers
             member = member.Where(x => x.member_sts == 1);
             ViewBag.MemberCount = member.Count();
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
             return View(member.ToList());
         }
 
@@ -85,8 +85,8 @@ namespace RegisterLions.Controllers
             }
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "MembershipDetails", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "MembershipDetails", identity.User.club_id);
             return View(member);
         }
         // GET: ClubInfo
@@ -111,8 +111,8 @@ namespace RegisterLions.Controllers
             }
 
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "ClubInfo", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "ClubInfo", identity.User.club_id);
 
             return View(club);
         }
@@ -159,10 +159,10 @@ namespace RegisterLions.Controllers
             SelectList listClub = new SelectList(tClub.OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
             ViewBag.club_id = new SelectList(tClub.Where(X => X.fiscal_year == searchFisicalYear).OrderBy(x => x.club_name_thai), "club_id", "club_name_thai", club_id);
             clubOfficer = clubOfficer.Where(x=>x.fiscal_year== searchFisicalYear);
-           
+
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "Officer", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "Officer", identity.User.club_id);
             return View(clubOfficer.ToList());
         }
     }

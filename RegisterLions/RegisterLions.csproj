@@ -215,7 +215,7 @@
     <Compile Include="Controllers\TUsersController.cs" />
     <Compile Include="Controllers\ZoneClubsController.cs" />
     <Compile Include="Controllers\ZoneOfficersController.cs" />
-    <Compile Include="Lib\WriteLog.cs" />
+    <Compile Include="Lib\ProjLib.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,6 +261,20 @@
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MemberReport.cs" />
+    <Compile Include="Models\Metadata\ClubMetadata.cs" />
+    <Compile Include="Models\Metadata\ClubOfficerMetadata.cs" />
+    <Compile Include="Models\Metadata\ClubStatusMetadata.cs" />
+    <Compile Include="Models\Metadata\DistrictMetadata.cs" />
+    <Compile Include="Models\Metadata\MemberMetadata.cs" />
+    <Compile Include="Models\Metadata\MembershipTypeMetadata.cs" />
+    <Compile Include="Models\Metadata\MovementMetadata.cs" />
+    <Compile Include="Models\Metadata\MultipleDistrictMetadata.cs" />
+    <Compile Include="Models\Metadata\OfficerGroupMetadata.cs" />
+    <Compile Include="Models\Metadata\OfficerMetadata.cs" />
+    <Compile Include="Models\Metadata\RegionOfficerMetadata.cs" />
+    <Compile Include="Models\Metadata\TUserMetadata.cs" />
+    <Compile Include="Models\Metadata\ZoneClubMetadata.cs" />
+    <Compile Include="Models\Metadata\ZoneOfficerMetadata.cs" />
     <Compile Include="Models\Movement.cs">
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>
@@ -275,6 +289,7 @@
     <Compile Include="Models\OfficerGroup.cs">
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\RegionOfficer.cs">
       <DependentUpon>RegisterLionsModel.tt</DependentUpon>
     </Compile>
@@ -635,6 +650,7 @@
     <Content Include="Views\MyHistory\OfficerHistory.cshtml" />
     <Content Include="Views\MyHistory\DistrictOfficerHistory.cshtml" />
     <Content Include="Views\MyDistrict\DistrictOfficer.cshtml" />
+    <Content Include="Views\TUsers\GenerateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

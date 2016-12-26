@@ -52,8 +52,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateDistrict", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateDistrict", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -90,8 +90,8 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditDistrict", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditDistrict", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.multiple_district_id = new SelectList(db.MultipleDistricts, "multiple_district_id", "multiple_district_name_thai", district.multiple_district_id);
@@ -123,8 +123,8 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteDistrict", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteDistrict", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

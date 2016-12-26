@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RegisterLions.Models.TUser>
+
+@{
+    ViewBag.Title = "GenerateUser";
+}
+
+<h2>GenerateUser</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_pwd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eff_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.upd_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Member.first_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_pwd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eff_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.exp_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.upd_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Member.first_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_code }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_code }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_code })
+        </td>
+    </tr>
+}
+
+</table>

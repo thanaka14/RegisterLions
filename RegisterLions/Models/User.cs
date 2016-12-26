@@ -30,6 +30,8 @@ namespace RegisterLions.Models
         public int district_id { get; set; }
         public string district_name_thai { get; set; }
 
+        public Nullable<System.DateTime> upd_date { get; set; }
+
         public string full_name { get
             {
                 if (first_name != null) { return first_name + " " + last_name; } else { return first_name_eng + " " + last_name_eng; }

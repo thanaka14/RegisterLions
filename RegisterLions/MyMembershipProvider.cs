@@ -154,9 +154,15 @@ namespace RegisterLions
             using (RegisterLionsEntities dc = new RegisterLionsEntities())
             {
                 var strEncPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
-               // var strEncPwd = password;
-                var user = dc.TUsers.Where(a => a.user_code.Equals(username) && a.user_pwd.Equals(strEncPwd)).FirstOrDefault();
-                if (user != null)
+                // var strEncPwd = password;
+                //var user = dc.TUsers.Where(a => a.user_code.Equals(username) && a.user_pwd.Equals(strEncPwd)).FirstOrDefault();
+                var user = (from u in dc.TUsers
+                            where u.user_code.Equals(username) && u.user_pwd.Equals(strEncPwd)
+                            join m in dc.Members on u.member_seq equals m.member_seq
+                            where m.member_sts == 1
+                            select u
+                           ).ToList();
+                if (user.Count() == 1)
                 {
                     return true;
                 }

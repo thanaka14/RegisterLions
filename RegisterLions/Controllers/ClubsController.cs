@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using RegisterLions.Models;
 using RegisterLions.Lib;
+using System.Web;
 
 namespace RegisterLions.Controllers
 {
@@ -44,16 +45,24 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "club_id,club_name_thai,club_name_eng,charter_date,meeting_place,district_id,club_sts")] Club club)
+        public ActionResult Create([Bind(Include = "club_id,club_name_thai,club_name_eng,charter_date,meeting_place,district_id,club_sts")] Club club, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null && image.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(image.InputStream))
+                    {
+                        club.image = reader.ReadBytes(image.ContentLength);
+                    }
+
+                }
                 db.Clubs.Add(club);
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "CreateClub", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "CreateClub", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -86,16 +95,28 @@ namespace RegisterLions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "club_id,club_name_thai,club_name_eng,charter_date,meeting_place,district_id,club_sts")] Club club)
+        public ActionResult Edit([Bind(Include = "club_id,club_name_thai,club_name_eng,charter_date,meeting_place,district_id,club_sts")] Club club, HttpPostedFileBase image, Club m)
         {
             if (ModelState.IsValid)
             {
+                if (image != null && image.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(image.InputStream))
+                    {
+                        club.image = reader.ReadBytes(image.ContentLength);
+                    }
+
+                }
+                else if (m.image != null)
+                {
+                    club.image = m.image;
+                }
                 db.Entry(club).State = EntityState.Modified;
                 db.SaveChanges();
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
-                WriteLog writeLog = new WriteLog();
-                writeLog.TransactionLog(identity.User.member_seq, "EditClub", identity.User.club_id);
+                //ProjLib projlib = new ProjLib();
+                ProjLib.TransactionLog(identity.User.member_seq, "EditClub", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.district_id = new SelectList(db.Districts, "district_id", "district_name_thai", club.district_id);
@@ -129,8 +150,8 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
-            WriteLog writeLog = new WriteLog();
-            writeLog.TransactionLog(identity.User.member_seq, "DeleteClub", identity.User.club_id);
+            //ProjLib projlib = new ProjLib();
+            ProjLib.TransactionLog(identity.User.member_seq, "DeleteClub", identity.User.club_id);
             return RedirectToAction("Index");
         }
         public ActionResult ListClub(string searchString)
