@@ -29,7 +29,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "ListTUser", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "ListTUser", identity.User.club_id);
             return View(tUser.OrderBy(x => x.user_code).ToList());
         }
 
@@ -67,7 +67,7 @@ namespace RegisterLions.Controllers
                         var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                     // Write log to table TransactionLog
                     //ProjLib projlib = new ProjLib();
-                    ProjLib.TransactionLog(identity.User.member_seq, "CreateTUser", identity.User.club_id);
+                    ProjLib.writeTransactionLog(identity.User.member_seq, "CreateTUser", identity.User.club_id);
                         return RedirectToAction("Index");
                     
                 }else
@@ -128,7 +128,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditTUser", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditTUser", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.member_seq = new SelectList(db.Members.OrderBy(x => x.first_name_eng).ThenBy(x => x.last_name_eng), "member_seq", "full_name_eng", tUser.member_seq);
@@ -187,7 +187,7 @@ namespace RegisterLions.Controllers
                     if (user.Count() == 0)
                     {
                         //ProjLib projlib = new ProjLib();
-                        string user_code= ProjLib.ChkUserCode(t.first_name_eng, t.last_name_eng);                        
+                        string user_code= ProjLib.chkUserCode(t.first_name_eng, t.last_name_eng);                        
                         TUser tuser = new TUser();
                         tuser.user_code = user_code;                     
                         tuser.user_pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(user_code + "@123", "SHA1");

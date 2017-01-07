@@ -13,7 +13,8 @@ namespace RegisterLions.Controllers
 
         public ActionResult Index()
         {
-            int fiscal_year = (DateTime.Now.Year) + 543;
+            int fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+
             var clubofficer = (from co in db.ClubOfficers
                                where co.fiscal_year == fiscal_year 
                                && (co.officer_id >= 13 && co.officer_id <= 18)
@@ -23,36 +24,41 @@ namespace RegisterLions.Controllers
             List<Officer2Col> officer2col = new List<Officer2Col>();
             int i = 0;
             string imgsrc="",title="",name = "";
-            foreach (var c1 in clubofficer)
+            if (clubofficer.ToList().Count() != 0)
             {
-                i++;
-                
-                string imgsrctmp = "";
-                if (c1.Member.image != null)
+                foreach (var c1 in clubofficer)
                 {
-                    var base64 = Convert.ToBase64String(c1.Member.image);
-                    imgsrctmp = String.Format("data:image/gif;base64,{0}", base64);
-                }else
-                {
-                    imgsrctmp = "~/Pictures/login.jpg";
-                }
-                if (i % 2 == 1)
-                {
-                    imgsrc = imgsrctmp;
-                    title = c1.Officer.title;
-                    name = c1.Member.full_name;
-                }else
-                {
+                    i++;
 
-                    officer2col.Add(new Officer2Col(imgsrc, title, name, imgsrctmp, c1.Officer.title, c1.Member.full_name));
-                    imgsrc = "";
-                    title = "";
-                    name = "";
+                    string imgsrctmp = "";
+                    if (c1.Member.image != null)
+                    {
+                        var base64 = Convert.ToBase64String(c1.Member.image);
+                        imgsrctmp = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    else
+                    {
+                        imgsrctmp = "~/Pictures/login.jpg";
+                    }
+                    if (i % 2 == 1)
+                    {
+                        imgsrc = imgsrctmp;
+                        title = c1.Officer.title;
+                        name = c1.Member.full_name;
+                    }
+                    else
+                    {
+
+                        officer2col.Add(new Officer2Col(imgsrc, title, name, imgsrctmp, c1.Officer.title, c1.Member.full_name));
+                        imgsrc = "";
+                        title = "";
+                        name = "";
+                    }
                 }
             }
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(0, "Index", 0);
+            ProjLib.writeTransactionLog(0, "Index", 0);
             ViewBag.officer = officer2col;
             return View();
             
@@ -63,7 +69,7 @@ namespace RegisterLions.Controllers
             ViewBag.Message = "Your application description page.";
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(0, "About", 0);
+            ProjLib.writeTransactionLog(0, "About", 0);
             return View();
         }
 
@@ -72,7 +78,7 @@ namespace RegisterLions.Controllers
             ViewBag.Message = "Your contact page.";
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(0, "Contact", 0);
+            ProjLib.writeTransactionLog(0, "Contact", 0);
 
             return View();
         }

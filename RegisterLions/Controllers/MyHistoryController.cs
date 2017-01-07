@@ -28,7 +28,7 @@ namespace RegisterLions.Controllers
                                select co).OrderBy(x=>x.fiscal_year).ThenBy(x=>x.officer_id);
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "OfficerHistory", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "OfficerHistory", identity.User.club_id);
             return View(clubOfficer);
         }
         public ActionResult DistrictOfficerHistory(int? member_seq)
@@ -64,7 +64,7 @@ namespace RegisterLions.Controllers
             ViewBag.member_seq = new SelectList(c_member2.OrderBy(x=>x.full_name), "member_seq", "full_name", member_seq);
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DistrictOfficerHistory", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DistrictOfficerHistory", identity.User.club_id);
             //ViewBag.member_seq = c_member2;
             return View(clubOfficer);
         }

@@ -108,7 +108,7 @@ namespace RegisterLions.Controllers
 
                     // Write log to table TransactionLog
                     //ProjLib projlib = new ProjLib();
-                    ProjLib.TransactionLog(user.member_seq,"Login",user.club_id);
+                    ProjLib.writeTransactionLog(user.member_seq,"Login",user.club_id);
 
                     JavaScriptSerializer js = new JavaScriptSerializer();
                     string data = js.Serialize(user);

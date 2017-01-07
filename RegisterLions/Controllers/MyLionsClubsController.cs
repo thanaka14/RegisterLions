@@ -67,7 +67,7 @@ namespace RegisterLions.Controllers
             ViewBag.MemberCount = member.Count();
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
             return View(member.ToList());
         }
 
@@ -86,7 +86,7 @@ namespace RegisterLions.Controllers
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "MembershipDetails", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "MembershipDetails", identity.User.club_id);
             return View(member);
         }
         // GET: ClubInfo
@@ -112,7 +112,7 @@ namespace RegisterLions.Controllers
 
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "ClubInfo", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "ClubInfo", identity.User.club_id);
 
             return View(club);
         }
@@ -147,7 +147,7 @@ namespace RegisterLions.Controllers
                            ).Distinct();
 
             if (searchFisicalYear == null)
-            { searchFisicalYear = (DateTime.Now.Year) + 543; }
+            { searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month); }
             if (club_id == null)
             {
                 club_id = tClub_id;
@@ -162,7 +162,7 @@ namespace RegisterLions.Controllers
 
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "Officer", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "Officer", identity.User.club_id);
             return View(clubOfficer.ToList());
         }
     }

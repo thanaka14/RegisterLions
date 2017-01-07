@@ -54,7 +54,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "CreateOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "CreateOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.officer_grp = new SelectList(db.OfficerGroups.OrderBy(x => x.officer_grp), "officer_grp", "officer_grp_desc", officer.officer_grp);
@@ -91,7 +91,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             ViewBag.officer_grp = new SelectList(db.OfficerGroups.OrderBy(x => x.officer_grp), "officer_grp", "officer_grp_desc", officer.officer_grp);
@@ -124,7 +124,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteOfficer", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteOfficer", identity.User.club_id);
             return RedirectToAction("Index");
         }
         public ActionResult ListOfficer(string searchString)

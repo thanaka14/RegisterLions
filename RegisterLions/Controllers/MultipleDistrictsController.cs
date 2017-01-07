@@ -52,7 +52,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "CreateMultipleDistrict", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "CreateMultipleDistrict", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -88,7 +88,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 // ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditMultipleDistrict", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditMultipleDistrict", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             return View(multipleDistrict);
@@ -120,7 +120,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteMultipleDistrict", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteMultipleDistrict", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

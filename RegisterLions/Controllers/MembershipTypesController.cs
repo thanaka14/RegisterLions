@@ -50,7 +50,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "CreateMembershipType", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "CreateMembershipType", identity.User.club_id);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -87,7 +87,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditMembershipType", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditMembershipType", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             return View(membershipType);
@@ -118,7 +118,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteMembershipType", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteMembershipType", identity.User.club_id);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -84,7 +84,7 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 // Write log to table TransactionLog
                 // ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "CreateZoneOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "CreateZoneOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             var memberZone = (from m in db.Members
@@ -178,7 +178,7 @@ namespace RegisterLions.Controllers
                 db.SaveChanges();
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditZoneOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditZoneOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             var memberZone = (from m in db.Members
@@ -238,7 +238,7 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteZoneOfficer", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteZoneOfficer", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

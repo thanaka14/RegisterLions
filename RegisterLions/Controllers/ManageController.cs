@@ -31,7 +31,7 @@ namespace RegisterLions.Controllers
 
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "Profile", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "Profile", identity.User.club_id);
             return View(Tuser);
         }
 
@@ -67,7 +67,7 @@ namespace RegisterLions.Controllers
             db.SaveChanges();
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "ChangePassword", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "ChangePassword", identity.User.club_id);
             return RedirectToAction("Profile", new { Message = "ChangePasswordSuccess" });
            
 
@@ -122,7 +122,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditProfile", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditProfile", identity.User.club_id);
                 return RedirectToAction("Profile", new { Message = "ChangeInformationSuccess" });
             }
             //ViewBag.club_id = new SelectList(db.Clubs, "club_id", "club_name_thai", member.club_id);

@@ -69,7 +69,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "CreateClubOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "CreateClubOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
             var c_member = from m in db.Members
@@ -128,7 +128,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditClubOfficer", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditClubOfficer", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -174,7 +174,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteClubOfficer", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteClubOfficer", identity.User.club_id);
             return RedirectToAction("Index");
         }
 

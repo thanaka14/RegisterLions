@@ -130,7 +130,7 @@ namespace RegisterLions.Controllers
                     db.MemberMovements.Add(memberMovement);
 
                     //ProjLib projlib = new ProjLib();
-                    var user_code = ProjLib.ChkUserCode(member.first_name_eng, member.last_name_eng);
+                    var user_code = ProjLib.chkUserCode(member.first_name_eng, member.last_name_eng);
                     TUser tuser = new TUser();
                     //tuser.user_code = member.first_name_eng.ToLower() + "." + member.last_name_eng.ToLower().Substring(0, 1);
                     tuser.user_code = user_code;
@@ -145,7 +145,7 @@ namespace RegisterLions.Controllers
 
                     // Write log to table TransactionLog
 
-                    ProjLib.TransactionLog(identity.User.member_seq, "CreateMember", identity.User.club_id);
+                    ProjLib.writeTransactionLog(identity.User.member_seq, "CreateMember", identity.User.club_id);
                     return RedirectToAction("Index");
                 }
                 else { ViewBag.errorMessage = "รหัสสมาชิกซ้ำ"; }
@@ -208,7 +208,7 @@ namespace RegisterLions.Controllers
                
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "EditMember", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "EditMember", identity.User.club_id);
                 return RedirectToAction("Index");
             }
 
@@ -275,7 +275,7 @@ namespace RegisterLions.Controllers
                 var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "MovementMember", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "MovementMember", identity.User.club_id);
             }
             return RedirectToAction("Index");
         }
@@ -336,7 +336,7 @@ namespace RegisterLions.Controllers
             var identity = (HttpContext.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DeleteMember", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DeleteMember", identity.User.club_id);
             return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)

@@ -57,7 +57,7 @@ namespace RegisterLions.Controllers
 
                 // Write log to table TransactionLog
                 //ProjLib projlib = new ProjLib();
-                ProjLib.TransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
+                ProjLib.writeTransactionLog(identity.User.member_seq, "Membership", identity.User.club_id);
 
             }
             ViewBag.MemberCount = member.Count();
@@ -118,7 +118,7 @@ namespace RegisterLions.Controllers
                               };
             if (searchFisicalYear == null)
             {
-                searchFisicalYear = (DateTime.Now.Year) + 543;
+                searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             }
             if (club_id != null)
             {
@@ -135,7 +135,7 @@ namespace RegisterLions.Controllers
             ViewBag.club_id = new SelectList(db.Clubs.Where(x => x.club_sts != 3).OrderBy(x => x.club_name_thai), "club_id", "club_name_thai");
             //ProjLib projlib = new ProjLib();
             //projlib.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
-            ProjLib.TransactionLog(0, "ClubList", 0);
+            ProjLib.writeTransactionLog(0, "ClubList", 0);
             // return View(regionOfficer.ToList());
             return View();
         }
@@ -151,7 +151,7 @@ namespace RegisterLions.Controllers
             {
                 intYear = DateTime.Now.Year;
                 intMth = DateTime.Now.Month;
-                fiscal_year = (DateTime.Now.Year) + 543;
+                fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             }
             else
             {
@@ -203,7 +203,7 @@ namespace RegisterLions.Controllers
             ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
             return View(memberMovement);
         }
 
@@ -218,7 +218,7 @@ namespace RegisterLions.Controllers
             {
                 intYear = DateTime.Now.Year;
                 intMth = DateTime.Now.Month;
-                fiscal_year = (DateTime.Now.Year) + 543;
+                fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             }
             else
             {
@@ -277,7 +277,7 @@ namespace RegisterLions.Controllers
             ViewBag.MemberCount = memberMovement.Count();
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
             return View(memberMovement);
         }
 
@@ -371,7 +371,7 @@ namespace RegisterLions.Controllers
                             join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
                             select c1
                             );
-            var searchFisicalYear = (DateTime.Now.Year) + 543;
+            var searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
 
 
@@ -381,7 +381,7 @@ namespace RegisterLions.Controllers
 
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.TransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
+            ProjLib.writeTransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
             var member = (from m in db.Members where m.member_sts == 1 select m);
             ViewBag.MemberCount = member.Count();
             return View();
@@ -420,7 +420,7 @@ namespace RegisterLions.Controllers
                              };
             if (searchFisicalYear == null)
             {
-                searchFisicalYear = (DateTime.Now.Year) + 543;
+                searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             }
             var clubOfficer = (from c in db.ClubOfficers                               
                                where c.fiscal_year == searchFisicalYear
@@ -441,7 +441,7 @@ namespace RegisterLions.Controllers
             ViewBag.clubOfficer = clubOfficer.OrderBy(x=>x.officer_id).ToList();
             //ProjLib projlib = new ProjLib();
             //projlib.TransactionLog(identity.User.member_seq, "RegionZone", identity.User.club_id);
-            ProjLib.TransactionLog(0, "RegionZone", 0);
+            ProjLib.writeTransactionLog(0, "RegionZone", 0);
             return View();
         }
         public ActionResult DistrictOfficer(int? fiscal_year, string searchString,int? officer_grp)
@@ -450,7 +450,7 @@ namespace RegisterLions.Controllers
             //identity.User.member_seq
             if (fiscal_year == null)
             {
-                fiscal_year = (DateTime.Now.Year) + 543;
+                fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);                
             }
             var clubOfficer = (from c1 in db.ClubOfficers
                                where c1.fiscal_year == fiscal_year
@@ -496,7 +496,7 @@ namespace RegisterLions.Controllers
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
             //projlib.TransactionLog(identity.User.member_seq, "DistrictOfficer", identity.User.club_id);
-            ProjLib.TransactionLog(0, "DistrictOfficer", 0);
+            ProjLib.writeTransactionLog(0, "DistrictOfficer", 0);
             //ViewBag.member_seq = c_member2;
             return View(clubOfficer);
         }
