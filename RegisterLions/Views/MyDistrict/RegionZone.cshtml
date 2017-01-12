@@ -74,7 +74,16 @@
 
                     }
                     <tr class="danger">
-                        <td>@item.club_seq สโมสรไลออนส์ @item.Club.club_name_thai</td>
+                        <td>@item.club_seq สโมสรไลออนส์ @item.Club.club_name_thai
+                        @{
+                            if (@item.Club.club_sts != 1)
+                            {
+                                <span class="label label-danger">@item.Club.ClubStatus.club_status_desc</span>
+
+                            }
+
+                        }
+                        </td>
                     </tr>
                     foreach (var clubofficer in ViewBag.clubOfficer)
                     {
@@ -96,7 +105,15 @@
                         <td>
                             
                                 <dd><img src='@imgSrc3' style="max-width:70px; max-height:70px;" />@clubofficer.Member.full_name
-                                @clubofficer.Officer.title</dd>                                
+                                @clubofficer.Officer.title
+                            @{
+                                if (@clubofficer.Member.member_sts == 2)
+                                {
+                                    <span class="label label-danger">พ้นสภาพ</span>
+
+                                }
+                            }
+                            </dd>                                
                            
 
                         </td>
