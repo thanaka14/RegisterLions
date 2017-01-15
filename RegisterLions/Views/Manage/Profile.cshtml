@@ -38,7 +38,9 @@
                     <dd>@Html.DisplayFor(model => model.Member.full_name_eng)</dd>
                     
                     <dt>สโมสรไลออนส์:</dt>
-                    <dd>@Html.DisplayFor(model => model.Member.Club.club_name_thai) @Html.DisplayFor(model => model.Member.Club.District.district_name_thai)</dd>
+                    <dd>@Html.DisplayFor(model => model.Member.Club.club_name_thai) (@Html.DisplayFor(model => model.Member.Club.club_id))</dd>
+                    
+                    <dd>@Html.DisplayFor(model => model.Member.Club.District.district_name_thai) (@Html.DisplayFor(model => model.Member.Club.District.district_id))</dd>
                     <dt>รหัสสมาชิก:</dt>
                     <dd>@Html.DisplayFor(model => model.Member.member_id)</dd>
                     <dt>ประเภทสมาชิก:</dt>
@@ -54,6 +56,8 @@
                     <dd>@Html.DisplayFor(model => model.Member.email)</dd>
                     <dt>โทรศัพท์เคลื่อนที่:</dt>
                     <dd>@Html.DisplayFor(model => model.Member.cell_phone)</dd>
+                    <dt>LineID:</dt>
+                    <dd>@Html.DisplayFor(model => model.Member.line_id)</dd>
                     <dt>ปีเกิด :</dt>
                     <dd>@Html.DisplayFor(model => model.Member.birth_year)</dd>
                     <dt>อาชีพ:</dt>
