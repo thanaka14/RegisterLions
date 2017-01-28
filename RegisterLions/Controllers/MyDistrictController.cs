@@ -162,8 +162,13 @@ namespace RegisterLions.Controllers
             //ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(intYear, intMth);
             DateTime startDate = DateTime.ParseExact(begFiscalYear(intYear, intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
             DateTime endDate = DateTime.ParseExact(endFiscalYear(intYear, intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
-            var memberMovement = (from t in db.MemberMovements
-                                  where t.move_sts==4 && (t.hist_date >= startDate && t.hist_date <= endDate)
+
+
+            
+
+            
+             var memberMovement = (from t in db.MemberMovements
+                                  where t.move_sts==4 && (t.hist_date >= startDate && t.hist_date <= endDate)                                  
                                   join mm in db.Movements on t.move_sts equals mm.move_sts
                                   join m in db.Members on t.member_seq equals m.member_seq
                                   join c in db.Clubs on t.club_id equals c.club_id
