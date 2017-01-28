@@ -189,7 +189,7 @@ namespace RegisterLions.Controllers
             ViewBag.club_id = listClub;
             ViewBag.MemberCount = memberMovement.Count();
             var c_fiscal_year = (from m1 in db.MemberMovements
-                                 where m1.move_sts==4
+                                 where m1.move_sts==4 && (m1.hist_date.Value.Year >= 2016 && m1.hist_date.Value.Month>=7)
                                  select new
                                  {
                                      fiscal_year = m1.hist_date.Value.Year+543
@@ -261,7 +261,7 @@ namespace RegisterLions.Controllers
                 ViewBag.club_id = listClub;
 
             var c_fiscal_year = (from m1 in db.MemberMovements
-                                 where m1.move_sts != 4 && m1.hist_date.Value.Year >= 2016
+                                 where m1.move_sts != 4 && (m1.hist_date.Value.Year >= 2016 && m1.hist_date.Value.Month>=7)
                                  select new
                                  {
                                      fiscal_year = m1.hist_date.Value.Year+543
