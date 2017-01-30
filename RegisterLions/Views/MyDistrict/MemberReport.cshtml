@@ -1,12 +1,13 @@
 ﻿@{
     ViewBag.Title = "รายงานความเคลื่อนไหวของสมาชิก ";
-    var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+    //var identity = (HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
     int zone_officer_id = 0;
     int region_officer_id = 0;
 }
 
 <div class="panel panel-primary">
-    <div class="panel-heading">@ViewBag.Title @ViewBag.fiscal_year @identity.User.district_name_thai (@identity.User.district_id) จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>
+    @*<div class="panel-heading">@ViewBag.Title @ViewBag.fiscal_year @identity.User.district_name_thai (@identity.User.district_id) จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>*@
+    <div class="panel-heading">@ViewBag.Title @ViewBag.fiscal_year จำนวน @ViewBag.MemberCount.ToString("#,##0") คน</div>
     <div class="panel-body">
         <table class="table table-bordered" id="myTable1">
             <thead>

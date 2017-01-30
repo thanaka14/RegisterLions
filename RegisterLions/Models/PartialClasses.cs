@@ -196,6 +196,11 @@ namespace RegisterLions.Models
             get { return fiscal_year + "-" + (fiscal_year + 1); }
         }
     }
+    [MetadataType(typeof(MemberMovementMetadata))]
+    public partial class MemberMovement
+    {
+        
+    }
 
 
 }

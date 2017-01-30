@@ -266,6 +266,7 @@
     <Compile Include="Models\Metadata\ClubStatusMetadata.cs" />
     <Compile Include="Models\Metadata\DistrictMetadata.cs" />
     <Compile Include="Models\Metadata\MemberMetadata.cs" />
+    <Compile Include="Models\Metadata\MemberMovement.cs" />
     <Compile Include="Models\Metadata\MembershipTypeMetadata.cs" />
     <Compile Include="Models\Metadata\MovementMetadata.cs" />
     <Compile Include="Models\Metadata\MultipleDistrictMetadata.cs" />
@@ -679,7 +680,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3515</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

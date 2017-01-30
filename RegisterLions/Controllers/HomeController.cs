@@ -4,6 +4,7 @@ using RegisterLions.Models;
 using RegisterLions.Lib;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace RegisterLions.Controllers
 {
@@ -60,6 +61,30 @@ namespace RegisterLions.Controllers
             //ProjLib projlib = new ProjLib();
             ProjLib.writeTransactionLog(0, "Index", 0);
             ViewBag.officer = officer2col;
+            // Statistic for Member
+            DateTime startDate = DateTime.ParseExact(ProjLib.getBegFiscalYear(DateTime.Now.Year, DateTime.Now.Month), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(ProjLib.getEndFiscalYear(DateTime.Now.Year, DateTime.Now.Month), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            var newMember = (from t in db.MemberMovements
+                                  where (t.move_sts != 4) && (t.hist_date >= startDate && t.hist_date <= endDate)                                 
+                                  select t
+                                  );
+            
+            var dropMember = (from t in db.MemberMovements
+                                  where t.move_sts == 4 && (t.hist_date >= startDate && t.hist_date <= endDate)                                  
+                                  select t
+                                  );
+            var totMember = (from m in db.Members
+                          where m.member_sts == 1                          
+                          select m);
+
+            ViewBag.newMember = newMember.ToList().Count();
+            ViewBag.dropMember = dropMember.ToList().Count();
+            ViewBag.netMember = newMember.ToList().Count() - dropMember.ToList().Count();
+            ViewBag.totMember = totMember.ToList().Count();
+            ViewBag.fiscal_year = "ปีบริหาร " + ProjLib.displayFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+
+            //club status
+
             return View();
             
         }

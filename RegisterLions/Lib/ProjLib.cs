@@ -77,6 +77,55 @@ namespace RegisterLions.Lib
             return fiscal_year;
         
     }
+        public static string getBegFiscalYear(int pYear, int pMonth)
+        {
+            string mydateSt = null;            
+            if (pMonth >= 7 && pMonth <= 12)
+            {
+                mydateSt = pYear.ToString() + "/07/01";
+            }
+            else
+            {
+                mydateSt = (pYear - 1).ToString() + "/07/01";
+            }
+            return mydateSt;
+        }
+        public static string getEndFiscalYear(int pYear, int pMonth)
+        {
+            string mydateEnd = null;
+            //int year = DateTime.Now.Year;
+            //int month = DateTime.Now.Month;
+            if (pMonth >= 7 && pMonth <= 12)
+            {
+
+                mydateEnd = (pYear + 1).ToString() + "/06/30";
+
+            }
+            else
+            {
+
+                mydateEnd = pYear.ToString() + "/06/30";
+
+            }
+            return mydateEnd;
+        }
+        public static string displayFiscalYear(int pYear, int pMonth)
+        {
+            //int year = DateTime.Now.Year;
+            // int month = DateTime.Now.Month;
+            string fiscal_year = "";
+            if (pMonth >= 7 && pMonth <= 12)
+            {
+
+                fiscal_year = (pYear + 543).ToString() + "-" + (pYear + 1 + 543).ToString();
+            }
+            else
+            {
+
+                fiscal_year = (pYear + 543 - 1).ToString() + "-" + (pYear + 543).ToString();
+            }
+            return fiscal_year;
+        }
 
 
 

@@ -140,11 +140,11 @@ namespace RegisterLions.Controllers
             return View();
         }
 
-        [Authorize]
+        
         public ActionResult DroppedMember(int? club_id,int? fiscal_year)
         {
-            var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
-            var tDistrict_id = identity.User.district_id;
+            //var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+            //var tDistrict_id = identity.User.district_id;
             var intYear = 0;
             var intMth = 0;
             if (fiscal_year == null)
@@ -160,8 +160,8 @@ namespace RegisterLions.Controllers
             }
             //ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             //ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(intYear, intMth);
-            DateTime startDate = DateTime.ParseExact(begFiscalYear(intYear, intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
-            DateTime endDate = DateTime.ParseExact(endFiscalYear(intYear, intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
+            DateTime startDate = DateTime.ParseExact(ProjLib.getBegFiscalYear(intYear, intMth), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(ProjLib.getEndFiscalYear(intYear, intMth), "yyyy/MM/dd", CultureInfo.InvariantCulture);
 
 
             
@@ -172,8 +172,8 @@ namespace RegisterLions.Controllers
                                   join mm in db.Movements on t.move_sts equals mm.move_sts
                                   join m in db.Members on t.member_seq equals m.member_seq
                                   join c in db.Clubs on t.club_id equals c.club_id
-                                  join d in db.Districts on c.district_id equals d.district_id
-                                  where d.district_id == tDistrict_id
+                                  //join d in db.Districts on c.district_id equals d.district_id
+                                  //where d.district_id == tDistrict_id
                                   select t
                                   );
             if (club_id != null)
@@ -181,7 +181,7 @@ namespace RegisterLions.Controllers
                 memberMovement = memberMovement.Where(x => x.club_id == club_id);
             }
             var tClub = (from c in db.Clubs
-                         where c.district_id == identity.User.district_id
+                        // where c.district_id == identity.User.district_id
                          join t in db.MemberMovements on c.club_id equals t.club_id
                          where t.move_sts == 4 && (t.hist_date >= startDate && t.hist_date <= endDate)
                          select new
@@ -208,15 +208,16 @@ namespace RegisterLions.Controllers
             ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.writeTransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
+            //ProjLib.writeTransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
+            ProjLib.writeTransactionLog(0, "DroppedMember", 0);
             return View(memberMovement);
         }
 
-        [Authorize]
+        
         public ActionResult NewMember(int? club_id, int? fiscal_year)
         {
-            var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
-            var tDistrict_id = identity.User.district_id;
+            //var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+            //var tDistrict_id = identity.User.district_id;
             var intYear = 0;
             var intMth = 0;
             if (fiscal_year == null)
@@ -233,14 +234,14 @@ namespace RegisterLions.Controllers
 
             //ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
             //ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(intYear, intMth);
-            DateTime startDate = DateTime.ParseExact(begFiscalYear(intYear, intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
-            DateTime endDate = DateTime.ParseExact(endFiscalYear(intYear,intMth), "yyyyMMdd", CultureInfo.InvariantCulture);
+            DateTime startDate = DateTime.ParseExact(ProjLib.getBegFiscalYear(intYear, intMth), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(ProjLib.getEndFiscalYear(intYear,intMth), "yyyy/MM/dd", CultureInfo.InvariantCulture);
             var memberMovement = (from t in db.MemberMovements
                                   where (t.move_sts != 4) && (t.hist_date >= startDate && t.hist_date <= endDate)
                                   join m in db.Members on t.member_seq equals m.member_seq
                                   join c in db.Clubs on t.club_id equals c.club_id
-                                  join d in db.Districts on c.district_id equals d.district_id
-                                  where d.district_id == tDistrict_id
+                                  //join d in db.Districts on c.district_id equals d.district_id
+                                  //where d.district_id == tDistrict_id
                                   select t
                                   );
             
@@ -252,7 +253,7 @@ namespace RegisterLions.Controllers
             }
 
             var tClub = (from c in db.Clubs
-                         where c.district_id== identity.User.district_id
+                         //where c.district_id== identity.User.district_id
                          join t in db.MemberMovements on c.club_id equals t.club_id
                          where (t.move_sts != 4) && (t.hist_date >= startDate && t.hist_date <= endDate)
                          select new
@@ -282,51 +283,52 @@ namespace RegisterLions.Controllers
             ViewBag.MemberCount = memberMovement.Count();
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.writeTransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
+            //ProjLib.writeTransactionLog(identity.User.member_seq, "NewMember", identity.User.club_id);
+            ProjLib.writeTransactionLog(0, "NewMember", 0);
             return View(memberMovement);
         }
 
-        [Authorize]
+        
         public ActionResult MemberReport()
         {
-            var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
-            ViewBag.fiscal_year = "ปีบริหาร " + displayFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
-            DateTime startDate = DateTime.ParseExact(begFiscalYear(DateTime.Now.Year, DateTime.Now.Month), "yyyyMMdd", CultureInfo.InvariantCulture);
-            DateTime endDate = DateTime.ParseExact(endFiscalYear(DateTime.Now.Year,DateTime.Now.Month), "yyyyMMdd", CultureInfo.InvariantCulture);
+            //var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
+            ViewBag.fiscal_year = "ปีบริหาร " + ProjLib.displayFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+            DateTime startDate = DateTime.ParseExact(ProjLib.getBegFiscalYear(DateTime.Now.Year, DateTime.Now.Month), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(ProjLib.getEndFiscalYear(DateTime.Now.Year,DateTime.Now.Month), "yyyy/MM/dd", CultureInfo.InvariantCulture);
 
            
             var totMemberList = (from m in db.Members
                               where (m.member_sts == 1)
                               join c in db.Clubs on m.club_id equals c.club_id
-                              where c.district_id == identity.User.district_id
+                             // where c.district_id == identity.User.district_id
                                  select m)
                               .GroupBy(t => t.club_id).Select(grp => new {club_id = grp.Key, totMember = grp.Count()}                              
                             ).OrderBy(x => x.club_id);
             var newMemberList = (from mm in db.MemberMovements
                                  where (mm.hist_date >= startDate && mm.hist_date <= endDate && mm.move_sts == 1)
                                  join c in db.Clubs on mm.club_id equals c.club_id
-                                 where c.district_id == identity.User.district_id
+                                // where c.district_id == identity.User.district_id
                                  select mm)
                                  .GroupBy(t => t.club_id).Select(grp => new { club_id = grp.Key, newMember = grp.Count() })
                                  .OrderBy(x => x.club_id).ToList();
             var transferMemberList = (from mm in db.MemberMovements
                                  where (mm.hist_date >= startDate && mm.hist_date <= endDate && mm.move_sts == 2)
                                       join c in db.Clubs on mm.club_id equals c.club_id
-                                      where c.district_id == identity.User.district_id
+                                     // where c.district_id == identity.User.district_id
                                       select mm)
                                 .GroupBy(t => t.club_id).Select(grp => new { club_id = grp.Key, transferMember = grp.Count() })
                                 .OrderBy(x => x.club_id).ToList();
             var reinstallMemberList = (from mm in db.MemberMovements
                                       where (mm.hist_date >= startDate && mm.hist_date <= endDate && mm.move_sts == 3)
                                        join c in db.Clubs on mm.club_id equals c.club_id
-                                       where c.district_id == identity.User.district_id
+                                      // where c.district_id == identity.User.district_id
                                        select mm)
                                 .GroupBy(t => t.club_id).Select(grp => new { club_id = grp.Key, reinstallMember = grp.Count() })
                                 .OrderBy(x => x.club_id).ToList();
             var dropMemberList = (from mm in db.MemberMovements
                                        where (mm.hist_date >= startDate && mm.hist_date <= endDate && mm.move_sts == 4)
                                   join c in db.Clubs on mm.club_id equals c.club_id
-                                  where c.district_id == identity.User.district_id
+                                  //where c.district_id == identity.User.district_id
                                   select mm)
                                 .GroupBy(t => t.club_id).Select(grp => new { club_id = grp.Key, dropMember = grp.Count() })
                                 .OrderBy(x => x.club_id).ToList();
@@ -386,7 +388,8 @@ namespace RegisterLions.Controllers
 
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
-            ProjLib.writeTransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
+            //ProjLib.writeTransactionLog(identity.User.member_seq, "MemberReport", identity.User.club_id);
+            ProjLib.writeTransactionLog(0, "MemberReport", 0);
             var member = (from m in db.Members where m.member_sts == 1 select m);
             ViewBag.MemberCount = member.Count();
             return View();
@@ -505,57 +508,8 @@ namespace RegisterLions.Controllers
             //ViewBag.member_seq = c_member2;
             return View(clubOfficer);
         }
-        public string begFiscalYear(int pYear, int pMonth)
-        {
-            string mydateSt = null;
-            //int year = DateTime.Now.Year;
-            //int month = DateTime.Now.Month;
-            if (pMonth >= 7 && pMonth <= 12)
-            {
-                mydateSt = pYear.ToString() + "0701";
-            }
-            else
-            {
-                mydateSt = (pYear - 1).ToString() + "0701";
-            }
-            return mydateSt;
-        }
-        public string endFiscalYear(int pYear, int pMonth)
-        {
-            string mydateEnd = null;
-            //int year = DateTime.Now.Year;
-            //int month = DateTime.Now.Month;
-            if (pMonth >= 7 && pMonth <= 12)
-            {
-
-                mydateEnd = (pYear + 1).ToString() + "0630";
-
-            }
-            else
-            {
-
-                mydateEnd = pYear.ToString() + "0630";
-
-            }
-            return mydateEnd;
-        }
-        public string displayFiscalYear(int pYear, int pMonth)
-        {
-            //int year = DateTime.Now.Year;
-           // int month = DateTime.Now.Month;
-            string fiscal_year = "";
-            if (pMonth >= 7 && pMonth <= 12)
-            {
-
-                fiscal_year = (pYear + 543).ToString() + "-" + (pYear + 1 + 543).ToString();
-            }
-            else
-            {
-
-                fiscal_year = (pYear + 543 - 1).ToString() + "-" + (pYear + 543).ToString();
-            }
-            return fiscal_year;
-        }
+        
+        
 
     }
 }
