@@ -17,8 +17,9 @@ namespace RegisterLions.Models
         public int reinstallMember { get; set; }
         public int dropMember { get; set; }
         public int totalMember { get; set; }
-
-        public MemberReport(int? pclub_id, string pclub_name, int pnewMemer, int ptransferMemer, int preinstallMember, int pdropMember, int ptotMember)
+        public int openBalance { get; set; }
+        public int netCG { get; set; }
+        public MemberReport(int? pclub_id, string pclub_name, int pnewMemer, int ptransferMemer, int preinstallMember, int pdropMember, int ptotMember,int popenBalance, int pnetCG)
         {
             
             club_id = pclub_id;
@@ -28,6 +29,9 @@ namespace RegisterLions.Models
             reinstallMember = preinstallMember;
             dropMember = pdropMember;
             totalMember = ptotMember;
+            openBalance = popenBalance;
+            netCG = pnetCG;
+
         }
 
        

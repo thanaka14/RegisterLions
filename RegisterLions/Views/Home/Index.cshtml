@@ -3,81 +3,96 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 
 }
-<div class='widget-content'>
-    
-    <h3>ผู้บริหารสโมสรไลออนส์สากล ภาค 310-เอ2</h3>
-    
-        <table class="table table-bordered">
-        
-            
+<div class="panel panel-success">
+    <div class="panel-heading">ผู้บริหารสโมสรไลออนส์สากล ภาค 310-เอ2 @ViewBag.fiscal_year</div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+
+
             @foreach (var t in ViewBag.officer)
             {
 
-                    <tr>
-                        <td align="center" width="50%">
-                            <img src='@t.imgsrc1' style="max-width:100px; max-height:100px;" />
-                            <br />@t.title1
-                            <br />@t.name1
-                            
-                        </td>
-                        
-                        <td align="center" width="50%">
-                            <img src='@t.imgsrc2' style="max-width:100px; max-height:100px;" />
-                            <br />@t.title2
-                            <br />@t.name2
+                <tr>
+                    <td align="center" width="50%">
+                        <img src='@t.imgsrc1' style="max-width:100px; max-height:100px;" />
+                        <br />@t.title1
+                        <br />@t.name1
 
-                        </td>
-                        
+                    </td>
 
+                    <td align="center" width="50%">
+                        <img src='@t.imgsrc2' style="max-width:100px; max-height:100px;" />
+                        <br />@t.title2
+                        <br />@t.name2
 
-                        
-                        </tr>
-                        }
+                    </td>
 
 
 
 
+                </tr>
+            }
 
-</table>
 
-</div>
-  <div class='widget-content'>
-    <h4>@Html.ActionLink("แสดงรายละเอียดรายชื่อกรรมการภาค", "DistrictOfficer", "MyDistrict") </h4>
-</div>  
-<div class='widget-content'>
 
-    <h3>สถิติความเคลื่อนไหวสมาชิก @ViewBag.fiscal_year </h3>
-    <table class="table table-striped">
-        <tr><td>สมาชิกปีบริหารที่ผ่านมา</td><td>1,178 คน</td></tr>
-        <tr><td>@Html.ActionLink("สมาชิกเพิ่ม", "NewMember", "MyDistrict")</td><td>@ViewBag.newMember.ToString("#,##0") คน</td></tr>
-        <tr><td>@Html.ActionLink("สมาชิกพ้นสภาพ", "DroppedMember", "MyDistrict")</td><td>@ViewBag.dropMember.ToString("#,##0") คน</td></tr>
-        <tr><td>รวมทั้งสิ้น</td><td>@ViewBag.totMember.ToString("#,##0") คน</td></tr>
-        <tr><td>สมาชิกสุทธิ</td><td>@ViewBag.netMember.ToString("#,##0") คน </td></tr>
-     </table>
-    <h4>@Html.ActionLink("แสดงรายละเอียดความเคลื่อนไหวสมาชิก", "MemberReport", "MyDistrict") </h4>
+
+
+        </table>
+        <div class="panel-footer"><h4>@Html.ActionLink("แสดงรายละเอียดรายชื่อกรรมการภาค", "DistrictOfficer", "MyDistrict") </h4></div>
+    </div>
 </div>
 
-    @*<div class='widget-content'>
+<div class="panel panel-warning">
+    <div class="panel-heading">สถานะภาพของสโมสร @ViewBag.fiscal_year</div>
+    <div class="panel-body">
+        <table class="table table-condensed table-hover table-striped">
+            <thead><tr><td>สถานะ</td><td>จำนวน</td></tr></thead>
+            <tbody><tr><td>สโมสรใหม่</td><td>0</td></tr>
+                <tr><td>Status Quo</td><td>1 @Html.ActionLink("ดูรายชื่อ", "ClubList", "MyDistrict", new { club_sts = 2 }, null)</td></tr>
+                <tr><td>Cannelled</td><td>1 @Html.ActionLink("ดูรายชื่อ", "ClubList", "MyDistrict", new { club_sts = 3 }, null)</td></tr>
+                <tr><td>Pending</td><td>0</td></tr>
+                <tr><td>Active</td><td>37 @Html.ActionLink("ดูรายชื่อ", "ClubList", "MyDistrict",  new { club_sts = 1 },null)</td></tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">สถิติความเคลื่อนไหวสมาชิก @ViewBag.fiscal_year</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr><td>สมาชิกปีบริหารที่ผ่านมา</td><td>1,178 คน</td></tr>
+                        <tr><td>@Html.ActionLink("สมาชิกเพิ่ม", "NewMember", "MyDistrict")</td><td>@ViewBag.newMember.ToString("#,##0") คน</td></tr>
+                        <tr><td>@Html.ActionLink("สมาชิกพ้นสภาพ", "DroppedMember", "MyDistrict")</td><td>@ViewBag.dropMember.ToString("#,##0") คน</td></tr>
+                        <tr><td>รวมทั้งสิ้น</td><td>@ViewBag.totMember.ToString("#,##0") คน</td></tr>
+                        <tr><td>สมาชิกสุทธิ</td><td>@ViewBag.netMember.ToString("#,##0") คน </td></tr>
+                    </table>
+
+                </div>
+                <div class="panel-footer"><h4>@Html.ActionLink("แสดงรายละเอียดความเคลื่อนไหวสมาชิก", "MemberReport", "MyDistrict") </h4></div>
+            </div>
 
 
-        <link href="http://mybloggerlab.com/Scripts/recent.css" type="text/css" rel="stylesheet" />
+            @*<div class='widget-content'>
 
 
-        <script type='text/javascript'>
-            var numposts = 7;
-            var showpostthumbnails = true;
-            var displaymore = false;
-            var displayseparator = true;
-            var showcommentnum = false;
-            var showpostdate = false;
-            var showpostsummary = true;
-            var numchars = 100;</script>
-        <h3>ข่าวสารสโมสรไลออนส์สากล</h3>
-            <script type="text/javascript" src="http://lcinewsa2.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
-        <h3>การประชุมใหญ่ไลอนส์สากลภาครวม 310 ประเทศไทยครั้งที่ 51</h3>
-        <script type="text/javascript" src="http://md310convention51.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
-        <h3>Centennial News</h3>
-            <script type="text/javascript" src="http://lci-centennial.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+                    <link href="http://mybloggerlab.com/Scripts/recent.css" type="text/css" rel="stylesheet" />
 
 
-    </div>*@
+                    <script type='text/javascript'>
+                        var numposts = 7;
+                        var showpostthumbnails = true;
+                        var displaymore = false;
+                        var displayseparator = true;
+                        var showcommentnum = false;
+                        var showpostdate = false;
+                        var showpostsummary = true;
+                        var numchars = 100;</script>
+                    <h3>ข่าวสารสโมสรไลออนส์สากล</h3>
+                        <script type="text/javascript" src="http://lcinewsa2.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+                    <h3>การประชุมใหญ่ไลอนส์สากลภาครวม 310 ประเทศไทยครั้งที่ 51</h3>
+                    <script type="text/javascript" src="http://md310convention51.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+                    <h3>Centennial News</h3>
+                        <script type="text/javascript" src="http://lci-centennial.blogspot.com/feeds/posts/default?orderby=published&alt=json-in-script&callback=labelthumbs"></script>
+
+
+                </div>*@

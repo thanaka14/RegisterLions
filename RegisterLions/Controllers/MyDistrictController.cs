@@ -63,7 +63,7 @@ namespace RegisterLions.Controllers
             ViewBag.MemberCount = member.Count();
             return View(member.ToList());
         }
-        public ActionResult ClubList(int? club_id,int? searchFisicalYear)
+        public ActionResult ClubList(int? club_id,int? searchFisicalYear,int? club_sts)
         {
             #region Part1
             //var tDistrict = (from d in db.Districts
@@ -103,6 +103,7 @@ namespace RegisterLions.Controllers
             #endregion           
             var zoneClub = (from c1 in db.ZoneClubs
                             join c2 in db.ZoneOfficers on c1.zone_officer_id equals c2.zone_officer_id
+                            join c3 in db.Clubs on c1.club_id equals c3.club_id
                             select c1
                             );
             var c_fiscal_year = (from c1 in db.ZoneClubs
@@ -124,6 +125,11 @@ namespace RegisterLions.Controllers
             {
                 zoneClub = zoneClub.Where(x => x.club_id == club_id);
             }
+            if(club_sts == null)
+            {
+                zoneClub = zoneClub.Where(x => x.Club.club_sts == 1);
+            }
+            else { zoneClub = zoneClub.Where(x => x.Club.club_sts == club_sts); }
 
             ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);            
             zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
@@ -369,7 +375,7 @@ namespace RegisterLions.Controllers
                     }
                     
                 }                
-                memberReport.Add(new MemberReport(t.club_id, tClubName,newMemer, transferMemer, reinstallMember, dropMember, t.totMember));
+                memberReport.Add(new MemberReport(t.club_id, tClubName,newMemer, transferMemer, reinstallMember, dropMember, t.totMember,0,0));
             }
             
             ViewBag.MemberReport = memberReport.OrderBy(x => x.club_name);
