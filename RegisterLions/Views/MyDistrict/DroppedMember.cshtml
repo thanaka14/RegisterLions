@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
-                        @Html.DropDownList("club_id", null, "ทุกสโมสร", htmlAttributes: new { @class = "form-control pull-right " })
+                        @Html.DropDownList("club_id", null, "ทุกสโมสร", htmlAttributes: new { @class = "form-control pull-right ", onChange = "document.searchForm.submit();" })
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" name="submitButton" onclick="document.searchForm.submit();">
                                 <i class="text-muted glyphicon glyphicon-search"></i>

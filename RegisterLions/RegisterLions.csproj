@@ -506,6 +506,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\MDS.pubxml" />
     <None Include="Properties\PublishProfiles\Membership.pubxml" />
     <None Include="Properties\PublishProfiles\RegisterLions.pubxml" />
     <None Include="Properties\PublishProfiles\somee.com.pubxml" />

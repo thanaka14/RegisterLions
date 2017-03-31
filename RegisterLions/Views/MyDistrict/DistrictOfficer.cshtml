@@ -14,12 +14,12 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("fiscal_year", null,  htmlAttributes: new { @class = "form-control " })
+                        @Html.DropDownList("fiscal_year", null,  htmlAttributes: new { @class = "form-control ", onChange = "document.searchForm.submit();" })
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                        @Html.DropDownList("officer_grp", null, "ทุกกลุ่มงาน",htmlAttributes: new { @class = "form-control " })
+                        @Html.DropDownList("officer_grp", null, "ทุกกลุ่มงาน",htmlAttributes: new { @class = "form-control ", onChange = "document.searchForm.submit();" })
                     </div>
                 </div>
 
