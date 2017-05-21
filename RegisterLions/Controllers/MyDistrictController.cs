@@ -110,7 +110,19 @@ namespace RegisterLions.Controllers
                                  select new
                                  {
                                      fiscal_year = c1.fiscal_year
-                                 }).Distinct().ToList();
+                                 }).Distinct().OrderByDescending(x=>x.fiscal_year).ToList();
+
+            int fiscal_year_default = 0;
+            var flag = true;
+
+            foreach (var c in c_fiscal_year)
+            {
+                if (flag)
+                {
+                    fiscal_year_default = (int)c.fiscal_year;
+                    flag = false;
+                }
+            }
             var fiscal_year = from m in c_fiscal_year
                               select new
                               {
@@ -119,7 +131,8 @@ namespace RegisterLions.Controllers
                               };
             if (searchFisicalYear == null)
             {
-                searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                //searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                searchFisicalYear = fiscal_year_default;
             }
             if (club_id != null)
             {
@@ -130,6 +143,8 @@ namespace RegisterLions.Controllers
                 zoneClub = zoneClub.Where(x => x.Club.club_sts == 1);
             }
             else { zoneClub = zoneClub.Where(x => x.Club.club_sts == club_sts); }
+
+            //fiscal_year = fiscal_year.OrderByDescending(x => x.fiscal_year);
 
             ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);            
             zoneClub = zoneClub.Where(x => x.fiscal_year == searchFisicalYear);
@@ -211,7 +226,7 @@ namespace RegisterLions.Controllers
                                      m.fiscal_year,
                                      fiscal_year_disp = string.Format("ปีบริหาร {0}-{1}", m.fiscal_year, (m.fiscal_year) + 1)
                                  };
-            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
+            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderByDescending(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
             // Write log to table TransactionLog
             //ProjLib projlib = new ProjLib();
             //ProjLib.writeTransactionLog(identity.User.member_seq, "DroppedMember", identity.User.club_id);
@@ -284,7 +299,7 @@ namespace RegisterLions.Controllers
                                      m.fiscal_year,
                                      fiscal_year_disp = string.Format("ปีบริหาร {0}-{1}", m.fiscal_year, (m.fiscal_year) + 1)
                                  };
-            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
+            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderByDescending(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
 
             ViewBag.MemberCount = memberMovement.Count();
             // Write log to table TransactionLog
@@ -425,7 +440,19 @@ namespace RegisterLions.Controllers
                                 select new
                                 {                                    
                                     fiscal_year = c1.fiscal_year
-                                }).Distinct().ToList();
+                                }).Distinct().OrderByDescending(x=>x.fiscal_year).ToList();
+            int fiscal_year_default = 0;
+            var flag = true;
+
+            foreach (var c in c_fiscal_year)
+            {
+                if (flag)
+                {
+                    fiscal_year_default = (int)c.fiscal_year;
+                    flag = false;
+                }
+            }
+
             var fiscal_year = from m in c_fiscal_year
                              select new
                              {
@@ -434,13 +461,16 @@ namespace RegisterLions.Controllers
                              };
             if (searchFisicalYear == null)
             {
-                searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                //searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                searchFisicalYear = fiscal_year_default;
             }
             var clubOfficer = (from c in db.ClubOfficers                               
                                where c.fiscal_year == searchFisicalYear
                                join o in db.Officers on c.officer_id equals o.officer_id
                                where o.officer_type == "C" && o.officer_id >= 1 && o.officer_id <= 3
                                select c);
+
+            fiscal_year = fiscal_year.OrderByDescending(x => x.fiscal_year);
 
             ViewBag.searchFisicalYear = new SelectList(fiscal_year, "fiscal_year", "fiscal_year_disp", searchFisicalYear);
             //    regionOfficer = regionOfficer.Where(x => x.fiscal_year == searchFisicalYear);
@@ -462,10 +492,7 @@ namespace RegisterLions.Controllers
         {
             //var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             //identity.User.member_seq
-            if (fiscal_year == null)
-            {
-                fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);                
-            }
+            
             var clubOfficer = (from c1 in db.ClubOfficers
                                where c1.fiscal_year == fiscal_year
                                join m in db.Members on c1.member_seq equals m.member_seq
@@ -496,14 +523,33 @@ namespace RegisterLions.Controllers
                             select new
                             {
                                 fiscal_year=c1.fiscal_year                                
-                            }).Distinct().ToList();
+                            }).Distinct().OrderByDescending(x=>x.fiscal_year).ToList();
+
+            int fiscal_year_default = 0;
+            var flag = true;
+
+            foreach (var c in c_fiscal_year)
+            {
+                if (flag)
+                {
+                    fiscal_year_default = (int)c.fiscal_year;
+                    flag = false;
+                }
+            }
+
+            if (fiscal_year == null)
+            {
+                //fiscal_year = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                fiscal_year = fiscal_year_default;
+            }
+
             var c_fiscal_year2 = from m in c_fiscal_year
                             select new
                             {
                                 m.fiscal_year,
                                 fiscal_year_disp = string.Format("ปีบริหาร {0}-{1}", m.fiscal_year, (m.fiscal_year)+1)
                             };
-            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderBy(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
+            ViewBag.fiscal_year = new SelectList(c_fiscal_year2.OrderByDescending(x => x.fiscal_year), "fiscal_year", "fiscal_year_disp", fiscal_year);
             ViewBag.officer_grp = new SelectList(db.OfficerGroups.OrderBy(x => x.officer_grp), "officer_grp", "officer_grp_desc", officer_grp);
             ViewBag.zoneOfficer = zoneOfficer;
             ViewBag.regionOfficer = regionOfficer;

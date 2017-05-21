@@ -25,13 +25,21 @@ namespace RegisterLions.Controllers
                                join d in db.Officers on a.officer_id equals d.officer_id
                                orderby a.fiscal_year, c.club_name_thai, a.officer_id
                                select a);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                clubOfficer = clubOfficer.Where(x => x.Member.first_name_eng.Contains(searchString) || x.Member.last_name_eng.Contains(searchString) ||
-                         x.Member.last_name.Contains(searchString) || x.Member.first_name.Contains(searchString) || x.Member.Club.club_name_thai.Contains(searchString) ||
-                         x.Officer.title.Contains(searchString) || x.Officer.title_eng.Contains(searchString)||x.fiscal_year.ToString().Contains(searchString));
-            }
-           
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    clubOfficer = clubOfficer.Where(x => x.Member.first_name_eng.Contains(searchString) || x.Member.last_name_eng.Contains(searchString) ||
+            //             x.Member.last_name.Contains(searchString) || x.Member.first_name.Contains(searchString) || x.Member.Club.club_name_thai.Contains(searchString) ||
+            //             x.Officer.title.Contains(searchString) || x.Officer.title_eng.Contains(searchString)||x.fiscal_year.ToString().Contains(searchString));
+            //}
+            //else
+            //{
+            //    clubOfficer = clubOfficer.Where(x => x.Member.first_name_eng.Contains(searchString));
+            //}
+
+            clubOfficer = clubOfficer.Where(x => x.Member.first_name_eng.Contains(searchString) || x.Member.last_name_eng.Contains(searchString) ||
+                        x.Member.last_name.Contains(searchString) || x.Member.first_name.Contains(searchString) || x.Member.Club.club_name_thai.Contains(searchString) ||
+                        x.Officer.title.Contains(searchString) || x.Officer.title_eng.Contains(searchString) || x.fiscal_year.ToString().Contains(searchString));
+
             return View(clubOfficer.ToList());
         }
 

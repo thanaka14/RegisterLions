@@ -121,7 +121,7 @@ namespace RegisterLions.Controllers
         {
             var identity = (System.Web.HttpContext.Current.User as RegisterLions.MyPrincipal).Identity as RegisterLions.MyIdentity;
             var tClub_id = identity.User.club_id;
-            var FiscalYear = db.ClubOfficers.Select(x => new { x.fiscal_year }).Distinct();
+            var FiscalYear = db.ClubOfficers.Select(x => new { x.fiscal_year }).Distinct().OrderByDescending(x => x.fiscal_year);
             //ViewBag.searchString = null;
             List<SelectListItem> lstFiscalYear = new List<SelectListItem>();
             foreach (var d in FiscalYear)
@@ -146,8 +146,22 @@ namespace RegisterLions.Controllers
                          }
                            ).Distinct();
 
+            int fiscal_year_default = 0;
+            var flag = true;
+
+            foreach (var c in FiscalYear)
+            {
+                if (flag)
+                {
+                    fiscal_year_default = (int)c.fiscal_year;
+                    flag = false;
+                }
+            }
             if (searchFisicalYear == null)
-            { searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month); }
+            {
+                //searchFisicalYear = ProjLib.getFiscalYear(DateTime.Now.Year, DateTime.Now.Month);
+                searchFisicalYear = fiscal_year_default;
+            }
             if (club_id == null)
             {
                 club_id = tClub_id;

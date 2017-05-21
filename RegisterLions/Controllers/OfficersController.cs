@@ -20,13 +20,14 @@ namespace RegisterLions.Controllers
         public ActionResult Index(string searchString)
         {
             var officer = (from o in db.Officers select o);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                officer = officer.Where(x => x.title.Contains(searchString) || x.title_eng.Contains(searchString) || x.OfficerGroup.officer_grp_desc.Contains(searchString));
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    officer = officer.Where(x => x.title.Contains(searchString) || x.title_eng.Contains(searchString) || x.OfficerGroup.officer_grp_desc.Contains(searchString));
 
-            }
+            //}
+            officer = officer.Where(x => x.title.Contains(searchString) || x.title_eng.Contains(searchString) || x.OfficerGroup.officer_grp_desc.Contains(searchString));
 
-            
+
 
             return View(officer.ToList());
         }
